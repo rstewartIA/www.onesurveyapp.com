@@ -1,0 +1,13 @@
+# *
+User-agent: *
+Allow: /
+
+# *
+User-agent: *
+Disallow: /api/
+
+# Host
+Host: https://www.onesurveyapp.com
+
+# Sitemaps
+Sitemap: https://www.onesurveyapp.com/sitemap.xml
