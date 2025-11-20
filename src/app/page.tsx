@@ -163,7 +163,7 @@ export default function Home() {
                   <Button
                     size="lg"
                     variant="outline"
-                    className="border-white/60 text-white hover:bg-white hover:text-brand-primary"
+                    className="border-white/70 bg-white/15 text-white hover:border-white/80 hover:bg-white/25"
                   >
                     Start Free
                   </Button>

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useRef, useState, type FocusEvent, type MouseEvent } from "react";
 import type { NavigationItem } from "@/data/navigation";
 import { cn } from "@/lib/utils";
 
@@ -11,24 +11,42 @@ type NavDropdownProps = {
 
 export function NavDropdown({ item }: NavDropdownProps) {
   const [open, setOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement | null>(null);
+  const triggerRef = useRef<HTMLButtonElement | null>(null);
 
   if (!item.children || item.children.length === 0) {
     return null;
   }
 
+  const handleTriggerLeave = (event: MouseEvent<HTMLButtonElement>) => {
+    const next = event.relatedTarget as Node | null;
+    if (next && menuRef.current?.contains(next)) return;
+    setOpen(false);
+  };
+
+  const handleMenuLeave = (event: MouseEvent<HTMLDivElement>) => {
+    const next = event.relatedTarget as Node | null;
+    if (next && triggerRef.current?.contains(next)) return;
+    setOpen(false);
+  };
+
+  const handleBlur = (event: FocusEvent<HTMLDivElement>) => {
+    if (!event.currentTarget.contains(event.relatedTarget)) {
+      setOpen(false);
+    }
+  };
+
   return (
-    <div
-      className="relative"
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
-      onFocus={() => setOpen(true)}
-      onBlur={() => setOpen(false)}
-    >
+    <div className="relative" onBlur={handleBlur}>
       <button
+        ref={triggerRef}
         type="button"
         className="flex items-center gap-1 rounded-md px-2 py-1 text-neutral-700 transition-colors hover:text-brand-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary"
         aria-haspopup="true"
         aria-expanded={open}
+        onMouseEnter={() => setOpen(true)}
+        onMouseLeave={handleTriggerLeave}
+        onFocus={() => setOpen(true)}
       >
         {item.label}
         <svg
@@ -46,6 +64,9 @@ export function NavDropdown({ item }: NavDropdownProps) {
       </button>
 
       <div
+        ref={menuRef}
+        onMouseEnter={() => setOpen(true)}
+        onMouseLeave={handleMenuLeave}
         className={cn(
           "absolute left-1/2 top-full mt-3 w-80 -translate-x-1/2 rounded-xl border border-neutral-200 bg-white p-3 shadow-lg transition-all duration-200",
           open ? "pointer-events-auto translate-y-0 opacity-100" : "pointer-events-none -translate-y-1 opacity-0"
