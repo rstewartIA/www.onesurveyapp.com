@@ -1,189 +1,201 @@
+import { HeroSection } from "@/components/marketing/hero-section";
+import { TopNav } from "@/components/marketing/top-nav";
+import { Footer } from "@/components/marketing/footer";
+import { FeatureCard } from "@/components/marketing/feature-card";
+import { SolutionCard } from "@/components/marketing/solution-card";
 import { Button } from "@/components/ui/button";
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card";
+import { navigationHierarchy, footerColumns } from "@/data/navigation";
+
+const featureBlocks = [
+  {
+    title: "Drag-and-drop editor",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at urna nec lacus convallis faucibus.",
+  },
+  {
+    title: "Smart asset library",
+    description: "Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum nisi ultricies.",
+  },
+  {
+    title: "Survey workflow",
+    description: "Curabitur blandit tempus porttitor. Vestibulum id ligula porta felis euismod semper.",
+  },
+  {
+    title: "Collaboration tools",
+    description: "Maecenas faucibus mollis interdum. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor.",
+  },
+  {
+    title: "Documentation & reporting",
+    description: "Donec sed odio dui. Cras mattis consectetur purus sit amet fermentum lorem ipsum dolor sit.",
+  },
+];
+
+const solutionTiles = [
+  {
+    title: "Security Integrators",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec id elit non mi porta gravida at eget metus.",
+    href: "/solutions/security-integrators",
+    accent: "blue" as const,
+  },
+  {
+    title: "Facility Managers",
+    description: "Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Etiam porta sem malesuada magna mollis.",
+    href: "/solutions/facility-managers",
+    accent: "slate" as const,
+  },
+  {
+    title: "Enterprise Teams",
+    description: "Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.",
+    href: "/solutions/enterprise-it-operations",
+    accent: "sky" as const,
+  },
+];
+
+const trustLogos = ["Security Integrators", "OEM Partners", "Facilities Teams", "Advisory Firms", "Ops Leaders"];
 
 export default function Home() {
-    return (
-        <div className="flex min-h-screen flex-col font-body">
-            {/* Navigation */}
-            <header className="sticky top-0 z-50 w-full border-b border-neutral-200 bg-white/80 backdrop-blur-md">
-                <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
-                    <div className="flex items-center gap-2">
-                        <div className="h-8 w-8 rounded-lg bg-brand-primary"></div>
-                        <span className="text-xl font-bold font-display text-brand-primary">
-                            OneSurvey
-                        </span>
-                    </div>
-                    <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-neutral-700">
-                        <a href="#" className="hover:text-brand-primary transition-colors">Features</a>
-                        <a href="#" className="hover:text-brand-primary transition-colors">Solutions</a>
-                        <a href="#" className="hover:text-brand-primary transition-colors">Pricing</a>
-                    </nav>
-                    <div className="flex items-center gap-4">
-                        <Button variant="ghost" size="sm" className="hidden sm:flex">
-                            Log in
-                        </Button>
-                        <Button size="sm">Get Started</Button>
-                    </div>
+  return (
+    <div className="flex min-h-screen flex-col bg-white font-body text-neutral-900">
+      <TopNav
+        navigation={navigationHierarchy}
+        primaryCta={{ label: "Book a Demo", href: "/demo" }}
+        secondaryCta={{ label: "Log in", href: "/login" }}
+      />
+
+      <main className="flex-1">
+        <HeroSection
+          eyebrow="Enterprise survey cloud"
+          title="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas."
+          primaryCta={{ label: "Get Started", href: "#cta" }}
+          secondaryCta={{ label: "View Product", href: "/product" }}
+        />
+
+        <section id="trust" className="bg-white py-14 md:py-18">
+          <div className="container mx-auto px-4 md:px-6 lg:px-8">
+            <div className="flex flex-col items-center gap-8 text-center">
+              <div className="space-y-3">
+                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-brand-secondary">Trusted by</p>
+                <h2 className="text-2xl font-semibold text-brand-primary">Lorem ipsum dolor sit amet partners</h2>
+              </div>
+              <div className="grid w-full grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+                {trustLogos.map((name) => (
+                  <div
+                    key={name}
+                    className="flex h-16 items-center justify-center rounded-lg border border-neutral-200 bg-[#F7F9FC] text-sm font-semibold text-neutral-600 shadow-sm"
+                  >
+                    {name}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="features" className="bg-[#F7F9FC] py-18 md:py-24">
+          <div className="container mx-auto px-4 md:px-6 lg:px-8">
+            <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between md:gap-8">
+              <div className="space-y-3 max-w-2xl">
+                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-brand-secondary">Features</p>
+                <h2 className="text-3xl font-semibold text-brand-primary sm:text-4xl">Lorem ipsum dolor sit amet</h2>
+                <p className="text-neutral-600">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sagittis lacus vel augue laoreet
+                  rutrum faucibus dolor auctor.
+                </p>
+              </div>
+              <div className="flex gap-3">
+                <Button className="bg-brand-primary text-white hover:bg-brand-secondary">Book a Demo</Button>
+                <Button variant="outline" className="border-neutral-200 text-brand-primary hover:border-brand-primary">
+                  View Features
+                </Button>
+              </div>
+            </div>
+
+            <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {featureBlocks.map((feature) => (
+                <FeatureCard key={feature.title} title={feature.title} description={feature.description} />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="solutions" className="bg-white py-18 md:py-24">
+          <div className="container mx-auto px-4 md:px-6 lg:px-8">
+            <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between md:gap-8">
+              <div className="space-y-3 max-w-2xl">
+                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-brand-secondary">Solutions</p>
+                <h2 className="text-3xl font-semibold text-brand-primary sm:text-4xl">Lorem ipsum dolor sit amet</h2>
+                <p className="text-neutral-600">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent commodo cursus magna, vel
+                  scelerisque nisl consectetur.
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {solutionTiles.map((solution) => (
+                <SolutionCard
+                  key={solution.title}
+                  title={solution.title}
+                  description={solution.description}
+                  href={solution.href}
+                  accent={solution.accent}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="cta" className="relative overflow-hidden bg-gradient-to-r from-brand-primary via-brand-secondary to-brand-primary py-20 text-white">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.15),transparent_35%)]" />
+          <div className="container relative mx-auto px-4 md:px-6 lg:px-8">
+            <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] items-center">
+              <div className="space-y-4">
+                <p className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-accent">CTA</p>
+                <h2 className="text-3xl font-semibold sm:text-4xl">Lorem ipsum dolor sit amet consectetur.</h2>
+                <p className="text-lg text-brand-accent">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam quis risus eget urna mollis ornare vel
+                  eu leo. Cras mattis consectetur purus sit amet fermentum.
+                </p>
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+                  <Button size="lg" className="bg-white text-brand-primary hover:bg-brand-accent/60">
+                    Book a Demo
+                  </Button>
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="border-white/60 text-white hover:bg-white hover:text-brand-primary"
+                  >
+                    Start Free
+                  </Button>
                 </div>
-            </header>
-
-            <main className="flex-1">
-                {/* Hero Section */}
-                <section className="w-full py-24 md:py-32 lg:py-40 bg-gradient-to-b from-white to-neutral-100">
-                    <div className="container mx-auto px-4 md:px-6">
-                        <div className="flex flex-col items-center space-y-8 text-center">
-                            <div className="space-y-4 max-w-3xl">
-                                <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl font-display text-brand-primary">
-                                    Unified Security Site Surveys from Field to Office
-                                </h1>
-                                <p className="mx-auto max-w-[700px] text-neutral-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                                    Stop using paper and disconnected tools. OneSurvey unifies field capture, collaborative design, and proposal handoffs for security integrators.
-                                </p>
-                            </div>
-                            <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                                <Button size="lg" className="px-8">
-                                    Start Free Trial
-                                </Button>
-                                <Button variant="outline" size="lg" className="px-8">
-                                    Book a Demo
-                                </Button>
-                            </div>
-                        </div>
+              </div>
+              <div className="rounded-2xl border border-white/20 bg-white/10 p-6 shadow-xl backdrop-blur">
+                <div className="space-y-3 text-sm text-brand-accent">
+                  <div className="flex items-center justify-between rounded-xl border border-white/15 bg-white/10 p-4">
+                    <div>
+                      <p className="text-xs uppercase tracking-wide text-white/80">Placeholder</p>
+                      <p className="text-lg font-semibold text-white">Lorem ipsum dolor</p>
                     </div>
-                </section>
-
-                {/* Features Section */}
-                <section className="w-full py-24 bg-white">
-                    <div className="container mx-auto px-4 md:px-6">
-                        <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
-                            <div className="inline-block rounded-full bg-brand-accent/20 px-3 py-1 text-sm text-brand-primary font-medium">
-                                Key Features
-                            </div>
-                            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-display text-brand-primary">
-                                Everything you need to win more bids
-                            </h2>
-                            <p className="max-w-[900px] text-neutral-500 md:text-xl/relaxed">
-                                Streamline your workflow with tools designed specifically for security professionals.
-                            </p>
-                        </div>
-                        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                            <Card>
-                                <CardHeader>
-                                    <div className="mb-4 h-12 w-12 rounded-lg bg-brand-accent/20 flex items-center justify-center text-brand-primary">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
-                                        </svg>
-                                    </div>
-                                    <CardTitle>Digital Site Surveys</CardTitle>
-                                </CardHeader>
-                                <CardContent>
-                                    <p className="text-neutral-500">
-                                        Capture photos, notes, and requirements on digital floor plans in real-time. No more paper notes or lost photos.
-                                    </p>
-                                </CardContent>
-                            </Card>
-                            <Card>
-                                <CardHeader>
-                                    <div className="mb-4 h-12 w-12 rounded-lg bg-brand-accent/20 flex items-center justify-center text-brand-primary">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 17.25v1.007a3 3 0 0 1-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0 1 15 18.257V17.25m6-12V15a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 15V5.25m18 0A2.25 2.25 0 0 0 18.75 3H5.25A2.25 2.25 0 0 0 3 5.25m18 0V12a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 12V5.25" />
-                                        </svg>
-                                    </div>
-                                    <CardTitle>Collaborative Design</CardTitle>
-                                </CardHeader>
-                                <CardContent>
-                                    <p className="text-neutral-500">
-                                        Work together with your team to design security systems directly on the floor plan. Drag and drop cameras, sensors, and more.
-                                    </p>
-                                </CardContent>
-                            </Card>
-                            <Card>
-                                <CardHeader>
-                                    <div className="mb-4 h-12 w-12 rounded-lg bg-brand-accent/20 flex items-center justify-center text-brand-primary">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
-                                        </svg>
-                                    </div>
-                                    <CardTitle>Automated Proposals</CardTitle>
-                                </CardHeader>
-                                <CardContent>
-                                    <p className="text-neutral-500">
-                                        Generate professional, bid-ready proposals with a single click. Include bill of materials, labor estimates, and site photos.
-                                    </p>
-                                </CardContent>
-                            </Card>
-                        </div>
-                    </div>
-                </section>
-
-                {/* CTA Strip */}
-                <section className="w-full py-24 bg-brand-primary text-white">
-                    <div className="container mx-auto px-4 md:px-6">
-                        <div className="flex flex-col items-center justify-center space-y-4 text-center">
-                            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-display">
-                                Ready to modernize your site surveys?
-                            </h2>
-                            <p className="max-w-[600px] text-brand-accent md:text-xl/relaxed">
-                                Join hundreds of security integrators who are winning more business with OneSurvey.
-                            </p>
-                            <div className="flex flex-col gap-2 min-[400px]:flex-row pt-4">
-                                <Button size="lg" className="px-8 bg-white text-brand-primary hover:bg-neutral-100">
-                                    Get Started for Free
-                                </Button>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </main>
-
-            {/* Footer */}
-            <footer className="w-full py-12 bg-neutral-900 text-neutral-400 border-t border-neutral-800">
-                <div className="container mx-auto px-4 md:px-6">
-                    <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-                        <div className="space-y-4">
-                            <div className="flex items-center gap-2">
-                                <div className="h-6 w-6 rounded bg-brand-primary"></div>
-                                <span className="text-lg font-bold text-white font-display">OneSurvey</span>
-                            </div>
-                            <p className="text-sm">
-                                The complete platform for security site surveys and system design.
-                            </p>
-                        </div>
-                        <div className="space-y-4">
-                            <h4 className="text-sm font-semibold text-white uppercase tracking-wider">Product</h4>
-                            <ul className="space-y-2 text-sm">
-                                <li><a href="#" className="hover:text-white transition-colors">Features</a></li>
-                                <li><a href="#" className="hover:text-white transition-colors">Pricing</a></li>
-                                <li><a href="#" className="hover:text-white transition-colors">Integrations</a></li>
-                            </ul>
-                        </div>
-                        <div className="space-y-4">
-                            <h4 className="text-sm font-semibold text-white uppercase tracking-wider">Company</h4>
-                            <ul className="space-y-2 text-sm">
-                                <li><a href="#" className="hover:text-white transition-colors">About</a></li>
-                                <li><a href="#" className="hover:text-white transition-colors">Blog</a></li>
-                                <li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
-                            </ul>
-                        </div>
-                        <div className="space-y-4">
-                            <h4 className="text-sm font-semibold text-white uppercase tracking-wider">Legal</h4>
-                            <ul className="space-y-2 text-sm">
-                                <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
-                                <li><a href="#" className="hover:text-white transition-colors">Terms of Service</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div className="mt-12 border-t border-neutral-800 pt-8 text-center text-sm">
-                        © {new Date().getFullYear()} OneSurvey. All rights reserved.
-                    </div>
+                    <span className="rounded-full bg-white/20 px-3 py-1 text-xs text-white">Live</span>
+                  </div>
+                  <div className="rounded-xl border border-white/15 bg-white/10 p-4">
+                    <div className="h-2 w-3/4 rounded-full bg-white/50" />
+                    <div className="mt-2 h-2 w-1/2 rounded-full bg-white/40" />
+                    <div className="mt-2 h-2 w-5/6 rounded-full bg-white/30" />
+                  </div>
+                  <div className="grid grid-cols-3 gap-2">
+                    <div className="h-16 rounded-lg bg-white/10" />
+                    <div className="h-16 rounded-lg bg-white/10" />
+                    <div className="h-16 rounded-lg bg-white/10" />
+                  </div>
                 </div>
-            </footer>
-        </div>
-    );
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <Footer columns={footerColumns} />
+    </div>
+  );
 }
