@@ -9,42 +9,46 @@ import { navigationHierarchy, footerColumns } from "@/data/navigation";
 const featureBlocks = [
   {
     title: "Drag-and-drop editor",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at urna nec lacus convallis faucibus.",
+    description:
+      "Plan cameras, sensors, and devices directly on floorplans using a clean drag-and-drop interface that speeds up layout decisions.",
   },
   {
     title: "Smart asset library",
-    description: "Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum nisi ultricies.",
+    description: "Store approved hardware and device templates so teams always select the right equipment for every project.",
   },
   {
     title: "Survey workflow",
-    description: "Curabitur blandit tempus porttitor. Vestibulum id ligula porta felis euismod semper.",
+    description: "Guide teams through structured survey steps to ensure consistent data capture across sites and technicians.",
   },
   {
     title: "Collaboration tools",
-    description: "Maecenas faucibus mollis interdum. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor.",
+    description: "Share site plans, notes, and revisions with internal teams and clients to keep everyone aligned.",
   },
   {
     title: "Documentation & reporting",
-    description: "Donec sed odio dui. Cras mattis consectetur purus sit amet fermentum lorem ipsum dolor sit.",
+    description: "Export clean, consistent documentation for proposals, design reviews, or project handoff packages.",
   },
 ];
 
 const solutionTiles = [
   {
     title: "Security Integrators",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec id elit non mi porta gravida at eget metus.",
+    description:
+      "Create accurate device layouts, document site conditions, and reduce survey time while improving the quality of design proposals.",
     href: "/solutions/security-integrators",
     accent: "blue" as const,
   },
   {
     title: "Facility Managers",
-    description: "Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Etiam porta sem malesuada magna mollis.",
+    description:
+      "Centralize site information, update floorplans, and track installed assets to support long-term maintenance and planning.",
     href: "/solutions/facility-managers",
     accent: "slate" as const,
   },
   {
     title: "Enterprise Teams",
-    description: "Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.",
+    description:
+      "Standardize how teams collect data across multiple locations and ensure every site follows the same process.",
     href: "/solutions/enterprise-it-operations",
     accent: "sky" as const,
   },
@@ -63,9 +67,9 @@ export default function Home() {
 
       <main className="flex-1">
         <HeroSection
-          eyebrow="Enterprise survey cloud"
-          title="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-          subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas."
+          eyebrow="OneSurvey"
+          title="The smarter way to plan and document your sites"
+          subtitle="OneSurvey helps teams capture site data, map security and facility assets, and standardize surveys in a single cloud platform—so every project starts with clarity and accuracy."
           primaryCta={{ label: "Get Started", href: "#cta" }}
           secondaryCta={{ label: "View Product", href: "/product" }}
         />
@@ -74,8 +78,10 @@ export default function Home() {
           <div className="container mx-auto px-4 md:px-6 lg:px-8">
             <div className="flex flex-col items-center gap-8 text-center">
               <div className="space-y-3">
-                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-brand-secondary">Trusted by</p>
-                <h2 className="text-2xl font-semibold text-brand-primary">Lorem ipsum dolor sit amet partners</h2>
+                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-brand-secondary">
+                  Trusted by leading operations and security teams
+                </p>
+                <h2 className="text-2xl font-semibold text-brand-primary">Trusted by leading operations and security teams</h2>
               </div>
               <div className="grid w-full grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
                 {trustLogos.map((name) => (
@@ -96,10 +102,12 @@ export default function Home() {
             <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between md:gap-8">
               <div className="space-y-3 max-w-2xl">
                 <p className="text-xs font-semibold uppercase tracking-[0.25em] text-brand-secondary">Features</p>
-                <h2 className="text-3xl font-semibold text-brand-primary sm:text-4xl">Lorem ipsum dolor sit amet</h2>
+                <h2 className="text-3xl font-semibold text-brand-primary sm:text-4xl">
+                  Powerful tools to standardize every survey
+                </h2>
                 <p className="text-neutral-600">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sagittis lacus vel augue laoreet
-                  rutrum faucibus dolor auctor.
+                  OneSurvey gives teams an intuitive workspace to capture site details, plan devices, and keep project
+                  documentation organized from the first walkthrough to final handoff.
                 </p>
               </div>
               <div className="flex gap-3">
@@ -123,10 +131,12 @@ export default function Home() {
             <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between md:gap-8">
               <div className="space-y-3 max-w-2xl">
                 <p className="text-xs font-semibold uppercase tracking-[0.25em] text-brand-secondary">Solutions</p>
-                <h2 className="text-3xl font-semibold text-brand-primary sm:text-4xl">Lorem ipsum dolor sit amet</h2>
+                <h2 className="text-3xl font-semibold text-brand-primary sm:text-4xl">
+                  Built for teams that manage complex environments
+                </h2>
                 <p className="text-neutral-600">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent commodo cursus magna, vel
-                  scelerisque nisl consectetur.
+                  OneSurvey adapts to the workflows of security, operations, and facility professionals—making it easier
+                  to plan, maintain, and communicate site needs.
                 </p>
               </div>
             </div>
@@ -150,11 +160,13 @@ export default function Home() {
           <div className="container relative mx-auto px-4 md:px-6 lg:px-8">
             <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] items-center">
               <div className="space-y-4">
-                <p className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-accent">CTA</p>
-                <h2 className="text-3xl font-semibold sm:text-4xl">Lorem ipsum dolor sit amet consectetur.</h2>
+                <p className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-accent">
+                  Take control of your site surveys
+                </p>
+                <h2 className="text-3xl font-semibold sm:text-4xl">Take control of your site surveys</h2>
                 <p className="text-lg text-brand-accent">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam quis risus eget urna mollis ornare vel
-                  eu leo. Cras mattis consectetur purus sit amet fermentum.
+                  Whether you're standardizing surveys across technicians or organizing site information for long-term
+                  planning, OneSurvey gives you a single place to capture, review, and share accurate data.
                 </p>
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
                   <Button size="lg" className="bg-white text-brand-primary hover:bg-brand-accent/60">
@@ -173,8 +185,8 @@ export default function Home() {
                 <div className="space-y-3 text-sm text-brand-accent">
                   <div className="flex items-center justify-between rounded-xl border border-white/15 bg-white/10 p-4">
                     <div>
-                      <p className="text-xs uppercase tracking-wide text-white/80">Placeholder</p>
-                      <p className="text-lg font-semibold text-white">Lorem ipsum dolor</p>
+                      <p className="text-xs uppercase tracking-wide text-white/80">OneSurvey</p>
+                      <p className="text-lg font-semibold text-white">Take control of your site surveys</p>
                     </div>
                     <span className="rounded-full bg-white/20 px-3 py-1 text-xs text-white">Live</span>
                   </div>

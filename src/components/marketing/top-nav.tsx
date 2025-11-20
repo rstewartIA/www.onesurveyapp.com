@@ -30,7 +30,7 @@ export function TopNav({
           </div>
           <div className="flex flex-col leading-tight">
             <span className="text-lg font-semibold text-brand-primary">OneSurvey</span>
-            <span className="text-xs text-neutral-500">Lorem ipsum dolor</span>
+            <span className="text-xs text-neutral-500">Smart Site Surveys, Asset Mapping & Facility Documentation</span>
           </div>
         </div>
 

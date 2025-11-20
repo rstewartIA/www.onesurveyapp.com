@@ -10,88 +10,73 @@ export const navigationHierarchy: NavigationItem[] = [
   {
     label: "Product",
     href: "/product",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     children: [
       {
         label: "Features overview",
-        href: "/product/features",
-        description: "Integer nec odio. Praesent libero. Sed cursus ante dapibus.",
+        href: "/product/features"
       },
       {
         label: "Floorplan editor",
-        href: "/product/floorplan-editor",
-        description: "Morbi lectus risus, iaculis vel, suscipit quis, luctus non.",
+        href: "/product/floorplan-editor"
       },
       {
         label: "Asset library",
-        href: "/product/asset-library",
-        description: "Suspendisse potenti. Sed dignissim lacinia nunc.",
+        href: "/product/asset-library"
       },
       {
         label: "Survey automation",
-        href: "/product/survey-automation",
-        description: "Curabitur tortor. Pellentesque nibh. Aenean quam.",
+        href: "/product/survey-automation"
       },
       {
         label: "Reporting & exports",
-        href: "/product/reporting-exports",
-        description: "Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi.",
+        href: "/product/reporting-exports"
       },
     ],
   },
   {
     label: "Solutions",
     href: "/solutions",
-    description: "Donec sodales sagittis magna. Sed consequat, leo eget bibendum.",
     children: [
       {
         label: "Security integrators",
-        href: "/solutions/security-integrators",
-        description: "Praesent mauris. Fusce nec tellus sed augue semper porta.",
+        href: "/solutions/security-integrators"
       },
       {
         label: "Facility managers",
-        href: "/solutions/facility-managers",
-        description: "Mauris massa. Vestibulum lacinia arcu eget nulla.",
+        href: "/solutions/facility-managers"
       },
       {
         label: "Enterprise IT & operations",
-        href: "/solutions/enterprise-it-operations",
-        description: "Class aptent taciti sociosqu ad litora torquent per conubia.",
+        href: "/solutions/enterprise-it-operations"
       },
     ],
   },
   {
     label: "Pricing",
     href: "/pricing",
-    description: "Nulla quis sem at nibh elementum imperdiet.",
   },
   {
     label: "Resources",
     href: "/resources",
-    description: "Duis sagittis ipsum. Praesent mauris. Fusce nec tellus.",
     children: [
-      { label: "Blog", href: "/blog", description: "Sed cursus ante dapibus." },
+      { label: "Blog", href: "/blog" },
       {
         label: "Guides",
-        href: "/guides",
-        description: "Nulla quis sem at nibh elementum imperdiet.",
+        href: "/guides"
       },
       {
         label: "Documentation",
-        href: "/docs",
-        description: "Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi.",
+        href: "/docs"
       },
     ],
   },
   {
     label: "Company",
     href: "/company",
-    description: "Maecenas mattis. Sed convallis tristique sem.",
     children: [
-      { label: "About", href: "/about", description: "Sed nisi. Nulla quis sem at nibh." },
-      { label: "Careers", href: "/careers", description: "Integer nec odio. Praesent libero." },
-      { label: "Contact", href: "/contact", description: "Sed cursus ante dapibus diam." },
+      { label: "About", href: "/about" },
+      { label: "Careers", href: "/careers" },
+      { label: "Contact", href: "/contact" },
     ],
   },
 ];

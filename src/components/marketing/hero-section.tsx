@@ -24,7 +24,6 @@ export function HeroSection({ eyebrow, title, subtitle, primaryCta, secondaryCta
             <span className="inline-flex items-center gap-2 rounded-full bg-brand-accent/30 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-brand-dark">
               {eyebrow}
               <span className="h-1 w-1 rounded-full bg-brand-dark" />
-              Lorem ipsum
             </span>
           )}
           <h1 className="text-4xl font-semibold leading-tight text-brand-primary sm:text-5xl lg:text-6xl">
@@ -54,19 +53,19 @@ export function HeroSection({ eyebrow, title, subtitle, primaryCta, secondaryCta
           </div>
           <div className="grid grid-cols-2 gap-4 pt-4 text-sm text-neutral-600 sm:grid-cols-3">
             <div className="rounded-xl border border-neutral-200 bg-white p-4 shadow-sm">
-              <div className="text-xs font-semibold uppercase text-brand-primary">Lorem</div>
-              <div className="text-2xl font-semibold text-neutral-900">24/7</div>
-              <p className="text-xs text-neutral-500">Dolor sit amet</p>
+              <div className="text-xs font-semibold uppercase text-brand-primary">Faster surveys</div>
+              <div className="text-2xl font-semibold text-neutral-900">30–50%</div>
+              <p className="text-xs text-neutral-500">faster site surveys</p>
             </div>
             <div className="rounded-xl border border-neutral-200 bg-white p-4 shadow-sm">
-              <div className="text-xs font-semibold uppercase text-brand-primary">Ipsum</div>
+              <div className="text-xs font-semibold uppercase text-brand-primary">Platform uptime</div>
               <div className="text-2xl font-semibold text-neutral-900">99.9%</div>
-              <p className="text-xs text-neutral-500">Consectetur elit</p>
+              <p className="text-xs text-neutral-500">platform uptime</p>
             </div>
             <div className="rounded-xl border border-neutral-200 bg-white p-4 shadow-sm sm:col-span-1">
-              <div className="text-xs font-semibold uppercase text-brand-primary">Dolor</div>
-              <div className="text-2xl font-semibold text-neutral-900">65+</div>
-              <p className="text-xs text-neutral-500">Adipiscing sed</p>
+              <div className="text-xs font-semibold uppercase text-brand-primary">Used across</div>
+              <div className="text-2xl font-semibold text-neutral-900">60+</div>
+              <p className="text-xs text-neutral-500">locations and teams</p>
             </div>
           </div>
         </div>
