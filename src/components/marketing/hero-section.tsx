@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 
 type CTA = { label: string; href: string };
@@ -73,27 +74,16 @@ export function HeroSection({ eyebrow, title, subtitle, primaryCta, secondaryCta
         <div className="relative">
           <div className="relative h-full min-h-[320px] rounded-2xl border border-neutral-200 bg-white/70 p-6 shadow-lg shadow-brand-primary/10">
             <div className="absolute inset-0 -z-10 translate-x-5 translate-y-5 rounded-3xl bg-gradient-to-br from-brand-primary/20 via-brand-secondary/15 to-brand-accent/40 blur-2xl" />
-            <div className="flex h-full flex-col justify-between gap-4">
-              <div className="flex items-center justify-between">
-                <div className="h-10 w-10 rounded-lg bg-brand-primary/10" />
-                <div className="flex gap-2">
-                  <span className="h-2 w-2 rounded-full bg-brand-primary/60" />
-                  <span className="h-2 w-2 rounded-full bg-brand-secondary/60" />
-                  <span className="h-2 w-2 rounded-full bg-brand-accent/60" />
-                </div>
-              </div>
-              <div className="rounded-xl border border-dashed border-brand-primary/30 bg-brand-accent/20 p-6">
-                <div className="mb-3 h-10 w-32 rounded-lg bg-white/70" />
-                <div className="grid gap-2 sm:grid-cols-3">
-                  <div className="h-16 rounded-lg bg-white/80" />
-                  <div className="h-16 rounded-lg bg-white/80" />
-                  <div className="h-16 rounded-lg bg-white/80" />
-                </div>
-              </div>
-              <div className="space-y-2">
-                <div className="h-3 w-3/4 rounded-full bg-brand-primary/20" />
-                <div className="h-3 w-2/3 rounded-full bg-brand-primary/10" />
-                <div className="h-3 w-1/2 rounded-full bg-brand-primary/20" />
+            <div className="relative flex h-full items-center justify-center">
+              <div className="relative w-full max-w-[540px] aspect-[4/3]">
+                <Image
+                  src="/tablet-survey-page.png"
+                  alt="Tablet survey page"
+                  fill
+                  className="rounded-xl object-contain shadow-lg"
+                  sizes="(min-width: 1024px) 540px, 100vw"
+                  priority
+                />
               </div>
             </div>
           </div>
