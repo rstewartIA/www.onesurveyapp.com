@@ -48,10 +48,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                 className: cn(classes, childProps.className),
             }
 
-            if (typeof children.type === "string") {
-                return React.cloneElement(children, { ...mergedProps, ref })
-            }
-
             return React.cloneElement(children, mergedProps)
         }
 
