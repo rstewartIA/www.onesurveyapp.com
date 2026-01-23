@@ -18,12 +18,6 @@ export function NavDropdown({ item }: NavDropdownProps) {
     return null;
   }
 
-  const handleTriggerLeave = (event: MouseEvent<HTMLButtonElement>) => {
-    const next = event.relatedTarget as Node | null;
-    if (next && menuRef.current?.contains(next)) return;
-    setOpen(false);
-  };
-
   const handleMenuLeave = (event: MouseEvent<HTMLDivElement>) => {
     const next = event.relatedTarget as Node | null;
     if (next && triggerRef.current?.contains(next)) return;
@@ -37,15 +31,22 @@ export function NavDropdown({ item }: NavDropdownProps) {
   };
 
   return (
-    <div className="relative" onBlur={handleBlur}>
+    <div
+      className="relative"
+      onBlur={handleBlur}
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
+      <span
+        aria-hidden="true"
+        className="pointer-events-auto absolute left-0 right-0 top-full h-3"
+      />
       <button
         ref={triggerRef}
         type="button"
         className="flex items-center gap-1 rounded-md px-2 py-1 text-neutral-700 transition-colors hover:text-brand-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary"
         aria-haspopup="true"
         aria-expanded={open}
-        onMouseEnter={() => setOpen(true)}
-        onMouseLeave={handleTriggerLeave}
         onFocus={() => setOpen(true)}
       >
         {item.label}
@@ -68,7 +69,7 @@ export function NavDropdown({ item }: NavDropdownProps) {
         onMouseEnter={() => setOpen(true)}
         onMouseLeave={handleMenuLeave}
         className={cn(
-          "absolute left-1/2 top-full mt-3 w-80 -translate-x-1/2 rounded-xl border border-neutral-200 bg-white p-3 shadow-lg transition-all duration-200",
+          "absolute left-1/2 top-full mt-2 w-80 -translate-x-1/2 rounded-xl border border-neutral-200 bg-white p-3 shadow-lg transition-all duration-200",
           open ? "pointer-events-auto translate-y-0 opacity-100" : "pointer-events-none -translate-y-1 opacity-0"
         )}
       >

@@ -71,21 +71,16 @@ export function HeroSection({ eyebrow, title, subtitle, primaryCta, secondaryCta
           </div>
         </div>
 
-        <div className="relative">
-          <div className="relative h-full min-h-[320px] rounded-2xl border border-neutral-200 bg-white/70 p-6 shadow-lg shadow-brand-primary/10">
-            <div className="absolute inset-0 -z-10 translate-x-5 translate-y-5 rounded-3xl bg-gradient-to-br from-brand-primary/20 via-brand-secondary/15 to-brand-accent/40 blur-2xl" />
-            <div className="relative flex h-full items-center justify-center">
-              <div className="relative w-full max-w-[540px] aspect-[4/3]">
-                <Image
-                  src="/tablet-survey-page.png"
-                  alt="Tablet survey page"
-                  fill
-                  className="rounded-xl object-contain shadow-lg"
-                  sizes="(min-width: 1024px) 540px, 100vw"
-                  priority
-                />
-              </div>
-            </div>
+        <div className="relative flex items-center justify-center">
+          <div className="relative w-full max-w-[600px] aspect-[4/3]">
+            <Image
+              src="/tablet-survey-page.png"
+              alt="Tablet survey page"
+              fill
+              className="object-contain"
+              sizes="(min-width: 1024px) 600px, 100vw"
+              priority
+            />
           </div>
         </div>
       </div>

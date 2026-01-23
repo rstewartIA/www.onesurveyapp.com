@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -25,13 +26,22 @@ export function TopNav({
     <header className="sticky top-0 z-50 w-full border-b border-neutral-200 bg-white/90 backdrop-blur-md">
       <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6 lg:px-8">
         <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-primary text-white font-display text-lg">
-            OS
-          </div>
-          <div className="flex flex-col leading-tight">
-            <span className="text-lg font-semibold text-brand-primary">OneSurvey</span>
-            <span className="text-xs text-neutral-500">Smart Site Surveys, Asset Mapping & Facility Documentation</span>
-          </div>
+          <Link href="/" className="flex items-center gap-3">
+            <div className="relative h-9 w-9">
+              <Image
+                src="/OS-logo.png"
+                alt="OneSurvey logo"
+                fill
+                className="object-contain"
+                sizes="36px"
+                priority
+              />
+            </div>
+            <div className="flex flex-col leading-tight">
+              <span className="text-lg font-semibold text-brand-primary">OneSurvey</span>
+              <span className="text-xs text-neutral-500">Smart Site Surveys, Asset Mapping & Facility Documentation</span>
+            </div>
+          </Link>
         </div>
 
         <nav className="hidden lg:flex items-center gap-6 text-sm font-medium text-neutral-700">
