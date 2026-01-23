@@ -37,6 +37,10 @@ export const metadata: Metadata = {
       "Capture, plan, and document your sites with a unified cloud platform. OneSurvey helps teams map devices, standardize surveys, and maintain clear facility records across every location.",
     images: ["/og-default.png"],
   },
+  icons: {
+    icon: "/OS-logo.png",
+    apple: "/OS-logo.png",
+  },
   alternates: {
     canonical: "https://onesurvey.com/",
   },

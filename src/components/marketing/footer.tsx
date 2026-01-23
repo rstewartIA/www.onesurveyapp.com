@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 type FooterColumn = {
   title: string;
@@ -16,8 +17,14 @@ export function Footer({ columns }: FooterProps) {
         <div className="grid gap-10 md:grid-cols-4">
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-primary text-white font-display text-lg">
-                OS
+              <div className="relative h-10 w-10">
+                <Image
+                  src="/OS-logo.png"
+                  alt="OneSurvey logo"
+                  fill
+                  className="object-contain"
+                  sizes="40px"
+                />
               </div>
               <div>
                 <div className="text-lg font-semibold text-white">OneSurvey</div>
