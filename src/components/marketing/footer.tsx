@@ -27,7 +27,7 @@ export function Footer({ columns }: FooterProps) {
             <p className="text-sm text-neutral-400 leading-relaxed">
               OneSurvey is a modern survey and site documentation platform for security integrators, facility managers,
               and enterprise teams. Capture site data, plan devices, manage floorplans, and generate consistent
-              documentation—faster and with greater accuracy.
+              documentation -faster and with greater accuracy.
             </p>
           </div>
           {columns.map((column) => (
@@ -50,7 +50,7 @@ export function Footer({ columns }: FooterProps) {
         </div>
         <div className="mt-12 border-t border-white/10 pt-6 text-sm text-neutral-400">
           <div className="flex flex-col items-start justify-between gap-3 sm:flex-row sm:items-center">
-            <div>© {new Date().getFullYear()} OneSurvey. All rights reserved.</div>
+            <div>(c) {new Date().getFullYear()} OneSurvey. All rights reserved.</div>
             <div className="flex flex-wrap gap-4">
               <Link href="/privacy" className="transition hover:text-white">
                 Privacy
@@ -68,3 +68,5 @@ export function Footer({ columns }: FooterProps) {
     </footer>
   );
 }
+
+

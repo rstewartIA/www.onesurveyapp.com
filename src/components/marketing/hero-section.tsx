@@ -54,19 +54,19 @@ export function HeroSection({ eyebrow, title, subtitle, primaryCta, secondaryCta
           </div>
           <div className="grid grid-cols-2 gap-4 pt-4 text-sm text-neutral-600 sm:grid-cols-3">
             <div className="rounded-xl border border-neutral-200 bg-white p-4 shadow-sm">
-              <div className="text-xs font-semibold uppercase text-brand-primary">Faster surveys</div>
-              <div className="text-2xl font-semibold text-neutral-900">30–50%</div>
-              <p className="text-xs text-neutral-500">faster site surveys</p>
+              <div className="text-xs font-semibold uppercase text-brand-primary">Survey consistency</div>
+              <div className="text-2xl font-semibold text-neutral-900">TBD</div>
+              <p className="text-xs text-neutral-500">Add a verified metric</p>
             </div>
             <div className="rounded-xl border border-neutral-200 bg-white p-4 shadow-sm">
-              <div className="text-xs font-semibold uppercase text-brand-primary">Platform uptime</div>
-              <div className="text-2xl font-semibold text-neutral-900">99.9%</div>
-              <p className="text-xs text-neutral-500">platform uptime</p>
+              <div className="text-xs font-semibold uppercase text-brand-primary">Proposal speed</div>
+              <div className="text-2xl font-semibold text-neutral-900">TBD</div>
+              <p className="text-xs text-neutral-500">Add a verified metric</p>
             </div>
             <div className="rounded-xl border border-neutral-200 bg-white p-4 shadow-sm sm:col-span-1">
-              <div className="text-xs font-semibold uppercase text-brand-primary">Used across</div>
-              <div className="text-2xl font-semibold text-neutral-900">60+</div>
-              <p className="text-xs text-neutral-500">locations and teams</p>
+              <div className="text-xs font-semibold uppercase text-brand-primary">Fewer re visits</div>
+              <div className="text-2xl font-semibold text-neutral-900">TBD</div>
+              <p className="text-xs text-neutral-500">Add a verified metric</p>
             </div>
           </div>
         </div>
@@ -92,3 +92,4 @@ export function HeroSection({ eyebrow, title, subtitle, primaryCta, secondaryCta
     </section>
   );
 }
+

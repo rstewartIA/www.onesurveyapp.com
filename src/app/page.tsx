@@ -5,56 +5,61 @@ import { FeatureCard } from "@/components/marketing/feature-card";
 import { SolutionCard } from "@/components/marketing/solution-card";
 import { Button } from "@/components/ui/button";
 import { navigationHierarchy, footerColumns } from "@/data/navigation";
+import Link from "next/link";
 
 const featureBlocks = [
   {
-    title: "Drag-and-drop editor",
+    title: "Survey capture",
     description:
-      "Plan cameras, sensors, and devices directly on floorplans using a clean drag-and-drop interface that speeds up layout decisions.",
+      "Use checklists, required fields, photos, and notes to capture consistent site data.",
   },
   {
-    title: "Smart asset library",
-    description: "Store approved hardware and device templates so teams always select the right equipment for every project.",
+    title: "Floorplan editor",
+    description: "Import plans, set scale, and place devices where they will be installed.",
   },
   {
-    title: "Survey workflow",
-    description: "Guide teams through structured survey steps to ensure consistent data capture across sites and technicians.",
+    title: "Asset library",
+    description: "Maintain approved devices, parts, and accessories for every project.",
   },
   {
-    title: "Collaboration tools",
-    description: "Share site plans, notes, and revisions with internal teams and clients to keep everyone aligned.",
+    title: "Photo documentation",
+    description: "Organize field photos into clear galleries for review and handoff.",
   },
   {
-    title: "Documentation & reporting",
-    description: "Export clean, consistent documentation for proposals, design reviews, or project handoff packages.",
+    title: "Assignments and handoff",
+    description: "Track install tasks and notes so teams stay aligned.",
+  },
+  {
+    title: "Reporting and exports",
+    description: "Generate survey summaries, inventories, and photo reports in minutes.",
   },
 ];
 
 const solutionTiles = [
   {
-    title: "Security Integrators",
+    title: "Security integrators",
     description:
-      "Create accurate device layouts, document site conditions, and reduce survey time while improving the quality of design proposals.",
+      "Capture accurate surveys, build clean layouts, and deliver proposal ready reports.",
     href: "/solutions/security-integrators",
     accent: "blue" as const,
   },
   {
-    title: "Facility Managers",
+    title: "Facility managers",
     description:
-      "Centralize site information, update floorplans, and track installed assets to support long-term maintenance and planning.",
+      "Keep plans and asset records current for maintenance and upgrades.",
     href: "/solutions/facility-managers",
     accent: "slate" as const,
   },
   {
-    title: "Enterprise Teams",
+    title: "Enterprise teams",
     description:
-      "Standardize how teams collect data across multiple locations and ensure every site follows the same process.",
+      "Standardize surveys and reporting across multiple locations.",
     href: "/solutions/enterprise-it-operations",
     accent: "sky" as const,
   },
 ];
 
-const trustLogos = ["Security Integrators", "OEM Partners", "Facilities Teams", "Advisory Firms", "Ops Leaders"];
+const trustLogos = ["Integrator teams", "OEM partners", "Facility groups", "Advisory firms", "Ops leaders"];
 
 export default function Home() {
   return (
@@ -68,8 +73,8 @@ export default function Home() {
       <main className="flex-1">
         <HeroSection
           eyebrow="OneSurvey"
-          title="The smarter way to plan and document your sites"
-          subtitle="OneSurvey helps teams capture site data, map security and facility assets, and standardize surveys in a single cloud platform—so every project starts with clarity and accuracy."
+          title="The smarter way to plan and document security sites"
+          subtitle="OneSurvey helps security integrators capture site data, place devices on scaled plans, and deliver clear reports so every project starts with clean scope."
           primaryCta={{ label: "Get Started", href: "#cta" }}
           secondaryCta={{ label: "View Product", href: "/product" }}
         />
@@ -79,9 +84,9 @@ export default function Home() {
             <div className="flex flex-col items-center gap-8 text-center">
               <div className="space-y-3">
                 <p className="text-xs font-semibold uppercase tracking-[0.25em] text-brand-secondary">
-                  Trusted by leading operations and security teams
+                  Trusted by integrators and teams like yours
                 </p>
-                <h2 className="text-2xl font-semibold text-brand-primary">Trusted by leading operations and security teams</h2>
+                <h2 className="text-2xl font-semibold text-brand-primary">Trusted by integrators and teams like yours</h2>
               </div>
               <div className="grid w-full grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
                 {trustLogos.map((name) => (
@@ -103,17 +108,19 @@ export default function Home() {
               <div className="space-y-3 max-w-2xl">
                 <p className="text-xs font-semibold uppercase tracking-[0.25em] text-brand-secondary">Features</p>
                 <h2 className="text-3xl font-semibold text-brand-primary sm:text-4xl">
-                  Powerful tools to standardize every survey
+                  Powerful tools for consistent site surveys
                 </h2>
                 <p className="text-neutral-600">
-                  OneSurvey gives teams an intuitive workspace to capture site details, plan devices, and keep project
-                  documentation organized from the first walkthrough to final handoff.
+                  OneSurvey keeps survey capture, device layout, and reporting organized from the first walkthrough to
+                  final handoff.
                 </p>
               </div>
               <div className="flex gap-3">
-                <Button className="bg-brand-primary text-white hover:bg-brand-secondary">Book a Demo</Button>
-                <Button variant="outline" className="border-neutral-200 text-brand-primary hover:border-brand-primary">
-                  View Features
+                <Button asChild className="bg-brand-primary text-white hover:bg-brand-secondary">
+                  <Link href="/demo">Book a Demo</Link>
+                </Button>
+                <Button asChild variant="outline" className="border-neutral-200 text-brand-primary hover:border-brand-primary">
+                  <Link href="/product/features">View Features</Link>
                 </Button>
               </div>
             </div>
@@ -135,8 +142,7 @@ export default function Home() {
                   Built for teams that manage complex environments
                 </h2>
                 <p className="text-neutral-600">
-                  OneSurvey adapts to the workflows of security, operations, and facility professionals—making it easier
-                  to plan, maintain, and communicate site needs.
+                  OneSurvey supports integrators, facility teams, and enterprise groups with consistent survey workflows.
                 </p>
               </div>
             </div>
@@ -165,19 +171,20 @@ export default function Home() {
                 </p>
                 <h2 className="text-3xl font-semibold sm:text-4xl">Take control of your site surveys</h2>
                 <p className="text-lg text-brand-accent">
-                  Whether you're standardizing surveys across technicians or organizing site information for long-term
+                  Whether you are standardizing surveys across technicians or organizing site information for long term
                   planning, OneSurvey gives you a single place to capture, review, and share accurate data.
                 </p>
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-                  <Button size="lg" className="bg-white text-brand-primary hover:bg-brand-accent/60">
-                    Book a Demo
+                  <Button asChild size="lg" className="bg-white text-brand-primary hover:bg-brand-accent/60">
+                    <Link href="/demo">Book a Demo</Link>
                   </Button>
                   <Button
+                    asChild
                     size="lg"
                     variant="outline"
                     className="border-white/70 bg-white/15 text-white hover:border-white/80 hover:bg-white/25"
                   >
-                    Start Free
+                    <Link href="/contact">Talk to Sales</Link>
                   </Button>
                 </div>
               </div>
