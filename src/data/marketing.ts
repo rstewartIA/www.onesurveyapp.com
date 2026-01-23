@@ -1,65 +1,65 @@
 export const navigationLinks = [
-  { href: "/features", label: "Features" },
+  { href: "/product", label: "Product" },
   { href: "/solutions", label: "Solutions" },
   { href: "/pricing", label: "Pricing" },
   { href: "/resources", label: "Resources" },
-  { href: "/about", label: "About" },
+  { href: "/company", label: "Company" },
   { href: "/contact", label: "Contact" },
 ];
 
 export const featureHighlights = [
   {
-    title: "Survey Capture",
+    title: "Survey capture",
     description:
-      "Offline-ready mobile capture with photo annotations, device libraries, and instant sync once you regain connectivity.",
-    stat: "99.2% data completeness",
+      "Field capture with photos, notes, and device lists in one guided workflow.",
+    stat: "Metric placeholder",
   },
   {
-    title: "Collaborative Design",
+    title: "Collaborative design",
     description:
-      "Drag-and-drop floor plans, version history, and threaded comments keep PMs, technicians, and execs aligned.",
-    stat: "3x faster approvals",
+      "Place devices on scaled plans with version history and team feedback.",
+    stat: "Metric placeholder",
   },
   {
-    title: "Proposal & Reporting",
+    title: "Proposal and reporting",
     description:
-      "Auto-generate bid-ready packages, scope summaries, and exportables tailored to stakeholders.",
-    stat: "67% faster bid cycles",
+      "Generate survey summaries, device inventories, and photo reports quickly.",
+    stat: "Metric placeholder",
   },
   {
-    title: "Lifecycle Visibility",
+    title: "Install handoff",
     description:
-      "Built-in install & service handoffs ensure every asset is documented from discovery to maintenance.",
-    stat: "47% fewer truck rolls",
+      "Keep installation notes and status tied to each device and floorplan.",
+    stat: "Metric placeholder",
   },
 ];
 
 export const personas = [
   {
     name: "Jacob / Program Manager",
-    goal: "Keep multi-site rollouts on schedule with trusted survey inputs.",
+    goal: "Keep multi site rollouts on schedule with trusted survey inputs.",
     needs: [
       "Consistent project documentation",
-      "Stakeholder-ready reporting",
-      "Live visibility into risk items",
+      "Stakeholder ready reporting",
+      "Visibility into risk items",
     ],
   },
   {
     name: "Peyman / Field Technician",
-    goal: "Capture everything during the first visit, even without signal.",
+    goal: "Capture everything during the first visit with a clear checklist.",
     needs: [
-      "Offline forms & media capture",
-      "Simple markup on floor plans",
-      "Tasks synced to HQ automatically",
+      "Field ready forms and media capture",
+      "Simple markup on floorplans",
+      "Tasks shared with the office team",
     ],
   },
   {
     name: "Sam / Business Development",
     goal: "Turn surveys into revenue with polished proposals.",
     needs: [
-      "On-brand proposals in minutes",
-      "Export-ready diagrams",
-      "Evidence that wins executive buy-in",
+      "On brand proposals in minutes",
+      "Export ready diagrams",
+      "Evidence that wins executive buy in",
     ],
   },
 ];
@@ -67,21 +67,21 @@ export const personas = [
 export const lifecyclePhases = [
   {
     title: "Survey",
-    details: "Guided checklists, geo-tagged photos, and offline syncing.",
+    details: "Guided checklists, photos, and site notes.",
     keyword: "security site survey software",
   },
   {
     title: "Design",
-    details: "Collaborative floor plans with device libraries and approvals.",
+    details: "Collaborative floorplans with device libraries and approvals.",
     keyword: "drag and drop floor plan design",
   },
   {
     title: "Bid",
-    details: "Proposal builder, ROI calculator, and stakeholder-ready exports.",
+    details: "Proposal builder and stakeholder ready exports.",
     keyword: "security proposal software",
   },
   {
-    title: "Install & Service",
+    title: "Install and service",
     details: "Asset registry, punch list tracking, and service history.",
     keyword: "security project lifecycle management",
   },
@@ -89,18 +89,18 @@ export const lifecyclePhases = [
 
 export const resources = [
   {
-    title: "Security Site Survey Checklist",
-    description: "Step-by-step guide for technicians to capture every device.",
+    title: "Security site survey checklist",
+    description: "Step by step guide for technicians to capture every device.",
     type: "PDF",
   },
   {
-    title: "ROI Calculator",
-    description: "Quantify time saved from digitizing surveys and proposals.",
-    type: "Interactive",
+    title: "ROI worksheet",
+    description: "Estimate time saved from digitizing surveys and reports.",
+    type: "Spreadsheet",
   },
   {
-    title: "SiteOwl vs OneSurvey",
-    description: "Competitive comparison for solution-aware buyers.",
+    title: "Buyer guide",
+    description: "How to evaluate survey and design platforms for integrators.",
     type: "Article",
   },
 ];
