@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { ReactElement } from "react";
 import Link from "next/link";
 import { MarketingShell } from "@/components/marketing/marketing-shell";
 import { PageHero } from "@/components/marketing/page-hero";
@@ -16,7 +17,7 @@ type Module = {
   id: string;
   label: string;
   color: string;
-  Icon: (props: { className?: string }) => JSX.Element;
+  Icon: (props: { className?: string }) => ReactElement;
 };
 
 const modules: Module[] = [
@@ -153,55 +154,24 @@ const moduleMap = modules.reduce<Record<string, Module>>((acc, moduleItem) => {
   return acc;
 }, {});
 
-type SeatPreview = {
+const seatAccess: Record<string, string[]> = {
+  full: ["survey", "floorplans", "library", "assignments", "reports", "photos"],
+  field: ["survey", "assignments", "photos", "floorplans"],
+  viewer: ["reports", "floorplans", "library"],
+};
+
+type SeatType = {
   name: string;
   description: string;
   color: string;
-  Icon: (props: { className?: string }) => JSX.Element;
+  Icon: (props: { className?: string }) => ReactElement;
+  modules: string[];
 };
 
-const seatTypePreview: SeatPreview[] = [
-  {
-    name: "Full seat",
-    description: "Lorem ipsum dolor sit amet.",
-    color: "bg-brand-primary/15 text-brand-primary",
-    Icon: ({ className }) => (
-      <svg
-        viewBox="0 0 24 24"
-        className={className}
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <circle cx="12" cy="8" r="3" />
-        <path d="M5 19c1.5-3 5-5 7-5s5.5 2 7 5" />
-      </svg>
-    ),
-  },
-  {
-    name: "Field seat",
-    description: "Lorem ipsum dolor sit amet.",
-    color: "bg-brand-accent/60 text-brand-dark",
-    Icon: ({ className }) => (
-      <svg
-        viewBox="0 0 24 24"
-        className={className}
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M12 21s6-5 6-10a6 6 0 1 0-12 0c0 5 6 10 6 10z" />
-        <circle cx="12" cy="11" r="2" />
-      </svg>
-    ),
-  },
+const seatTypes: SeatType[] = [
   {
     name: "Viewer seat",
-    description: "Lorem ipsum dolor sit amet.",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     color: "bg-neutral-100 text-neutral-700",
     Icon: ({ className }) => (
       <svg
@@ -217,14 +187,49 @@ const seatTypePreview: SeatPreview[] = [
         <circle cx="12" cy="12" r="3" />
       </svg>
     ),
+    modules: seatAccess.viewer,
+  },
+  {
+    name: "Field seat",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    color: "bg-brand-accent/60 text-brand-dark",
+    Icon: ({ className }) => (
+      <svg
+        viewBox="0 0 24 24"
+        className={className}
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M12 21s6-5 6-10a6 6 0 1 0-12 0c0 5 6 10 6 10z" />
+        <circle cx="12" cy="11" r="2" />
+      </svg>
+    ),
+    modules: seatAccess.field,
+  },
+  {
+    name: "Full seat",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    color: "bg-brand-primary/15 text-brand-primary",
+    Icon: ({ className }) => (
+      <svg
+        viewBox="0 0 24 24"
+        className={className}
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <circle cx="12" cy="8" r="3" />
+        <path d="M5 19c1.5-3 5-5 7-5s5.5 2 7 5" />
+      </svg>
+    ),
+    modules: seatAccess.full,
   },
 ];
-
-const seatAccess: Record<string, string[]> = {
-  full: ["survey", "floorplans", "library", "assignments", "reports", "photos"],
-  field: ["survey", "assignments", "photos", "floorplans"],
-  viewer: ["reports", "floorplans", "library"],
-};
 
 type Seat = {
   name: string;
@@ -256,9 +261,9 @@ const plans: Plan[] = [
     billing: "Billed monthly",
     cta: { label: "Select plan", href: "/contact" },
     seats: [
-      { name: "Full seat", price: "Included", modules: seatAccess.full },
-      { name: "Field seat", price: "Included", modules: seatAccess.field },
       { name: "Viewer seat", price: "Included", modules: seatAccess.viewer },
+      { name: "Field seat", price: "Included", modules: seatAccess.field },
+      { name: "Full seat", price: "Included", modules: seatAccess.full },
     ],
     features: [
       "Lorem ipsum dolor sit amet",
@@ -277,9 +282,9 @@ const plans: Plan[] = [
     highlight: true,
     cta: { label: "Select plan", href: "/contact" },
     seats: [
-      { name: "Full seat", price: "$18", cadence: "/mo", modules: seatAccess.full },
-      { name: "Field seat", price: "$12", cadence: "/mo", modules: seatAccess.field },
       { name: "Viewer seat", price: "$6", cadence: "/mo", modules: seatAccess.viewer },
+      { name: "Field seat", price: "$12", cadence: "/mo", modules: seatAccess.field },
+      { name: "Full seat", price: "$18", cadence: "/mo", modules: seatAccess.full },
     ],
     features: [
       "Magna aliqua ut enim",
@@ -297,9 +302,9 @@ const plans: Plan[] = [
     cta: { label: "Select plan", href: "/contact" },
     auxLink: { label: "Contact sales", href: "/contact" },
     seats: [
-      { name: "Full seat", price: "$28", cadence: "/mo", modules: seatAccess.full },
-      { name: "Field seat", price: "$20", cadence: "/mo", modules: seatAccess.field },
       { name: "Viewer seat", price: "$12", cadence: "/mo", modules: seatAccess.viewer },
+      { name: "Field seat", price: "$20", cadence: "/mo", modules: seatAccess.field },
+      { name: "Full seat", price: "$28", cadence: "/mo", modules: seatAccess.full },
     ],
     features: [
       "Duis aute irure dolor",
@@ -317,9 +322,9 @@ const plans: Plan[] = [
     cta: { label: "Contact sales", href: "/contact" },
     auxLink: { label: "Learn more", href: "/contact" },
     seats: [
-      { name: "Full seat", price: "Custom", modules: seatAccess.full },
-      { name: "Field seat", price: "Custom", modules: seatAccess.field },
       { name: "Viewer seat", price: "Custom", modules: seatAccess.viewer },
+      { name: "Field seat", price: "Custom", modules: seatAccess.field },
+      { name: "Full seat", price: "Custom", modules: seatAccess.full },
     ],
     features: [
       "Excepteur sint occaecat",
@@ -414,7 +419,7 @@ export default function PricingPage() {
             >
               <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500">Seat types</p>
               <div className="mt-4 space-y-3">
-                {seatTypePreview.map((seat, index) => (
+                {seatTypes.map((seat, index) => (
                   <div
                     key={seat.name}
                     className="flex items-start gap-3 rounded-xl border border-neutral-200 bg-neutral-50 p-3 motion-safe:animate-[pricing-fade-up_700ms_ease-out_both]"
@@ -576,6 +581,52 @@ export default function PricingPage() {
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white py-18 md:py-24">
+        <div className="container mx-auto px-4 md:px-6 lg:px-8">
+          <SectionHeading
+            align="center"
+            eyebrow="Seat types"
+            title="Not sure which seat is right for you? We have you covered."
+            subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt."
+          />
+          <div className="mt-10 grid gap-10 lg:grid-cols-3">
+            {seatTypes.map((seat, index) => (
+              <div
+                key={seat.name}
+                className={`space-y-6 motion-safe:animate-[pricing-fade-up_700ms_ease-out_both] ${
+                  index > 0 ? "lg:border-l lg:border-neutral-200 lg:pl-8" : ""
+                }`}
+                style={{ animationDelay: `${120 + index * 120}ms` }}
+              >
+                <div className="flex items-start gap-3">
+                  <span className={`flex h-10 w-10 items-center justify-center rounded-xl ${seat.color}`}>
+                    <seat.Icon className="h-5 w-5" />
+                  </span>
+                  <div>
+                    <p className="text-lg font-semibold text-neutral-900">{seat.name}</p>
+                    <p className="mt-1 text-sm text-neutral-600">{seat.description}</p>
+                  </div>
+                </div>
+                <ul className="space-y-3">
+                  {seat.modules.map((moduleId) => {
+                    const moduleItem = moduleMap[moduleId];
+                    if (!moduleItem) {
+                      return null;
+                    }
+                    return (
+                      <li key={`${seat.name}-${moduleItem.id}`} className="flex items-center gap-3 text-sm text-neutral-700">
+                        <ModuleBadge moduleItem={moduleItem} size="sm" />
+                        <span>{moduleItem.label}</span>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            ))}
           </div>
         </div>
       </section>
