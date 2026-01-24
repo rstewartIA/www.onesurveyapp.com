@@ -83,8 +83,23 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
+  body.nav-open-blur {
+    overflow: hidden;
+  }
+
+  body.nav-open-blur main,
+  body.nav-open-blur footer {
+    filter: blur(20px);
+    transition: filter 200ms ease;
+  }
+
   body {
     @apply bg-white text-neutral-900 font-body;
+  }
+
+  main,
+  footer {
+    transition: filter 200ms ease;
   }
 
   h1,
