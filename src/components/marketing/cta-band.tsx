@@ -25,10 +25,10 @@ export function CtaBand({
         <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] items-center">
           <div className="space-y-4">
             {eyebrow && (
-              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-accent">{eyebrow}</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/70">{eyebrow}</p>
             )}
-            <h2 className="text-3xl font-semibold sm:text-4xl">{title}</h2>
-            <p className="text-lg text-brand-accent">{description}</p>
+            <h2 className="text-3xl font-semibold text-white sm:text-4xl">{title}</h2>
+            <p className="text-lg text-white/80">{description}</p>
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
               <Button
                 asChild
@@ -50,7 +50,7 @@ export function CtaBand({
             </div>
           </div>
           <div className="rounded-2xl border border-white/20 bg-white/10 p-6 shadow-xl backdrop-blur">
-            <div className="space-y-3 text-sm text-brand-accent">
+            <div className="space-y-3 text-sm text-white/70">
               <div className="flex items-center justify-between rounded-xl border border-white/15 bg-white/10 p-4">
                 <div>
                   <p className="text-xs uppercase tracking-wide text-white/80">OneSurvey</p>
