@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
-type CTA = { label: string; href: string };
+type CTA = { label: string; href: string; target?: string; rel?: string };
 
 type PageHeroProps = {
   eyebrow?: string;
@@ -49,7 +49,13 @@ export function PageHero({
                   size="lg"
                   className="px-7 text-base font-semibold bg-brand-primary text-white shadow-md shadow-brand-primary/15 hover:bg-brand-secondary"
                 >
-                  <Link href={primaryCta.href}>{primaryCta.label}</Link>
+                  <Link
+                    href={primaryCta.href}
+                    target={primaryCta.target}
+                    rel={primaryCta.target === "_blank" ? primaryCta.rel ?? "noreferrer" : primaryCta.rel}
+                  >
+                    {primaryCta.label}
+                  </Link>
                 </Button>
               )}
               {secondaryCta && (
@@ -59,7 +65,13 @@ export function PageHero({
                   variant="outline"
                   className="px-7 text-base font-semibold border-neutral-200 text-brand-primary hover:border-brand-primary hover:bg-brand-accent/20"
                 >
-                  <Link href={secondaryCta.href}>{secondaryCta.label}</Link>
+                  <Link
+                    href={secondaryCta.href}
+                    target={secondaryCta.target}
+                    rel={secondaryCta.target === "_blank" ? secondaryCta.rel ?? "noreferrer" : secondaryCta.rel}
+                  >
+                    {secondaryCta.label}
+                  </Link>
                 </Button>
               )}
             </div>

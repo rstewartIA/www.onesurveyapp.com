@@ -335,6 +335,174 @@ const plans: Plan[] = [
   },
 ];
 
+const planTiers = [
+  { id: "starter", label: "Starter" },
+  { id: "professional", label: "Professional" },
+  { id: "organization", label: "Organization" },
+  { id: "enterprise", label: "Enterprise" },
+] as const;
+
+type PlanTierId = (typeof planTiers)[number]["id"];
+type Availability = boolean | string;
+
+type CompareFeature = {
+  name: string;
+  detail: string;
+  availability: Record<PlanTierId, Availability>;
+};
+
+type CompareModule = {
+  id: string;
+  name: string;
+  description: string;
+  features: CompareFeature[];
+};
+
+const compareModules: CompareModule[] = [
+  {
+    id: "site-dashboard",
+    name: "Site Dashboard (OneSurvey Projects)",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    features: [
+      {
+        name: "Project overview cards",
+        detail: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
+        availability: { starter: true, professional: true, organization: true, enterprise: true },
+      },
+      {
+        name: "Portfolio filters",
+        detail: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
+        availability: { starter: false, professional: true, organization: true, enterprise: true },
+      },
+      {
+        name: "Bulk status updates",
+        detail: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
+        availability: { starter: false, professional: true, organization: true, enterprise: true },
+      },
+      {
+        name: "Custom portfolio tags",
+        detail: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
+        availability: { starter: "Limited", professional: true, organization: true, enterprise: true },
+      },
+    ],
+  },
+  {
+    id: "floor-plan-editing",
+    name: "Floor Plan Editing",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    features: [
+      {
+        name: "Scale calibration",
+        detail: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
+        availability: { starter: true, professional: true, organization: true, enterprise: true },
+      },
+      {
+        name: "Device placement",
+        detail: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
+        availability: { starter: true, professional: true, organization: true, enterprise: true },
+      },
+      {
+        name: "Coverage overlays",
+        detail: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
+        availability: { starter: false, professional: true, organization: true, enterprise: true },
+      },
+      {
+        name: "Layer templates",
+        detail: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
+        availability: { starter: false, professional: false, organization: true, enterprise: true },
+      },
+    ],
+  },
+  {
+    id: "survey-capture",
+    name: "Survey Capture",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    features: [
+      {
+        name: "Lorem ipsum checklist",
+        detail: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
+        availability: { starter: true, professional: true, organization: true, enterprise: true },
+      },
+      {
+        name: "Dolor sit prompts",
+        detail: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
+        availability: { starter: true, professional: true, organization: true, enterprise: true },
+      },
+      {
+        name: "Etiam consequat exports",
+        detail: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
+        availability: { starter: false, professional: true, organization: true, enterprise: true },
+      },
+    ],
+  },
+  {
+    id: "assignments",
+    name: "Assignments",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    features: [
+      {
+        name: "Lorem ipsum routing",
+        detail: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
+        availability: { starter: false, professional: true, organization: true, enterprise: true },
+      },
+      {
+        name: "Sit amet handoffs",
+        detail: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
+        availability: { starter: false, professional: true, organization: true, enterprise: true },
+      },
+      {
+        name: "Consectetur approvals",
+        detail: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
+        availability: { starter: false, professional: true, organization: true, enterprise: true },
+      },
+    ],
+  },
+  {
+    id: "device-library",
+    name: "Device Library",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    features: [
+      {
+        name: "Lorem ipsum catalog",
+        detail: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
+        availability: { starter: true, professional: true, organization: true, enterprise: true },
+      },
+      {
+        name: "Dolor sit templates",
+        detail: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
+        availability: { starter: false, professional: true, organization: true, enterprise: true },
+      },
+      {
+        name: "Amet bulk updates",
+        detail: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
+        availability: { starter: false, professional: true, organization: true, enterprise: true },
+      },
+    ],
+  },
+  {
+    id: "reporting",
+    name: "Reporting",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    features: [
+      {
+        name: "Lorem ipsum summaries",
+        detail: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
+        availability: { starter: true, professional: true, organization: true, enterprise: true },
+      },
+      {
+        name: "Sit amet exports",
+        detail: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
+        availability: { starter: false, professional: true, organization: true, enterprise: true },
+      },
+      {
+        name: "Consectetur photo reports",
+        detail: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
+        availability: { starter: false, professional: true, organization: true, enterprise: true },
+      },
+    ],
+  },
+];
+
 const faqs = [
   {
     question: "Can we start with a pilot?",
@@ -399,6 +567,36 @@ function CheckIcon({ className }: { className?: string }) {
       <path d="M5 13l4 4L19 7" />
     </svg>
   );
+}
+
+function ChevronIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className={className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M6 9l6 6 6-6" />
+    </svg>
+  );
+}
+
+function AvailabilityCell({ value }: { value: Availability }) {
+  if (typeof value === "string") {
+    return <span className="text-xs font-semibold text-neutral-500">{value}</span>;
+  }
+  if (value) {
+    return (
+      <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-success/15 text-success">
+        <CheckIcon className="h-4 w-4" />
+      </span>
+    );
+  }
+  return <span className="inline-flex h-2 w-2 rounded-full bg-neutral-300" />;
 }
 
 export default function PricingPage() {
@@ -627,6 +825,101 @@ export default function PricingPage() {
                 </ul>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white py-18 md:py-24">
+        <div className="container mx-auto px-4 md:px-6 lg:px-8">
+          <SectionHeading
+            align="center"
+            eyebrow="Compare"
+            title="Compare all features"
+            subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt."
+          />
+          <div className="mt-8 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
+              <span className="text-xs font-semibold uppercase tracking-wide text-neutral-500">Filter by seat type</span>
+              <div className="relative">
+                <select
+                  className="appearance-none rounded-full border border-neutral-200 bg-white px-4 py-2 pr-9 text-sm font-semibold text-neutral-700 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary/30"
+                  defaultValue="full"
+                >
+                  <option value="viewer">Viewer seat</option>
+                  <option value="field">Field seat</option>
+                  <option value="full">Full seat</option>
+                </select>
+                <ChevronIcon className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-500" />
+              </div>
+            </div>
+            <div className="flex items-center rounded-full border border-neutral-200 bg-white p-1 text-xs font-semibold text-neutral-600 shadow-sm">
+              <button type="button" className="rounded-full bg-brand-primary px-3 py-1 text-white">
+                All features
+              </button>
+              <button type="button" className="px-3 py-1 text-neutral-500 hover:text-neutral-700">
+                Key features
+              </button>
+            </div>
+          </div>
+
+          <div className="mt-8 rounded-2xl border border-neutral-200 bg-white shadow-sm">
+            <div className="overflow-x-auto">
+              <div className="min-w-[920px]">
+                <div className="grid grid-cols-[minmax(240px,1fr)_repeat(4,minmax(0,130px))_minmax(0,40px)] gap-4 border-b border-neutral-200 px-6 py-3 text-xs font-semibold uppercase tracking-wide text-neutral-500">
+                  <div>Features</div>
+                  {planTiers.map((planTier) => (
+                    <div key={planTier.id} className="text-center">
+                      {planTier.label}
+                    </div>
+                  ))}
+                  <div />
+                </div>
+                <div className="divide-y divide-neutral-200">
+                  {compareModules.map((compareModule) => (
+                    <details key={compareModule.id} className="group">
+                      <summary className="grid cursor-pointer list-none grid-cols-[minmax(240px,1fr)_repeat(4,minmax(0,130px))_minmax(0,40px)] gap-4 px-6 py-4 text-sm font-semibold text-neutral-900 transition hover:bg-neutral-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary/30 [&::-webkit-details-marker]:hidden">
+                        <div className="flex items-center gap-3">
+                          <div className="flex flex-col">
+                            <span>{compareModule.name}</span>
+                            <span className="text-xs font-normal text-neutral-500">{compareModule.description}</span>
+                          </div>
+                        </div>
+                        {planTiers.map((planTier) => (
+                          <div key={planTier.id} className="flex items-center justify-center">
+                            <span className="inline-flex h-2 w-2 rounded-full bg-neutral-200" />
+                          </div>
+                        ))}
+                        <div className="flex items-center justify-end">
+                          <ChevronIcon className="h-4 w-4 text-neutral-400 transition group-open:rotate-180" />
+                        </div>
+                      </summary>
+                      <div className="border-t border-neutral-200 bg-neutral-50/40">
+                        {compareModule.features.map((feature) => (
+                          <details key={`${compareModule.id}-${feature.name}`} className="group border-t border-neutral-200 bg-white">
+                            <summary className="grid cursor-pointer list-none grid-cols-[minmax(240px,1fr)_repeat(4,minmax(0,130px))_minmax(0,40px)] gap-4 px-6 py-3 text-sm text-neutral-700 transition hover:bg-neutral-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary/30 [&::-webkit-details-marker]:hidden">
+                              <div className="flex items-center gap-3 pl-6">
+                                <span className="font-medium text-neutral-800">{feature.name}</span>
+                              </div>
+                              {planTiers.map((planTier) => (
+                                <div key={planTier.id} className="flex items-center justify-center">
+                                  <AvailabilityCell value={feature.availability[planTier.id]} />
+                                </div>
+                              ))}
+                              <div className="flex items-center justify-end">
+                                <ChevronIcon className="h-4 w-4 text-neutral-400 transition group-open:rotate-180" />
+                              </div>
+                            </summary>
+                            <div className="pb-4 pr-6 pl-14 text-sm text-neutral-500">
+                              <p className="max-w-2xl">{feature.detail}</p>
+                            </div>
+                          </details>
+                        ))}
+                      </div>
+                    </details>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>

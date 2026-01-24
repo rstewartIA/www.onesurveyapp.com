@@ -16,7 +16,12 @@ export default function LoginPage() {
         eyebrow="Login"
         title="Access your OneSurvey workspace"
         subtitle="Use the login link below to access the main application."
-        primaryCta={{ label: "Go to login", href: "https://app.onesurvey.com" }}
+        primaryCta={{
+          label: "Go to login",
+          href: "https://rocket.onesurveyapp.com/login",
+          target: "_blank",
+          rel: "noreferrer",
+        }}
         secondaryCta={{ label: "Contact support", href: "/contact" }}
       />
 

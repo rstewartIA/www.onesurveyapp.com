@@ -166,11 +166,11 @@ export default function Home() {
           <div className="container relative mx-auto px-4 md:px-6 lg:px-8">
             <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] items-center">
               <div className="space-y-4">
-                <p className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-accent">
+                <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/70">
                   Take control of your site surveys
                 </p>
-                <h2 className="text-3xl font-semibold sm:text-4xl">Take control of your site surveys</h2>
-                <p className="text-lg text-brand-accent">
+                <h2 className="text-3xl font-semibold text-white sm:text-4xl">Take control of your site surveys</h2>
+                <p className="text-lg text-white/80">
                   Whether you are standardizing surveys across technicians or organizing site information for long term
                   planning, OneSurvey gives you a single place to capture, review, and share accurate data.
                 </p>
@@ -189,7 +189,7 @@ export default function Home() {
                 </div>
               </div>
               <div className="rounded-2xl border border-white/20 bg-white/10 p-6 shadow-xl backdrop-blur">
-                <div className="space-y-3 text-sm text-brand-accent">
+                <div className="space-y-3 text-sm text-white/70">
                   <div className="flex items-center justify-between rounded-xl border border-white/15 bg-white/10 p-4">
                     <div>
                       <p className="text-xs uppercase tracking-wide text-white/80">OneSurvey</p>

@@ -54,6 +54,42 @@ export function Footer({ columns }: FooterProps) {
               </ul>
             </div>
           ))}
+          <div className="flex flex-wrap items-center gap-4 md:col-span-3 md:col-start-2 md:justify-end">
+            <Link
+              href="https://apps.apple.com"
+              target="_blank"
+              rel="noreferrer"
+              className="transition hover:opacity-90"
+              aria-label="Download on the App Store"
+            >
+              <span className="relative block h-12 w-40">
+                <Image
+                  src="/app-store-badge.svg"
+                  alt="Download on the App Store"
+                  fill
+                  sizes="160px"
+                  className="object-contain"
+                />
+              </span>
+            </Link>
+            <Link
+              href="https://play.google.com/store"
+              target="_blank"
+              rel="noreferrer"
+              className="transition hover:opacity-90"
+              aria-label="Get it on Google Play"
+            >
+              <span className="relative block h-12 w-40">
+                <Image
+                  src="/google-play-badge.png"
+                  alt="Get it on Google Play"
+                  fill
+                  sizes="160px"
+                  className="object-contain"
+                />
+              </span>
+            </Link>
+          </div>
         </div>
         <div className="mt-12 border-t border-white/10 pt-6 text-sm text-neutral-400">
           <div className="flex flex-col items-start justify-between gap-3 sm:flex-row sm:items-center">
