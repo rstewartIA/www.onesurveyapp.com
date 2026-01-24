@@ -62,15 +62,13 @@ export function Footer({ columns }: FooterProps) {
               className="transition hover:opacity-90"
               aria-label="Download on the App Store"
             >
-              <span className="relative block h-12 w-40">
-                <Image
-                  src="/app-store-badge.svg"
-                  alt="Download on the App Store"
-                  fill
-                  sizes="160px"
-                  className="object-contain"
-                />
-              </span>
+              <Image
+                src="/app-store-badge.svg"
+                alt="Download on the App Store"
+                width={120}
+                height={40}
+                className="block h-12 w-auto"
+              />
             </Link>
             <Link
               href="https://play.google.com/store"
@@ -79,15 +77,13 @@ export function Footer({ columns }: FooterProps) {
               className="transition hover:opacity-90"
               aria-label="Get it on Google Play"
             >
-              <span className="relative block h-12 w-40">
-                <Image
-                  src="/google-play-badge.png"
-                  alt="Get it on Google Play"
-                  fill
-                  sizes="160px"
-                  className="object-contain"
-                />
-              </span>
+              <Image
+                src="/google-play-badge.png"
+                alt="Get it on Google Play"
+                width={564}
+                height={168}
+                className="block h-12 w-auto"
+              />
             </Link>
           </div>
         </div>
