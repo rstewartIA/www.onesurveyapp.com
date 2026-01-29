@@ -93,6 +93,16 @@
     transition: filter 200ms ease;
   }
 
+  body.nav-open-mobile {
+    overflow: hidden;
+  }
+
+  body.nav-open-mobile main,
+  body.nav-open-mobile footer {
+    filter: blur(12px);
+    transition: filter 200ms ease;
+  }
+
   body {
     @apply bg-white text-neutral-900 font-body;
   }
