@@ -116,9 +116,9 @@ function NavIcon({ label }: { label: string }) {
   if (key.includes("doc")) {
     return (
       <svg aria-hidden="true" viewBox="0 0 24 24" className={iconClassName} fill="none" stroke="currentColor" strokeWidth="1.6">
-        <path d="M7 3.5h7l4 4V20.5a1.5 1.5 0 0 1-1.5 1.5H7A1.5 1.5 0 0 1 5.5 20.5V5A1.5 1.5 0 0 1 7 3.5z" />
-        <path d="M14 3.5V8h4" />
-        <path d="M8 12h8M8 16h5" />
+        <path d="M4.5 6.5c0-1.1.9-2 2-2H11a2 2 0 0 1 2 2v12.5H6.5a2 2 0 0 0-2 2v-14z" />
+        <path d="M19.5 6.5c0-1.1-.9-2-2-2H13a2 2 0 0 0-2 2v12.5h6.5a2 2 0 0 1 2 2v-14z" />
+        <path d="M9 8.5h2.5M9 12h2.5M9 15.5h2.5" />
       </svg>
     );
   }
@@ -320,17 +320,17 @@ export function NavDropdown({ item }: NavDropdownProps) {
                     <span>{item.label}</span>
                     <svg
                       aria-hidden="true"
-                    viewBox="0 0 24 24"
-                    className="h-4 w-4"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M9 6l6 6-6 6" />
-                  </svg>
-                </div>
+                      viewBox="0 0 24 24"
+                      className="h-4 w-4"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M9 6l6 6-6 6" />
+                    </svg>
+                  </div>
                   <div className="rounded-xl border border-neutral-200 bg-white p-4 shadow-sm transition-colors group-hover:bg-neutral-50">
                     <div className="mx-auto aspect-[4/3] w-full max-w-[170px] rounded-lg bg-gradient-to-br from-brand-accent/40 via-white to-brand-primary/10">
                       <div className="flex h-full w-full items-center justify-center text-[0.65rem] font-semibold uppercase tracking-wide text-neutral-500">
