@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import type { NavigationItem } from "@/data/navigation";
@@ -12,10 +12,34 @@ type MobileNavProps = {
   primaryCta?: { label: string; href: string };
   secondaryCta?: { label: string; href: string };
   onClose?: () => void;
+  dialogId?: string;
 };
 
-export function MobileNav({ open, navigation, primaryCta, secondaryCta, onClose }: MobileNavProps) {
+const focusableSelector =
+  'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+function getFocusableElements(container: HTMLElement) {
+  return Array.from(container.querySelectorAll<HTMLElement>(focusableSelector)).filter((element) => {
+    if (element.hasAttribute("disabled")) return false;
+    if (element.getAttribute("tabindex") === "-1") return false;
+    if (element.closest('[aria-hidden="true"]')) return false;
+    return true;
+  });
+}
+
+export function MobileNav({
+  open,
+  navigation,
+  primaryCta,
+  secondaryCta,
+  onClose,
+  dialogId = "mobile-nav-dialog",
+}: MobileNavProps) {
   const [activeItem, setActiveItem] = useState<NavigationItem | null>(null);
+  const dialogRef = useRef<HTMLDivElement | null>(null);
+  const closeButtonRef = useRef<HTMLButtonElement | null>(null);
+  const backButtonRef = useRef<HTMLButtonElement | null>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
   const showSubmenu = Boolean(activeItem?.children?.length);
 
   useEffect(() => {
@@ -27,10 +51,63 @@ export function MobileNav({ open, navigation, primaryCta, secondaryCta, onClose 
 
   const activeChildren = useMemo(() => activeItem?.children ?? [], [activeItem]);
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     setActiveItem(null);
     onClose?.();
-  };
+  }, [onClose]);
+
+  useEffect(() => {
+    if (open) {
+      previousFocusRef.current = document.activeElement as HTMLElement | null;
+    } else if (previousFocusRef.current) {
+      previousFocusRef.current.focus();
+      previousFocusRef.current = null;
+    }
+  }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
+    const target = showSubmenu ? backButtonRef.current : closeButtonRef.current;
+    target?.focus();
+  }, [open, showSubmenu]);
+
+  useEffect(() => {
+    if (!open) return;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        handleClose();
+        return;
+      }
+
+      if (event.key !== "Tab") return;
+
+      const dialog = dialogRef.current;
+      if (!dialog) return;
+
+      const focusable = getFocusableElements(dialog);
+      if (focusable.length === 0) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const activeElement = document.activeElement as HTMLElement | null;
+
+      if (event.shiftKey) {
+        if (activeElement === first || !dialog.contains(activeElement)) {
+          event.preventDefault();
+          last.focus();
+        }
+      } else if (activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [open, handleClose, showSubmenu]);
 
   return (
     <div
@@ -49,8 +126,11 @@ export function MobileNav({ open, navigation, primaryCta, secondaryCta, onClose 
           "absolute inset-0 h-full w-screen bg-white shadow-2xl transition-transform duration-300 ease-out",
           open ? "translate-x-0" : "translate-x-full"
         )}
+        ref={dialogRef}
+        id={dialogId}
         role="dialog"
         aria-modal="true"
+        aria-labelledby="mobile-nav-title"
       >
         <div className="flex h-full min-h-0 flex-col">
           <div className="flex items-center justify-between border-b border-neutral-200/80 px-5 py-4">
@@ -60,6 +140,7 @@ export function MobileNav({ open, navigation, primaryCta, secondaryCta, onClose 
                 onClick={() => setActiveItem(null)}
                 className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-neutral-200 text-neutral-700 transition hover:border-brand-primary hover:text-brand-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary"
                 aria-label="Back to main menu"
+                ref={backButtonRef}
               >
                 <svg
                   aria-hidden="true"
@@ -78,7 +159,7 @@ export function MobileNav({ open, navigation, primaryCta, secondaryCta, onClose 
               <span className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-primary">Menu</span>
             )}
 
-            <div className="text-base font-semibold text-neutral-900">
+            <div id="mobile-nav-title" className="text-base font-semibold text-neutral-900">
               {showSubmenu ? activeItem?.label : "Explore"}
             </div>
 
@@ -87,6 +168,7 @@ export function MobileNav({ open, navigation, primaryCta, secondaryCta, onClose 
               onClick={handleClose}
               className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-neutral-200 text-neutral-700 transition hover:border-brand-primary hover:text-brand-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary"
               aria-label="Close navigation menu"
+              ref={closeButtonRef}
             >
               <svg
                 aria-hidden="true"
@@ -111,6 +193,7 @@ export function MobileNav({ open, navigation, primaryCta, secondaryCta, onClose 
                 rootVisible ? "translate-x-0 opacity-100" : "-translate-x-full opacity-0",
                 rootVisible ? "pointer-events-auto" : "pointer-events-none"
               )}
+              aria-hidden={!rootVisible}
             >
               <nav className="flex-1 space-y-3 overflow-y-auto pb-4">
                 {navigation.map((item, index) => {
@@ -192,6 +275,7 @@ export function MobileNav({ open, navigation, primaryCta, secondaryCta, onClose 
                 submenuVisible ? "translate-x-0 opacity-100" : "translate-x-full opacity-0",
                 submenuVisible ? "pointer-events-auto" : "pointer-events-none"
               )}
+              aria-hidden={!submenuVisible}
             >
               <nav className="flex-1 space-y-3 overflow-y-auto pb-4">
                 {activeItem && (

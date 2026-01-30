@@ -21,15 +21,42 @@ export function TopNav({
   secondaryCta = { label: "Log in", href: "/login" },
 }: TopNavProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const mobileDialogId = "mobile-nav-dialog";
 
   useEffect(() => {
     const { body } = document;
+    const navTargets = Array.from(document.querySelectorAll<HTMLElement>("main, footer"));
+
+    const restoreAriaHidden = () => {
+      navTargets.forEach((element) => {
+        if (!element.hasAttribute("data-nav-aria-hidden")) return;
+        const previous = element.getAttribute("data-nav-aria-hidden");
+        if (previous) {
+          element.setAttribute("aria-hidden", previous);
+        } else {
+          element.removeAttribute("aria-hidden");
+        }
+        element.removeAttribute("data-nav-aria-hidden");
+      });
+    };
+
     if (mobileOpen) {
       body.classList.add("nav-open-mobile");
+      navTargets.forEach((element) => {
+        if (!element.hasAttribute("data-nav-aria-hidden")) {
+          const previous = element.getAttribute("aria-hidden");
+          element.setAttribute("data-nav-aria-hidden", previous ?? "");
+        }
+        element.setAttribute("aria-hidden", "true");
+      });
     } else {
       body.classList.remove("nav-open-mobile");
+      restoreAriaHidden();
     }
-    return () => body.classList.remove("nav-open-mobile");
+    return () => {
+      body.classList.remove("nav-open-mobile");
+      restoreAriaHidden();
+    };
   }, [mobileOpen]);
 
   return (
@@ -96,13 +123,15 @@ export function TopNav({
                 <Link href={primaryCta.href}>{primaryCta.label}</Link>
               </Button>
             )}
-            <button
-              type="button"
-              onClick={() => setMobileOpen((open) => !open)}
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-neutral-200 bg-white text-neutral-800 shadow-sm transition hover:border-brand-primary hover:text-brand-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary"
-              aria-label="Toggle navigation menu"
-              aria-expanded={mobileOpen}
-            >
+          <button
+            type="button"
+            onClick={() => setMobileOpen((open) => !open)}
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-neutral-200 bg-white text-neutral-800 shadow-sm transition hover:border-brand-primary hover:text-brand-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary"
+            aria-label="Toggle navigation menu"
+            aria-expanded={mobileOpen}
+            aria-controls={mobileDialogId}
+            aria-haspopup="dialog"
+          >
               <div className="space-y-1">
                 <span
                   className={cn(
@@ -134,6 +163,7 @@ export function TopNav({
         primaryCta={primaryCta}
         secondaryCta={secondaryCta}
         onClose={() => setMobileOpen(false)}
+        dialogId={mobileDialogId}
       />
     </>
   );

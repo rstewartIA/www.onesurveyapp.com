@@ -7,9 +7,9 @@ import { MediaPlaceholder } from "@/components/marketing/media-placeholder";
 import { CtaBand } from "@/components/marketing/cta-band";
 
 export const metadata: Metadata = {
-  title: "Security Floorplan Editor for Device Layouts",
+  title: "Floorplan Editor for Security Device Layouts",
   description:
-    "Import floorplans, set scale, and place security devices on accurate layouts with OneSurvey.",
+    "Import floorplans, set scale, and place security devices on accurate layouts with OneSurvey's floorplan editor.",
 };
 
 const editorFeatures = [
@@ -50,7 +50,7 @@ export default function FloorplanEditorPage() {
     <MarketingShell>
       <PageHero
         eyebrow="Floorplan editor"
-        title="Design accurate layouts on scaled floorplans"
+        title="Design accurate security layouts on scaled floorplans"
         subtitle="Bring plans to life with accurate scale, device placement, and coverage views built for security design reviews."
         primaryCta={{ label: "Book a demo", href: "/demo" }}
         secondaryCta={{ label: "View product", href: "/product" }}

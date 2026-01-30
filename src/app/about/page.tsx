@@ -5,7 +5,7 @@ import { SectionHeading } from "@/components/marketing/section-heading";
 import { MediaPlaceholder } from "@/components/marketing/media-placeholder";
 
 export const metadata: Metadata = {
-  title: "Our Story",
+  title: "About OneSurvey - Security Site Survey Platform",
   description:
     "The story behind OneSurvey and our focus on the security integrator workflow.",
 };
@@ -22,7 +22,7 @@ export default function AboutPage() {
       <PageHero
         eyebrow="About"
         title="Built around the way integrators work"
-        subtitle="From field surveys to proposal ready reports, OneSurvey is designed around real security project workflows."
+        subtitle="From field surveys to proposal-ready reports, OneSurvey is designed around real security project workflows."
         primaryCta={{ label: "Book a demo", href: "/demo" }}
         secondaryCta={{ label: "Careers", href: "/careers" }}
         media={

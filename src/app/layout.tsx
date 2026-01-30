@@ -17,14 +17,15 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "OneSurvey - Smart Site Surveys, Asset Mapping & Facility Documentation",
+  title: "OneSurvey - Security Site Survey Software & Floorplan Design",
   description:
-    "OneSurvey is a modern survey and site documentation platform for security integrators, facility managers, and enterprise teams. Capture site data, plan devices, manage floorplans, and generate consistent documentation -faster and with greater accuracy.",
+    "OneSurvey is a modern security site survey and documentation platform for integrators, facility managers, and enterprise teams. Capture site data, map devices on floorplans, and generate consistent documentation faster and with greater accuracy.",
   keywords: [
     "site survey software",
+    "security site survey software",
     "facility documentation tool",
     "security integrator platform",
-    "asset mapping",
+    "device mapping",
     "floorplan editor",
     "project walkthrough software",
     "survey workflow tool",

@@ -32,7 +32,7 @@ function NavIcon({ label }: { label: string }) {
     );
   }
 
-  if (key.includes("asset")) {
+  if (key.includes("asset") || key.includes("device") || key.includes("library")) {
     return (
       <svg aria-hidden="true" viewBox="0 0 24 24" className={iconClassName} fill="none" stroke="currentColor" strokeWidth="1.6">
         <rect x="4" y="4" width="7" height="7" rx="1.2" />
@@ -175,6 +175,12 @@ export function NavDropdown({ item }: NavDropdownProps) {
     setOpen(false);
   };
 
+  const handleTriggerLeave = (event: MouseEvent<HTMLDivElement>) => {
+    const next = event.relatedTarget as Node | null;
+    if (next && (menuRef.current?.contains(next) || triggerRef.current?.contains(next))) return;
+    setOpen(false);
+  };
+
   const handleBlur = (event: FocusEvent<HTMLDivElement>) => {
     if (!event.currentTarget.contains(event.relatedTarget)) {
       setOpen(false);
@@ -199,11 +205,11 @@ export function NavDropdown({ item }: NavDropdownProps) {
       className="relative flex h-16 items-center"
       onBlur={handleBlur}
       onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
+      onMouseLeave={handleTriggerLeave}
     >
       <span
         aria-hidden="true"
-        className="pointer-events-auto absolute left-0 right-0 top-full h-3"
+        className="pointer-events-auto absolute left-0 right-0 top-full h-6"
       />
       <button
         ref={triggerRef}
@@ -233,7 +239,6 @@ export function NavDropdown({ item }: NavDropdownProps) {
 
       <div
         aria-hidden="true"
-        onMouseEnter={() => setOpen(false)}
         onClick={() => setOpen(false)}
         className={cn(
           "fixed inset-x-0 top-16 bottom-0 z-30 bg-white/20 backdrop-blur-2xl transition-opacity duration-200",

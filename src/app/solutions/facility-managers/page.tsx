@@ -7,9 +7,9 @@ import { MediaPlaceholder } from "@/components/marketing/media-placeholder";
 import { CtaBand } from "@/components/marketing/cta-band";
 
 export const metadata: Metadata = {
-  title: "Facility Security Asset and Floorplan Management",
+  title: "Facility Security Device and Floorplan Management",
   description:
-    "Keep floorplans and security assets current, coordinate surveys, and maintain clear documentation across facilities.",
+    "Keep floorplans and security devices current, coordinate surveys, and maintain clear documentation across facilities.",
 };
 
 const facilityFeatures = [
@@ -18,7 +18,7 @@ const facilityFeatures = [
     description: "Keep plans current after renovations or layout changes.",
   },
   {
-    title: "Asset records",
+    title: "Device records",
     description: "Track installed devices with photos and notes in one place.",
   },
   {
@@ -38,14 +38,14 @@ export default function FacilityManagersPage() {
     <MarketingShell>
       <PageHero
         eyebrow="Facility managers"
-        title="Keep floorplans and security assets current"
-        subtitle="Centralize plans, device records, and photos so maintenance and upgrades stay on track."
+        title="Keep floorplans and security devices current"
+        subtitle="Centralize plans, device records, and photos so maintenance, audits, and upgrades stay on track."
         primaryCta={{ label: "Book a demo", href: "/demo" }}
         secondaryCta={{ label: "Talk to sales", href: "/contact" }}
         media={
           <MediaPlaceholder
             label="Facility overview"
-            helper="Add a facility plan or asset dashboard screenshot."
+            helper="Add a facility plan or device dashboard screenshot."
           />
         }
       />
@@ -69,7 +69,7 @@ export default function FacilityManagersPage() {
         <div className="container mx-auto px-4 md:px-6 lg:px-8">
           <div className="grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-center">
             <MediaPlaceholder
-              label="Asset record view"
+              label="Device record view"
               helper="Insert a device record card with photos and notes."
               className="min-h-[320px]"
             />
@@ -95,7 +95,7 @@ export default function FacilityManagersPage() {
       <CtaBand
         eyebrow="Facility ready"
         title="Bring your documentation into OneSurvey"
-        description="See how the platform keeps plans and assets organized for every site."
+        description="See how the platform keeps plans and devices organized for every site."
         primaryCta={{ label: "Book a demo", href: "/demo" }}
         secondaryCta={{ label: "Contact sales", href: "/contact" }}
       />

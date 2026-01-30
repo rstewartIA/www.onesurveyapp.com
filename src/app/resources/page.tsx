@@ -8,9 +8,9 @@ import { CtaBand } from "@/components/marketing/cta-band";
 import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
-  title: "OneSurvey Resources for Security Integrators",
+  title: "Security Site Survey Resources and Guides",
   description:
-    "Guides, checklists, and templates to improve site surveys, design quality, and proposal clarity.",
+    "Guides, checklists, and templates to improve security site surveys, floorplan design quality, and proposal clarity.",
 };
 
 const resources = [
@@ -42,7 +42,7 @@ export default function ResourcesPage() {
       <PageHero
         eyebrow="Resources"
         title="Resources for better security surveys"
-        subtitle="Download guides and checklists that help field teams capture complete site data." 
+        subtitle="Download guides and checklists that help field teams capture complete security site data."
         primaryCta={{ label: "Get the checklist", href: "/guides" }}
         secondaryCta={{ label: "Browse guides", href: "/guides" }}
         media={

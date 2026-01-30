@@ -47,7 +47,7 @@ export default function ReportingExportsPage() {
         title="Turn site data into clear reports and scope packages"
         subtitle="Generate survey summaries, inventories, and photo reports that help clients and project teams make confident decisions."
         primaryCta={{ label: "Book a demo", href: "/demo" }}
-        secondaryCta={{ label: "View sample report", href: "/resources" }}
+        secondaryCta={{ label: "Explore resources", href: "/resources" }}
         media={
           <MediaPlaceholder
             label="Report preview"

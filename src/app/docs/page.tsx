@@ -7,7 +7,7 @@ import { MediaPlaceholder } from "@/components/marketing/media-placeholder";
 import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
-  title: "OneSurvey Help Center",
+  title: "OneSurvey Help Center for Security Site Surveys",
   description:
     "How to articles and training resources for surveys, floorplans, device libraries, and reports.",
 };
@@ -45,7 +45,7 @@ export default function DocsPage() {
       <PageHero
         eyebrow="Help center"
         title="Get answers fast"
-        subtitle="Step by step help for surveys, floorplans, and reporting." 
+        subtitle="Step by step help for surveys, floorplans, device libraries, and reporting."
         primaryCta={{ label: "Contact support", href: "/contact" }}
         secondaryCta={{ label: "Book a demo", href: "/demo" }}
         media={

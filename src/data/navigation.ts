@@ -12,7 +12,7 @@ export const navigationHierarchy: NavigationItem[] = [
     href: "/product",
     children: [
       {
-        label: "Features overview",
+        label: "Features",
         href: "/product/features"
       },
       {
@@ -20,11 +20,11 @@ export const navigationHierarchy: NavigationItem[] = [
         href: "/product/floorplan-editor"
       },
       {
-        label: "Asset library",
+        label: "Device library",
         href: "/product/asset-library"
       },
       {
-        label: "Survey automation",
+        label: "Survey workflow",
         href: "/product/survey-automation"
       },
       {
@@ -65,7 +65,7 @@ export const navigationHierarchy: NavigationItem[] = [
         href: "/guides"
       },
       {
-        label: "Documentation",
+        label: "Help center",
         href: "/docs"
       },
     ],
@@ -85,10 +85,10 @@ export const footerColumns = [
   {
     title: "Product",
     links: [
-      { label: "Features overview", href: "/product/features" },
+      { label: "Features", href: "/product/features" },
       { label: "Floorplan editor", href: "/product/floorplan-editor" },
-      { label: "Asset library", href: "/product/asset-library" },
-      { label: "Survey automation", href: "/product/survey-automation" },
+      { label: "Device library", href: "/product/asset-library" },
+      { label: "Survey workflow", href: "/product/survey-automation" },
       { label: "Reporting & exports", href: "/product/reporting-exports" },
     ],
   },
@@ -105,7 +105,7 @@ export const footerColumns = [
     links: [
       { label: "Blog", href: "/blog" },
       { label: "Guides", href: "/guides" },
-      { label: "Documentation", href: "/docs" },
+      { label: "Help center", href: "/docs" },
     ],
   },
   {

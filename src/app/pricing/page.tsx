@@ -8,9 +8,9 @@ import { CtaBand } from "@/components/marketing/cta-band";
 import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
-  title: "OneSurvey Pricing for Security Integrators",
+  title: "OneSurvey Pricing - Security Site Survey Software",
   description:
-    "Flexible plans for integrators and enterprise teams. Start with a pilot and scale to full rollouts.",
+    "Flexible plans for integrators, facility teams, and enterprise programs. Start with a pilot and scale to full rollouts.",
 };
 
 type Module = {
@@ -171,7 +171,7 @@ type SeatType = {
 const seatTypes: SeatType[] = [
   {
     name: "Viewer seat",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    description: "Read-only access to reports, floorplans, and the device library for stakeholders.",
     color: "bg-neutral-100 text-neutral-700",
     Icon: ({ className }) => (
       <svg
@@ -191,7 +191,7 @@ const seatTypes: SeatType[] = [
   },
   {
     name: "Field seat",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    description: "Field-ready access for capturing surveys, photos, and assignments on site.",
     color: "bg-brand-accent/60 text-brand-dark",
     Icon: ({ className }) => (
       <svg
@@ -211,7 +211,7 @@ const seatTypes: SeatType[] = [
   },
   {
     name: "Full seat",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    description: "Full create/edit access across surveys, floorplans, device library, assignments, and reports.",
     color: "bg-brand-primary/15 text-brand-primary",
     Icon: ({ className }) => (
       <svg
@@ -255,9 +255,9 @@ type Plan = {
 const plans: Plan[] = [
   {
     name: "Starter",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    description: "Best for pilots or small teams validating a new survey workflow.",
     price: "Free",
-    priceUnit: "Lorem ipsum",
+    priceUnit: "Pilot plan",
     billing: "Billed monthly",
     cta: { label: "Select plan", href: "/contact" },
     seats: [
@@ -266,15 +266,15 @@ const plans: Plan[] = [
       { name: "Full seat", price: "Included", modules: seatAccess.full },
     ],
     features: [
-      "Lorem ipsum dolor sit amet",
-      "Consectetur adipiscing elit",
-      "Sed do eiusmod tempor",
-      "Ut labore et dolore",
+      "Core survey capture and floorplan editor",
+      "Device library with categories and accessories",
+      "Photo documentation for surveys and elements",
+      "Standard report exports",
     ],
   },
   {
     name: "Professional",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    description: "For growing integrators who need consistent surveys and reporting.",
     price: "$18",
     priceUnit: "per seat / month",
     billing: "Billed annually",
@@ -287,15 +287,15 @@ const plans: Plan[] = [
       { name: "Full seat", price: "$18", cadence: "/mo", modules: seatAccess.full },
     ],
     features: [
-      "Magna aliqua ut enim",
-      "Minim veniam quis",
-      "Nostrud exercitation ullamco",
-      "Laboris nisi ut aliquip",
+      "Assignments and handoff workflows",
+      "Advanced reporting formats and exports",
+      "Device library templates and bulk updates",
+      "Team notes and shared context",
     ],
   },
   {
     name: "Organization",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    description: "For multi-team standardization across projects and regions.",
     price: "$28",
     priceUnit: "per seat / month",
     billing: "Billed annually",
@@ -307,15 +307,15 @@ const plans: Plan[] = [
       { name: "Full seat", price: "$28", cadence: "/mo", modules: seatAccess.full },
     ],
     features: [
-      "Duis aute irure dolor",
-      "In reprehenderit in voluptate",
-      "Velit esse cillum dolore",
-      "Eu fugiat nulla pariatur",
+      "Organization-wide standards and templates",
+      "Seat management with admin and user roles",
+      "Portfolio reporting across sites",
+      "Priority onboarding for larger teams",
     ],
   },
   {
     name: "Enterprise",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    description: "Custom plan for large portfolios and multi-site rollouts.",
     price: "Custom",
     priceUnit: "Annual contract",
     billing: "Billed annually",
@@ -327,10 +327,10 @@ const plans: Plan[] = [
       { name: "Full seat", price: "Custom", modules: seatAccess.full },
     ],
     features: [
-      "Excepteur sint occaecat",
-      "Cupidatat non proident",
-      "Sunt in culpa qui",
-      "Officia deserunt mollit",
+      "Custom seat mix and volume pricing",
+      "Multi-site rollout planning",
+      "Audit-friendly reporting workflows",
+      "Dedicated onboarding guidance",
     ],
   },
 ];
@@ -362,26 +362,26 @@ const compareModules: CompareModule[] = [
   {
     id: "site-dashboard",
     name: "Site Dashboard (OneSurvey Projects)",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    description: "Organize projects, surveys, reports, and assignments in one workspace.",
     features: [
       {
         name: "Project overview cards",
-        detail: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
+        detail: "See survey, photo, report, and assignment activity at a glance.",
         availability: { starter: true, professional: true, organization: true, enterprise: true },
       },
       {
+        name: "Stage and archive tracking",
+        detail: "Track active vs. archived projects and current stage status.",
+        availability: { starter: false, professional: true, organization: true, enterprise: true },
+      },
+      {
         name: "Portfolio filters",
-        detail: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
+        detail: "Filter by stage, team, or category to find projects quickly.",
         availability: { starter: false, professional: true, organization: true, enterprise: true },
       },
       {
-        name: "Bulk status updates",
-        detail: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
-        availability: { starter: false, professional: true, organization: true, enterprise: true },
-      },
-      {
-        name: "Custom portfolio tags",
-        detail: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
+        name: "Project tags and categories",
+        detail: "Group work by region, customer, or program for reporting.",
         availability: { starter: "Limited", professional: true, organization: true, enterprise: true },
       },
     ],
@@ -389,26 +389,26 @@ const compareModules: CompareModule[] = [
   {
     id: "floor-plan-editing",
     name: "Floor Plan Editing",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    description: "Scale, annotate, and place devices on accurate floorplans.",
     features: [
       {
         name: "Scale calibration",
-        detail: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
+        detail: "Set real-world measurements to keep layouts accurate.",
         availability: { starter: true, professional: true, organization: true, enterprise: true },
       },
       {
         name: "Device placement",
-        detail: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
+        detail: "Drag and drop devices from the library onto the plan.",
         availability: { starter: true, professional: true, organization: true, enterprise: true },
       },
       {
         name: "Coverage overlays",
-        detail: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
+        detail: "Visualize device coverage and orientation for reviews.",
         availability: { starter: false, professional: true, organization: true, enterprise: true },
       },
       {
-        name: "Layer templates",
-        detail: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
+        name: "Annotations and labels",
+        detail: "Add walls, zones, and labels to communicate scope clearly.",
         availability: { starter: false, professional: false, organization: true, enterprise: true },
       },
     ],
@@ -416,21 +416,21 @@ const compareModules: CompareModule[] = [
   {
     id: "survey-capture",
     name: "Survey Capture",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    description: "Standardize what teams capture during security site surveys.",
     features: [
       {
-        name: "Lorem ipsum checklist",
-        detail: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
+        name: "Survey templates and checklists",
+        detail: "Guide technicians through consistent site data capture.",
         availability: { starter: true, professional: true, organization: true, enterprise: true },
       },
       {
-        name: "Dolor sit prompts",
-        detail: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
+        name: "Required fields and validation",
+        detail: "Reduce missing data before a survey is marked complete.",
         availability: { starter: true, professional: true, organization: true, enterprise: true },
       },
       {
-        name: "Etiam consequat exports",
-        detail: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
+        name: "Photo and note capture",
+        detail: "Attach photos and notes to devices and locations.",
         availability: { starter: false, professional: true, organization: true, enterprise: true },
       },
     ],
@@ -438,21 +438,21 @@ const compareModules: CompareModule[] = [
   {
     id: "assignments",
     name: "Assignments",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    description: "Track tasks and handoffs tied to surveys and elements.",
     features: [
       {
-        name: "Lorem ipsum routing",
-        detail: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
+        name: "Task creation and status",
+        detail: "Create assignments with clear owners and status tracking.",
         availability: { starter: false, professional: true, organization: true, enterprise: true },
       },
       {
-        name: "Sit amet handoffs",
-        detail: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
+        name: "Due dates and priorities",
+        detail: "Keep install teams aligned with timelines and priorities.",
         availability: { starter: false, professional: true, organization: true, enterprise: true },
       },
       {
-        name: "Consectetur approvals",
-        detail: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
+        name: "Comments and attachments",
+        detail: "Share notes, files, and context alongside tasks.",
         availability: { starter: false, professional: true, organization: true, enterprise: true },
       },
     ],
@@ -460,21 +460,21 @@ const compareModules: CompareModule[] = [
   {
     id: "device-library",
     name: "Device Library",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    description: "Maintain approved devices and accessories for consistent designs.",
     features: [
       {
-        name: "Lorem ipsum catalog",
-        detail: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
+        name: "Device catalog and categories",
+        detail: "Organize devices, parts, and accessories by system type.",
         availability: { starter: true, professional: true, organization: true, enterprise: true },
       },
       {
-        name: "Dolor sit templates",
-        detail: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
+        name: "Templates and packages",
+        detail: "Reuse standard device sets across projects.",
         availability: { starter: false, professional: true, organization: true, enterprise: true },
       },
       {
-        name: "Amet bulk updates",
-        detail: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
+        name: "Bulk updates and imports",
+        detail: "Add or update device data at scale when catalogs change.",
         availability: { starter: false, professional: true, organization: true, enterprise: true },
       },
     ],
@@ -482,21 +482,21 @@ const compareModules: CompareModule[] = [
   {
     id: "reporting",
     name: "Reporting",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    description: "Generate proposal-ready reports and installation documentation.",
     features: [
       {
-        name: "Lorem ipsum summaries",
-        detail: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
+        name: "Survey summaries and inventories",
+        detail: "Export clear summaries and device lists for estimating.",
         availability: { starter: true, professional: true, organization: true, enterprise: true },
       },
       {
-        name: "Sit amet exports",
-        detail: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
+        name: "Floorplan PDF exports",
+        detail: "Share plan visuals with proposals and handoff docs.",
         availability: { starter: false, professional: true, organization: true, enterprise: true },
       },
       {
-        name: "Consectetur photo reports",
-        detail: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
+        name: "Photo documentation reports",
+        detail: "Package photos with labels and notes for approvals.",
         availability: { starter: false, professional: true, organization: true, enterprise: true },
       },
     ],
@@ -605,10 +605,10 @@ export default function PricingPage() {
       <PageHero
         eyebrow="Pricing"
         title="Pick your plan, choose your seats"
-        subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt."
+        subtitle="Choose viewer, field, or full seats and scale from a pilot to an organization-wide rollout."
         primaryCta={{ label: "Select a plan", href: "/contact" }}
         secondaryCta={{ label: "Book a demo", href: "/demo" }}
-        supportingText="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        supportingText="Talk with our team to build the right mix for your survey workflow."
         media={
           <div className="space-y-4">
             <div
@@ -661,7 +661,7 @@ export default function PricingPage() {
             <SectionHeading
               eyebrow="Plans"
               title="Compare seat types and module access"
-              subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi."
+              subtitle="See how each plan bundles seat access and modules for different team sizes."
             />
             <div className="flex flex-wrap items-center gap-3">
               <div className="flex items-center rounded-full border border-neutral-200 bg-white p-1 text-xs font-semibold text-neutral-600 shadow-sm">
@@ -789,7 +789,7 @@ export default function PricingPage() {
             align="center"
             eyebrow="Seat types"
             title="Not sure which seat is right for you? We have you covered."
-            subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt."
+            subtitle="Pick the right access level for field teams, project leads, and stakeholders."
           />
           <div className="mt-10 grid gap-10 lg:grid-cols-3">
             {seatTypes.map((seat, index) => (
@@ -835,7 +835,7 @@ export default function PricingPage() {
             align="center"
             eyebrow="Compare"
             title="Compare all features"
-            subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt."
+            subtitle="Review what's included across plans and modules."
           />
           <div className="mt-8 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
