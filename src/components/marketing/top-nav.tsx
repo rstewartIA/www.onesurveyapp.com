@@ -22,6 +22,7 @@ export function TopNav({
 }: TopNavProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const mobileDialogId = "mobile-nav-dialog";
+  const isExternal = (href: string, external?: boolean) => external || href.startsWith("http");
 
   useEffect(() => {
     const { body } = document;
@@ -89,13 +90,25 @@ export function TopNav({
               item.children ? (
                 <NavDropdown key={item.label} item={item} />
               ) : (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  className="rounded-md px-2 py-1 text-neutral-700 transition-colors hover:text-brand-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary"
-                >
-                  {item.label}
-                </Link>
+                isExternal(item.href, item.external) ? (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="rounded-md px-2 py-1 text-neutral-700 transition-colors hover:text-brand-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary"
+                  >
+                    {item.label}
+                  </a>
+                ) : (
+                  <Link
+                    key={item.label}
+                    href={item.href}
+                    className="rounded-md px-2 py-1 text-neutral-700 transition-colors hover:text-brand-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary"
+                  >
+                    {item.label}
+                  </Link>
+                )
               )
             )}
           </nav>

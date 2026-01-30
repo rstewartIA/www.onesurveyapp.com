@@ -41,6 +41,7 @@ export function MobileNav({
   const backButtonRef = useRef<HTMLButtonElement | null>(null);
   const previousFocusRef = useRef<HTMLElement | null>(null);
   const showSubmenu = Boolean(activeItem?.children?.length);
+  const isExternal = (href: string, external?: boolean) => external || href.startsWith("http");
 
   useEffect(() => {
     if (!open) setActiveItem(null);
@@ -228,18 +229,48 @@ export function MobileNav({
                       </span>
                     </button>
                   ) : (
-                    <Link
-                      key={item.label}
-                      href={item.href}
-                      onClick={handleClose}
-                      style={{ transitionDelay: delay }}
-                      className={cn(
-                        "flex items-center justify-between rounded-2xl border border-transparent px-4 py-3 text-base font-semibold text-neutral-900 transition-all duration-300 ease-out hover:border-neutral-200 hover:bg-neutral-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary",
-                        rootVisible ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
-                      )}
-                    >
-                      {item.label}
-                    </Link>
+                    isExternal(item.href, item.external) ? (
+                      <a
+                        key={item.label}
+                        href={item.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        onClick={handleClose}
+                        style={{ transitionDelay: delay }}
+                        className={cn(
+                          "flex items-center justify-between rounded-2xl border border-transparent px-4 py-3 text-base font-semibold text-neutral-900 transition-all duration-300 ease-out hover:border-neutral-200 hover:bg-neutral-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary",
+                          rootVisible ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
+                        )}
+                      >
+                        <span>{item.label}</span>
+                        <svg
+                          aria-hidden="true"
+                          viewBox="0 0 24 24"
+                          className="h-4 w-4 text-neutral-500"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path d="M7 17l10-10" />
+                          <path d="M10 7h7v7" />
+                        </svg>
+                      </a>
+                    ) : (
+                      <Link
+                        key={item.label}
+                        href={item.href}
+                        onClick={handleClose}
+                        style={{ transitionDelay: delay }}
+                        className={cn(
+                          "flex items-center justify-between rounded-2xl border border-transparent px-4 py-3 text-base font-semibold text-neutral-900 transition-all duration-300 ease-out hover:border-neutral-200 hover:bg-neutral-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary",
+                          rootVisible ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
+                        )}
+                      >
+                        {item.label}
+                      </Link>
+                    )
                   );
                 })}
               </nav>
@@ -279,46 +310,105 @@ export function MobileNav({
             >
               <nav className="flex-1 space-y-3 overflow-y-auto pb-4">
                 {activeItem && (
-                  <Link
-                    href={activeItem.href}
-                    onClick={handleClose}
-                    style={{ transitionDelay: submenuVisible ? "30ms" : "0ms" }}
-                    className={cn(
-                      "flex items-center justify-between rounded-2xl border border-brand-accent bg-brand-accent/20 px-4 py-3 text-base font-semibold text-brand-primary transition-all duration-300 ease-out hover:border-brand-primary/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary",
-                      submenuVisible ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
-                    )}
-                  >
-                    View all {activeItem.label}
-                    <svg
-                      aria-hidden="true"
-                      viewBox="0 0 24 24"
-                      className="h-4 w-4"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
+                  isExternal(activeItem.href, activeItem.external) ? (
+                    <a
+                      href={activeItem.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      onClick={handleClose}
+                      style={{ transitionDelay: submenuVisible ? "30ms" : "0ms" }}
+                      className={cn(
+                        "flex items-center justify-between rounded-2xl border border-brand-accent bg-brand-accent/20 px-4 py-3 text-base font-semibold text-brand-primary transition-all duration-300 ease-out hover:border-brand-primary/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary",
+                        submenuVisible ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
+                      )}
                     >
-                      <path d="M9 6l6 6-6 6" />
-                    </svg>
-                  </Link>
+                      <span>View all {activeItem.label}</span>
+                      <svg
+                        aria-hidden="true"
+                        viewBox="0 0 24 24"
+                        className="h-4 w-4"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d="M7 17l10-10" />
+                        <path d="M10 7h7v7" />
+                      </svg>
+                    </a>
+                  ) : (
+                    <Link
+                      href={activeItem.href}
+                      onClick={handleClose}
+                      style={{ transitionDelay: submenuVisible ? "30ms" : "0ms" }}
+                      className={cn(
+                        "flex items-center justify-between rounded-2xl border border-brand-accent bg-brand-accent/20 px-4 py-3 text-base font-semibold text-brand-primary transition-all duration-300 ease-out hover:border-brand-primary/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary",
+                        submenuVisible ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
+                      )}
+                    >
+                      View all {activeItem.label}
+                      <svg
+                        aria-hidden="true"
+                        viewBox="0 0 24 24"
+                        className="h-4 w-4"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d="M9 6l6 6-6 6" />
+                      </svg>
+                    </Link>
+                  )
                 )}
 
                 {activeChildren.map((child, index) => {
                   const delay = submenuVisible ? `${90 + index * 60}ms` : "0ms";
                   return (
-                    <Link
-                      key={child.label}
-                      href={child.href}
-                      onClick={handleClose}
-                      style={{ transitionDelay: delay }}
-                      className={cn(
-                        "flex items-center justify-between rounded-2xl border border-transparent px-4 py-3 text-base font-semibold text-neutral-900 transition-all duration-300 ease-out hover:border-neutral-200 hover:bg-neutral-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary",
-                        submenuVisible ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
-                      )}
-                    >
-                      {child.label}
-                    </Link>
+                    isExternal(child.href, child.external) ? (
+                      <a
+                        key={child.label}
+                        href={child.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        onClick={handleClose}
+                        style={{ transitionDelay: delay }}
+                        className={cn(
+                          "flex items-center justify-between rounded-2xl border border-transparent px-4 py-3 text-base font-semibold text-neutral-900 transition-all duration-300 ease-out hover:border-neutral-200 hover:bg-neutral-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary",
+                          submenuVisible ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
+                        )}
+                      >
+                        <span>{child.label}</span>
+                        <svg
+                          aria-hidden="true"
+                          viewBox="0 0 24 24"
+                          className="h-4 w-4 text-neutral-500"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path d="M7 17l10-10" />
+                          <path d="M10 7h7v7" />
+                        </svg>
+                      </a>
+                    ) : (
+                      <Link
+                        key={child.label}
+                        href={child.href}
+                        onClick={handleClose}
+                        style={{ transitionDelay: delay }}
+                        className={cn(
+                          "flex items-center justify-between rounded-2xl border border-transparent px-4 py-3 text-base font-semibold text-neutral-900 transition-all duration-300 ease-out hover:border-neutral-200 hover:bg-neutral-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary",
+                          submenuVisible ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
+                        )}
+                      >
+                        {child.label}
+                      </Link>
+                    )
                   );
                 })}
               </nav>

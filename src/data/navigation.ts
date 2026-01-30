@@ -3,6 +3,7 @@ export type NavigationItem = {
   href: string;
   description?: string;
   children?: NavigationItem[];
+  external?: boolean;
 };
 
 export const navigationHierarchy: NavigationItem[] = [
@@ -61,12 +62,13 @@ export const navigationHierarchy: NavigationItem[] = [
     children: [
       { label: "Blog", href: "/blog" },
       {
-        label: "Guides",
-        href: "/guides"
+        label: "Documentation",
+        href: "https://rstewartia.github.io/OneSurvey-Docs/",
+        external: true
       },
       {
-        label: "Help center",
-        href: "/docs"
+        label: "FAQs",
+        href: "/faqs"
       },
     ],
   },
@@ -104,8 +106,8 @@ export const footerColumns = [
     title: "Resources",
     links: [
       { label: "Blog", href: "/blog" },
-      { label: "Guides", href: "/guides" },
-      { label: "Help center", href: "/docs" },
+      { label: "Documentation", href: "https://rstewartia.github.io/OneSurvey-Docs/", external: true },
+      { label: "FAQs", href: "/faqs" },
     ],
   },
   {

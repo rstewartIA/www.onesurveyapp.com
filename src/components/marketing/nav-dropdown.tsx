@@ -165,6 +165,7 @@ export function NavDropdown({ item }: NavDropdownProps) {
   const menuRef = useRef<HTMLDivElement | null>(null);
   const triggerRef = useRef<HTMLButtonElement | null>(null);
   const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const isExternal = (href: string, external?: boolean) => external || href.startsWith("http");
 
   if (!item.children || item.children.length === 0) {
     return null;
@@ -278,14 +279,47 @@ export function NavDropdown({ item }: NavDropdownProps) {
         <div className="container mx-auto px-4 py-8 md:px-6 lg:px-8">
           <div className="grid gap-6 lg:grid-cols-[240px_minmax(0,1fr)]">
             <div className="border-r border-neutral-200/70 pr-6">
-              <Link
-                href={item.href}
-                className="group flex flex-col gap-4 rounded-2xl px-4 py-4 transition-colors hover:bg-neutral-50/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary"
-              >
-                <div className="flex items-center justify-between text-sm font-semibold uppercase tracking-[0.2em] text-brand-primary transition-colors group-hover:text-brand-secondary">
-                  <span>{item.label}</span>
-                  <svg
-                    aria-hidden="true"
+              {isExternal(item.href, item.external) ? (
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group flex flex-col gap-4 rounded-2xl px-4 py-4 transition-colors hover:bg-neutral-50/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary"
+                >
+                  <div className="flex items-center justify-between text-sm font-semibold uppercase tracking-[0.2em] text-brand-secondary transition-colors group-hover:text-brand-primary">
+                    <span>{item.label}</span>
+                    <svg
+                      aria-hidden="true"
+                      viewBox="0 0 24 24"
+                      className="h-4 w-4"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M7 17l10-10" />
+                      <path d="M10 7h7v7" />
+                    </svg>
+                  </div>
+                  <div className="rounded-xl border border-neutral-200 bg-white p-4 shadow-sm transition-colors group-hover:bg-neutral-50">
+                    <div className="mx-auto aspect-[4/3] w-full max-w-[170px] rounded-lg bg-gradient-to-br from-brand-accent/40 via-white to-brand-primary/10">
+                      <div className="flex h-full w-full items-center justify-center text-[0.65rem] font-semibold uppercase tracking-wide text-neutral-500">
+                        {item.label} preview
+                      </div>
+                    </div>
+                    <p className="mt-4 text-xs text-neutral-500">Placeholder image for {item.label}.</p>
+                  </div>
+                </a>
+              ) : (
+                <Link
+                  href={item.href}
+                  className="group flex flex-col gap-4 rounded-2xl px-4 py-4 transition-colors hover:bg-neutral-50/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary"
+                >
+                  <div className="flex items-center justify-between text-sm font-semibold uppercase tracking-[0.2em] text-brand-secondary transition-colors group-hover:text-brand-primary">
+                    <span>{item.label}</span>
+                    <svg
+                      aria-hidden="true"
                     viewBox="0 0 24 24"
                     className="h-4 w-4"
                     fill="none"
@@ -297,33 +331,67 @@ export function NavDropdown({ item }: NavDropdownProps) {
                     <path d="M9 6l6 6-6 6" />
                   </svg>
                 </div>
-                <div className="rounded-xl border border-neutral-200 bg-white p-4 shadow-sm transition-colors group-hover:bg-neutral-50">
-                  <div className="mx-auto aspect-[4/3] w-full max-w-[170px] rounded-lg bg-gradient-to-br from-brand-accent/40 via-white to-brand-primary/10">
-                    <div className="flex h-full w-full items-center justify-center text-[0.65rem] font-semibold uppercase tracking-wide text-neutral-500">
-                      {item.label} preview
+                  <div className="rounded-xl border border-neutral-200 bg-white p-4 shadow-sm transition-colors group-hover:bg-neutral-50">
+                    <div className="mx-auto aspect-[4/3] w-full max-w-[170px] rounded-lg bg-gradient-to-br from-brand-accent/40 via-white to-brand-primary/10">
+                      <div className="flex h-full w-full items-center justify-center text-[0.65rem] font-semibold uppercase tracking-wide text-neutral-500">
+                        {item.label} preview
+                      </div>
                     </div>
+                    <p className="mt-4 text-xs text-neutral-500">Placeholder image for {item.label}.</p>
                   </div>
-                  <p className="mt-4 text-xs text-neutral-500">Placeholder image for {item.label}.</p>
-                </div>
-              </Link>
+                </Link>
+              )}
             </div>
             <div className="grid gap-3 pl-6 sm:grid-cols-2 lg:grid-cols-3">
               {item.children.map((child) => (
-                <Link
-                  key={child.label}
-                  href={child.href}
-                  className="group flex items-start gap-3 rounded-xl border border-neutral-200 bg-neutral-100 px-4 py-3 transition hover:border-neutral-300 hover:bg-neutral-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary"
-                >
-                  <span className="mt-0.5 flex h-8 w-8 items-center justify-center">
-                    <NavIcon label={child.label} />
-                  </span>
-                  <div>
-                    <div className="text-sm font-semibold text-neutral-900 transition group-hover:text-brand-primary">
-                      {child.label}
+                isExternal(child.href, child.external) ? (
+                  <a
+                    key={child.label}
+                    href={child.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="group flex items-start gap-3 rounded-xl border border-neutral-200 bg-neutral-100 px-4 py-3 transition hover:border-neutral-300 hover:bg-neutral-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary"
+                  >
+                    <span className="mt-0.5 flex h-8 w-8 items-center justify-center">
+                      <NavIcon label={child.label} />
+                    </span>
+                    <div>
+                      <div className="flex items-center gap-2 text-sm font-semibold text-neutral-900 transition group-hover:text-brand-primary">
+                        <span>{child.label}</span>
+                        <svg
+                          aria-hidden="true"
+                          viewBox="0 0 24 24"
+                          className="h-3.5 w-3.5"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path d="M7 17l10-10" />
+                          <path d="M10 7h7v7" />
+                        </svg>
+                      </div>
+                      {child.description && <p className="mt-1 text-xs text-neutral-500">{child.description}</p>}
                     </div>
-                    {child.description && <p className="mt-1 text-xs text-neutral-500">{child.description}</p>}
-                  </div>
-                </Link>
+                  </a>
+                ) : (
+                  <Link
+                    key={child.label}
+                    href={child.href}
+                    className="group flex items-start gap-3 rounded-xl border border-neutral-200 bg-neutral-100 px-4 py-3 transition hover:border-neutral-300 hover:bg-neutral-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary"
+                  >
+                    <span className="mt-0.5 flex h-8 w-8 items-center justify-center">
+                      <NavIcon label={child.label} />
+                    </span>
+                    <div>
+                      <div className="text-sm font-semibold text-neutral-900 transition group-hover:text-brand-primary">
+                        {child.label}
+                      </div>
+                      {child.description && <p className="mt-1 text-xs text-neutral-500">{child.description}</p>}
+                    </div>
+                  </Link>
+                )
               ))}
             </div>
           </div>
