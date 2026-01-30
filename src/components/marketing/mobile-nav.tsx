@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import type { NavigationItem } from "@/data/navigation";
@@ -10,68 +11,409 @@ type MobileNavProps = {
   navigation: NavigationItem[];
   primaryCta?: { label: string; href: string };
   secondaryCta?: { label: string; href: string };
+  onClose?: () => void;
+  dialogId?: string;
 };
 
-export function MobileNav({ open, navigation, primaryCta, secondaryCta }: MobileNavProps) {
+const focusableSelector =
+  'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+function getFocusableElements(container: HTMLElement) {
+  return Array.from(container.querySelectorAll<HTMLElement>(focusableSelector)).filter((element) => {
+    if (element.hasAttribute("disabled")) return false;
+    if (element.getAttribute("tabindex") === "-1") return false;
+    if (element.closest('[aria-hidden="true"]')) return false;
+    return true;
+  });
+}
+
+export function MobileNav({
+  open,
+  navigation,
+  primaryCta,
+  secondaryCta,
+  onClose,
+  dialogId = "mobile-nav-dialog",
+}: MobileNavProps) {
+  const [activeItem, setActiveItem] = useState<NavigationItem | null>(null);
+  const dialogRef = useRef<HTMLDivElement | null>(null);
+  const closeButtonRef = useRef<HTMLButtonElement | null>(null);
+  const backButtonRef = useRef<HTMLButtonElement | null>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
+  const showSubmenu = Boolean(activeItem?.children?.length);
+  const isExternal = (href: string, external?: boolean) => external || href.startsWith("http");
+
+  useEffect(() => {
+    if (!open) setActiveItem(null);
+  }, [open]);
+
+  const rootVisible = open && !showSubmenu;
+  const submenuVisible = open && showSubmenu;
+
+  const activeChildren = useMemo(() => activeItem?.children ?? [], [activeItem]);
+
+  const handleClose = useCallback(() => {
+    setActiveItem(null);
+    onClose?.();
+  }, [onClose]);
+
+  useEffect(() => {
+    if (open) {
+      previousFocusRef.current = document.activeElement as HTMLElement | null;
+    } else if (previousFocusRef.current) {
+      previousFocusRef.current.focus();
+      previousFocusRef.current = null;
+    }
+  }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
+    const target = showSubmenu ? backButtonRef.current : closeButtonRef.current;
+    target?.focus();
+  }, [open, showSubmenu]);
+
+  useEffect(() => {
+    if (!open) return;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        handleClose();
+        return;
+      }
+
+      if (event.key !== "Tab") return;
+
+      const dialog = dialogRef.current;
+      if (!dialog) return;
+
+      const focusable = getFocusableElements(dialog);
+      if (focusable.length === 0) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const activeElement = document.activeElement as HTMLElement | null;
+
+      if (event.shiftKey) {
+        if (activeElement === first || !dialog.contains(activeElement)) {
+          event.preventDefault();
+          last.focus();
+        }
+      } else if (activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [open, handleClose, showSubmenu]);
+
   return (
     <div
-      className={cn(
-        "lg:hidden overflow-hidden border-b border-neutral-200 bg-white shadow-sm transition-all duration-200",
-        open ? "max-h-[620px]" : "max-h-0"
-      )}
+      className={cn("fixed inset-0 z-[60] w-screen lg:hidden", open ? "pointer-events-auto" : "pointer-events-none")}
       aria-hidden={!open}
     >
-      <div className="container mx-auto px-4 pb-4 pt-2">
-        <nav className="space-y-2">
-          {navigation.map((item) => (
-            <div key={item.label}>
-              <Link
-                href={item.href}
-                className="flex items-center justify-between rounded-lg px-3 py-2 text-sm font-semibold text-neutral-800 transition hover:bg-neutral-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary"
+      <div
+        className={cn(
+          "absolute inset-0 bg-neutral-900/30 transition-opacity duration-200",
+          open ? "opacity-100" : "opacity-0"
+        )}
+        onClick={handleClose}
+      />
+      <div
+        className={cn(
+          "absolute inset-0 h-full w-screen bg-white shadow-2xl transition-transform duration-300 ease-out",
+          open ? "translate-x-0" : "translate-x-full"
+        )}
+        ref={dialogRef}
+        id={dialogId}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="mobile-nav-title"
+      >
+        <div className="flex h-full min-h-0 flex-col">
+          <div className="flex items-center justify-between border-b border-neutral-200/80 px-5 py-4">
+            {showSubmenu ? (
+              <button
+                type="button"
+                onClick={() => setActiveItem(null)}
+                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-neutral-200 text-neutral-700 transition hover:border-brand-primary hover:text-brand-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary"
+                aria-label="Back to main menu"
+                ref={backButtonRef}
               >
-                {item.label}
-                {item.children && (
-                  <svg
-                    aria-hidden="true"
-                    viewBox="0 0 24 24"
-                    className="h-4 w-4 text-neutral-500"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M6 9l6 6 6-6" />
-                  </svg>
-                )}
-              </Link>
-              {item.children && (
-                <div className="ml-3 mt-1 space-y-1 border-l border-neutral-100 pl-3">
-                  {item.children.map((child) => (
-                    <Link
-                      key={child.label}
-                      href={child.href}
-                      className="block rounded-md px-2 py-1 text-sm text-neutral-700 transition hover:bg-neutral-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary"
-                    >
-                      {child.label}
-                    </Link>
-                  ))}
-                </div>
-              )}
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  className="h-5 w-5"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M15 18l-6-6 6-6" />
+                </svg>
+              </button>
+            ) : (
+              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-primary">Menu</span>
+            )}
+
+            <div id="mobile-nav-title" className="text-base font-semibold text-neutral-900">
+              {showSubmenu ? activeItem?.label : "Explore"}
             </div>
-          ))}
-        </nav>
-        <div className="mt-4 flex flex-col gap-2">
-          {secondaryCta && (
-            <Button asChild variant="outline" className="w-full justify-center border-neutral-200 text-neutral-800">
-              <Link href={secondaryCta.href}>{secondaryCta.label}</Link>
-            </Button>
-          )}
-          {primaryCta && (
-            <Button asChild className="w-full justify-center bg-brand-primary text-white hover:bg-brand-secondary">
-              <Link href={primaryCta.href}>{primaryCta.label}</Link>
-            </Button>
-          )}
+
+            <button
+              type="button"
+              onClick={handleClose}
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-neutral-200 text-neutral-700 transition hover:border-brand-primary hover:text-brand-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary"
+              aria-label="Close navigation menu"
+              ref={closeButtonRef}
+            >
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                className="h-5 w-5"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M18 6L6 18" />
+                <path d="M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+
+          <div className="relative flex-1 min-h-0 overflow-hidden">
+            <div
+              className={cn(
+                "absolute inset-0 flex min-h-0 flex-col px-5 pb-6 pt-4 transition-all duration-300 ease-out",
+                rootVisible ? "translate-x-0 opacity-100" : "-translate-x-full opacity-0",
+                rootVisible ? "pointer-events-auto" : "pointer-events-none"
+              )}
+              aria-hidden={!rootVisible}
+            >
+              <nav className="flex-1 space-y-3 overflow-y-auto pb-4">
+                {navigation.map((item, index) => {
+                  const hasChildren = Boolean(item.children?.length);
+                  const delay = rootVisible ? `${index * 60}ms` : "0ms";
+
+                  return hasChildren ? (
+                    <button
+                      key={item.label}
+                      type="button"
+                      onClick={() => setActiveItem(item)}
+                      style={{ transitionDelay: delay }}
+                      className={cn(
+                        "group flex w-full items-center justify-between rounded-2xl border border-transparent px-4 py-3 text-left text-base font-semibold text-neutral-900 transition-all duration-300 ease-out hover:border-neutral-200 hover:bg-neutral-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary",
+                        rootVisible ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
+                      )}
+                    >
+                      {item.label}
+                      <span className="flex h-8 w-8 items-center justify-center rounded-full border border-neutral-200 text-neutral-500 transition group-hover:border-brand-primary group-hover:text-brand-primary">
+                        <svg
+                          aria-hidden="true"
+                          viewBox="0 0 24 24"
+                          className="h-4 w-4"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path d="M9 6l6 6-6 6" />
+                        </svg>
+                      </span>
+                    </button>
+                  ) : (
+                    isExternal(item.href, item.external) ? (
+                      <a
+                        key={item.label}
+                        href={item.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        onClick={handleClose}
+                        style={{ transitionDelay: delay }}
+                        className={cn(
+                          "flex items-center justify-between rounded-2xl border border-transparent px-4 py-3 text-base font-semibold text-neutral-900 transition-all duration-300 ease-out hover:border-neutral-200 hover:bg-neutral-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary",
+                          rootVisible ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
+                        )}
+                      >
+                        <span>{item.label}</span>
+                        <svg
+                          aria-hidden="true"
+                          viewBox="0 0 24 24"
+                          className="h-4 w-4 text-neutral-500"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path d="M7 17l10-10" />
+                          <path d="M10 7h7v7" />
+                        </svg>
+                      </a>
+                    ) : (
+                      <Link
+                        key={item.label}
+                        href={item.href}
+                        onClick={handleClose}
+                        style={{ transitionDelay: delay }}
+                        className={cn(
+                          "flex items-center justify-between rounded-2xl border border-transparent px-4 py-3 text-base font-semibold text-neutral-900 transition-all duration-300 ease-out hover:border-neutral-200 hover:bg-neutral-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary",
+                          rootVisible ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
+                        )}
+                      >
+                        {item.label}
+                      </Link>
+                    )
+                  );
+                })}
+              </nav>
+
+              <div className="flex flex-col gap-2 pt-4">
+                {secondaryCta && (
+                  <Button
+                    asChild
+                    variant="outline"
+                    className="w-full justify-center rounded-full border-neutral-200 text-neutral-800"
+                  >
+                    <Link href={secondaryCta.href} onClick={handleClose}>
+                      {secondaryCta.label}
+                    </Link>
+                  </Button>
+                )}
+                {primaryCta && (
+                  <Button
+                    asChild
+                    className="w-full justify-center rounded-full bg-brand-primary text-white hover:bg-brand-secondary"
+                  >
+                    <Link href={primaryCta.href} onClick={handleClose}>
+                      {primaryCta.label}
+                    </Link>
+                  </Button>
+                )}
+              </div>
+            </div>
+
+            <div
+              className={cn(
+                "absolute inset-0 flex min-h-0 flex-col px-5 pb-6 pt-4 transition-all duration-300 ease-out",
+                submenuVisible ? "translate-x-0 opacity-100" : "translate-x-full opacity-0",
+                submenuVisible ? "pointer-events-auto" : "pointer-events-none"
+              )}
+              aria-hidden={!submenuVisible}
+            >
+              <nav className="flex-1 space-y-3 overflow-y-auto pb-4">
+                {activeItem && (
+                  isExternal(activeItem.href, activeItem.external) ? (
+                    <a
+                      href={activeItem.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      onClick={handleClose}
+                      style={{ transitionDelay: submenuVisible ? "30ms" : "0ms" }}
+                      className={cn(
+                        "flex items-center justify-between rounded-2xl border border-brand-accent bg-brand-accent/20 px-4 py-3 text-base font-semibold text-brand-primary transition-all duration-300 ease-out hover:border-brand-primary/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary",
+                        submenuVisible ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
+                      )}
+                    >
+                      <span>View all {activeItem.label}</span>
+                      <svg
+                        aria-hidden="true"
+                        viewBox="0 0 24 24"
+                        className="h-4 w-4"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d="M7 17l10-10" />
+                        <path d="M10 7h7v7" />
+                      </svg>
+                    </a>
+                  ) : (
+                    <Link
+                      href={activeItem.href}
+                      onClick={handleClose}
+                      style={{ transitionDelay: submenuVisible ? "30ms" : "0ms" }}
+                      className={cn(
+                        "flex items-center justify-between rounded-2xl border border-brand-accent bg-brand-accent/20 px-4 py-3 text-base font-semibold text-brand-primary transition-all duration-300 ease-out hover:border-brand-primary/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary",
+                        submenuVisible ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
+                      )}
+                    >
+                      View all {activeItem.label}
+                      <svg
+                        aria-hidden="true"
+                        viewBox="0 0 24 24"
+                        className="h-4 w-4"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d="M9 6l6 6-6 6" />
+                      </svg>
+                    </Link>
+                  )
+                )}
+
+                {activeChildren.map((child, index) => {
+                  const delay = submenuVisible ? `${90 + index * 60}ms` : "0ms";
+                  return (
+                    isExternal(child.href, child.external) ? (
+                      <a
+                        key={child.label}
+                        href={child.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        onClick={handleClose}
+                        style={{ transitionDelay: delay }}
+                        className={cn(
+                          "flex items-center justify-between rounded-2xl border border-transparent px-4 py-3 text-base font-semibold text-neutral-900 transition-all duration-300 ease-out hover:border-neutral-200 hover:bg-neutral-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary",
+                          submenuVisible ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
+                        )}
+                      >
+                        <span>{child.label}</span>
+                        <svg
+                          aria-hidden="true"
+                          viewBox="0 0 24 24"
+                          className="h-4 w-4 text-neutral-500"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path d="M7 17l10-10" />
+                          <path d="M10 7h7v7" />
+                        </svg>
+                      </a>
+                    ) : (
+                      <Link
+                        key={child.label}
+                        href={child.href}
+                        onClick={handleClose}
+                        style={{ transitionDelay: delay }}
+                        className={cn(
+                          "flex items-center justify-between rounded-2xl border border-transparent px-4 py-3 text-base font-semibold text-neutral-900 transition-all duration-300 ease-out hover:border-neutral-200 hover:bg-neutral-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary",
+                          submenuVisible ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
+                        )}
+                      >
+                        {child.label}
+                      </Link>
+                    )
+                  );
+                })}
+              </nav>
+            </div>
+          </div>
         </div>
       </div>
     </div>

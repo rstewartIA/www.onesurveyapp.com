@@ -7,9 +7,9 @@ import { MediaPlaceholder } from "@/components/marketing/media-placeholder";
 import { CtaBand } from "@/components/marketing/cta-band";
 
 export const metadata: Metadata = {
-  title: "Security Device Library and Catalog Management",
+  title: "Device Library for Security Surveys and Design",
   description:
-    "Build and manage a shared device library with categories, parts, and accessories for consistent security designs.",
+    "Build and manage a shared device library (element library) with categories, parts, and accessories for consistent security designs.",
 };
 
 const libraryFeatures = [
@@ -43,7 +43,7 @@ export default function AssetLibraryPage() {
   return (
     <MarketingShell>
       <PageHero
-        eyebrow="Asset library"
+        eyebrow="Device library"
         title="Standardize devices and parts across every survey"
         subtitle="Keep a clean catalog of cameras, access control, intrusion, and more so your team uses the right equipment on every project."
         primaryCta={{ label: "Book a demo", href: "/demo" }}

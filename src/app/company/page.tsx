@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 export const metadata: Metadata = {
   title: "About OneSurvey",
   description:
-    "OneSurvey helps security integrators standardize site surveys, designs, and reporting from one workspace.",
+    "OneSurvey helps security integrators and facilities teams standardize site surveys, designs, and reporting from one workspace.",
 };
 
 const values = [

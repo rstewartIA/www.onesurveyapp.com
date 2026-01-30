@@ -3,7 +3,7 @@ import Image from "next/image";
 
 type FooterColumn = {
   title: string;
-  links: { label: string; href: string }[];
+  links: { label: string; href: string; external?: boolean }[];
 };
 
 type FooterProps = {
@@ -11,6 +11,8 @@ type FooterProps = {
 };
 
 export function Footer({ columns }: FooterProps) {
+  const isExternal = (href: string, external?: boolean) => external || href.startsWith("http");
+
   return (
     <footer className="bg-[#0B1B2D] text-neutral-200">
       <div className="container mx-auto px-4 py-14 md:px-6 lg:px-8">
@@ -43,12 +45,36 @@ export function Footer({ columns }: FooterProps) {
               <ul className="space-y-2 text-sm">
                 {column.links.map((link) => (
                   <li key={link.label}>
-                    <Link
-                      href={link.href}
-                      className="text-neutral-300 transition hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent"
-                    >
-                      {link.label}
-                    </Link>
+                    {isExternal(link.href, link.external) ? (
+                      <a
+                        href={link.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-2 text-neutral-300 transition hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent"
+                      >
+                        <span>{link.label}</span>
+                        <svg
+                          aria-hidden="true"
+                          viewBox="0 0 24 24"
+                          className="h-3.5 w-3.5"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path d="M7 17l10-10" />
+                          <path d="M10 7h7v7" />
+                        </svg>
+                      </a>
+                    ) : (
+                      <Link
+                        href={link.href}
+                        className="text-neutral-300 transition hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent"
+                      >
+                        {link.label}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>

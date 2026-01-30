@@ -11,27 +11,27 @@ const featureBlocks = [
   {
     title: "Survey capture",
     description:
-      "Use checklists, required fields, photos, and notes to capture consistent site data.",
+      "Use guided checklists, required fields, photos, and notes to capture consistent security site data.",
   },
   {
     title: "Floorplan editor",
-    description: "Import plans, set scale, and place devices where they will be installed.",
+    description: "Import plans, set scale, and place devices on accurate floorplan layouts.",
   },
   {
-    title: "Asset library",
-    description: "Maintain approved devices, parts, and accessories for every project.",
+    title: "Device library",
+    description: "Maintain approved devices, parts, and accessories so every survey uses the right specs.",
   },
   {
     title: "Photo documentation",
-    description: "Organize field photos into clear galleries for review and handoff.",
+    description: "Organize field photos into clear galleries tied to devices and locations.",
   },
   {
     title: "Assignments and handoff",
-    description: "Track install tasks and notes so teams stay aligned.",
+    description: "Track tasks and notes so survey findings flow cleanly to install teams.",
   },
   {
     title: "Reporting and exports",
-    description: "Generate survey summaries, inventories, and photo reports in minutes.",
+    description: "Generate proposal-ready reports, device inventories, and photo documentation fast.",
   },
 ];
 
@@ -39,21 +39,21 @@ const solutionTiles = [
   {
     title: "Security integrators",
     description:
-      "Capture accurate surveys, build clean layouts, and deliver proposal ready reports.",
+      "Capture accurate surveys, build clean layouts, and deliver proposal-ready scope packages.",
     href: "/solutions/security-integrators",
     accent: "blue" as const,
   },
   {
     title: "Facility managers",
     description:
-      "Keep plans and asset records current for maintenance and upgrades.",
+      "Keep floorplans and device records current for maintenance and upgrades.",
     href: "/solutions/facility-managers",
     accent: "slate" as const,
   },
   {
     title: "Enterprise teams",
     description:
-      "Standardize surveys and reporting across multiple locations.",
+      "Standardize survey workflows and reporting across multiple locations.",
     href: "/solutions/enterprise-it-operations",
     accent: "sky" as const,
   },
@@ -73,8 +73,8 @@ export default function Home() {
       <main className="flex-1">
         <HeroSection
           eyebrow="OneSurvey"
-          title="The smarter way to plan and document security sites"
-          subtitle="OneSurvey helps security integrators capture site data, place devices on scaled plans, and deliver clear reports so every project starts with clean scope."
+          title="Security site survey software for floorplan-based planning"
+          subtitle="OneSurvey helps security integrators, low-voltage installers, and facilities teams capture site data, map devices on scaled floorplans, and deliver proposal-ready documentation."
           primaryCta={{ label: "Get Started", href: "#cta" }}
           secondaryCta={{ label: "View Product", href: "/product" }}
         />
@@ -108,10 +108,10 @@ export default function Home() {
               <div className="space-y-3 max-w-2xl">
                 <p className="text-xs font-semibold uppercase tracking-[0.25em] text-brand-secondary">Features</p>
                 <h2 className="text-3xl font-semibold text-brand-primary sm:text-4xl">
-                  Powerful tools for consistent site surveys
+                  Powerful tools for consistent security site surveys
                 </h2>
                 <p className="text-neutral-600">
-                  OneSurvey keeps survey capture, device layout, and reporting organized from the first walkthrough to
+                  OneSurvey keeps survey capture, floorplan design, and reporting organized from the first walkthrough to
                   final handoff.
                 </p>
               </div>
@@ -171,7 +171,7 @@ export default function Home() {
                 </p>
                 <h2 className="text-3xl font-semibold text-white sm:text-4xl">Take control of your site surveys</h2>
                 <p className="text-lg text-white/80">
-                  Whether you are standardizing surveys across technicians or organizing site information for long term
+                  Whether you are standardizing surveys across technicians or organizing site information for long-term
                   planning, OneSurvey gives you a single place to capture, review, and share accurate data.
                 </p>
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-center">

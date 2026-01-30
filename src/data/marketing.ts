@@ -82,7 +82,7 @@ export const lifecyclePhases = [
   },
   {
     title: "Install and service",
-    details: "Asset registry, punch list tracking, and service history.",
+    details: "Device registry, punch list tracking, and service history.",
     keyword: "security project lifecycle management",
   },
 ];

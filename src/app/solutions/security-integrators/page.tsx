@@ -9,7 +9,7 @@ import { CtaBand } from "@/components/marketing/cta-band";
 export const metadata: Metadata = {
   title: "Security Integrator Site Survey and Design Platform",
   description:
-    "Speed up site surveys, standardize device layouts, and deliver proposal ready reports built for integrators.",
+    "Speed up site surveys, standardize device layouts, and deliver proposal-ready reports built for integrators.",
 };
 
 const painPoints = [
@@ -48,7 +48,7 @@ export default function SecurityIntegratorsPage() {
       <PageHero
         eyebrow="Security integrators"
         title="Win bids with fast, accurate site surveys"
-        subtitle="Reduce rework and deliver clearer scope with scaled floorplans, device standards, and report ready documentation."
+        subtitle="Reduce rework and deliver clearer scope with scaled floorplans, device standards, and report-ready documentation for project managers, estimators, and low-voltage teams."
         primaryCta={{ label: "Book a demo", href: "/demo" }}
         secondaryCta={{ label: "See the workflow", href: "/product" }}
         media={

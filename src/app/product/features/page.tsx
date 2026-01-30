@@ -7,9 +7,9 @@ import { MediaPlaceholder } from "@/components/marketing/media-placeholder";
 import { CtaBand } from "@/components/marketing/cta-band";
 
 export const metadata: Metadata = {
-  title: "OneSurvey Features for Security Integrators",
+  title: "OneSurvey Features - Security Site Survey Software",
   description:
-    "Explore the survey, floorplan, library, photo, and reporting features built for security system integrators.",
+    "Explore survey capture, floorplan design, device library, photo documentation, and reporting features built for security system integrators.",
 };
 
 const surveyFeatures = [
@@ -45,7 +45,7 @@ const designFeatures = [
 const libraryFeatures = [
   {
     title: "Device catalog",
-    description: "Maintain approved devices, parts, and accessories.",
+    description: "Maintain approved devices, parts, and accessories for consistent designs.",
   },
   {
     title: "Templates",
@@ -53,7 +53,7 @@ const libraryFeatures = [
   },
   {
     title: "Bulk updates",
-    description: "Add or update library data at scale when needed.",
+    description: "Add or update device data at scale when catalogs change.",
   },
 ];
 
@@ -78,7 +78,7 @@ export default function FeaturesPage() {
       <PageHero
         eyebrow="Features"
         title="Features built around how integrators survey and design"
-        subtitle="OneSurvey brings survey capture, floorplan design, and reporting together so every project starts with clean data."
+        subtitle="OneSurvey brings survey capture, floorplan design, device libraries, and reporting together so every project starts with clean data."
         primaryCta={{ label: "Book a demo", href: "/demo" }}
         secondaryCta={{ label: "View pricing", href: "/pricing" }}
         media={
@@ -122,9 +122,9 @@ export default function FeaturesPage() {
       <section className="bg-white py-18 md:py-24">
         <div className="container mx-auto px-4 md:px-6 lg:px-8">
           <SectionHeading
-            eyebrow="Library"
+            eyebrow="Device library"
             title="Keep device standards consistent"
-            subtitle="Build a shared catalog so every survey uses the right equipment and specs."
+            subtitle="Build a shared device library (element library) so every survey uses the right equipment and specs."
           />
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             {libraryFeatures.map((feature) => (
@@ -164,7 +164,7 @@ export default function FeaturesPage() {
             </div>
             <MediaPlaceholder
               label="Quality check preview"
-              helper="Insert a sample report or analysis view when approved."
+              helper="Insert an analysis preview or review dashboard when approved."
               className="min-h-[260px]"
             />
           </div>

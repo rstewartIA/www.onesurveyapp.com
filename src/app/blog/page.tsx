@@ -7,9 +7,9 @@ import { MediaPlaceholder } from "@/components/marketing/media-placeholder";
 import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
-  title: "OneSurvey Blog for Security Integrators",
+  title: "OneSurvey Blog - Security Site Survey Insights",
   description:
-    "Field tips, design best practices, and project workflows for security system integrators.",
+    "Field tips, design best practices, and project workflows for security system integrators and facilities teams.",
 };
 
 const featuredPosts = [
@@ -36,7 +36,7 @@ export default function BlogPage() {
       <PageHero
         eyebrow="Blog"
         title="Insights for modern integrators"
-        subtitle="Practical guidance for surveys, design, and project delivery." 
+        subtitle="Practical guidance for surveys, design, and project delivery."
         primaryCta={{ label: "Subscribe", href: "/contact" }}
         secondaryCta={{ label: "Browse guides", href: "/guides" }}
         media={

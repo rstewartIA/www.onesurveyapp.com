@@ -7,7 +7,7 @@ import { MediaPlaceholder } from "@/components/marketing/media-placeholder";
 import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
-  title: "Careers at OneSurvey",
+  title: "Careers at OneSurvey - Security Site Survey Software",
   description:
     "Join a team building the future of security site surveys and design workflows.",
 };

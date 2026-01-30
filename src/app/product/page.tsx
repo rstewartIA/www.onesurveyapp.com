@@ -9,24 +9,24 @@ import { CtaBand } from "@/components/marketing/cta-band";
 import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
-  title: "OneSurvey Product - Site Survey and Design Platform",
+  title: "OneSurvey Product - Security Site Survey and Floorplan Design",
   description:
-    "OneSurvey brings site surveys, floorplan design, device libraries, and reporting into one workspace for security integrators.",
+    "OneSurvey brings security site surveys, floorplan design, device libraries, and reporting into one workspace for integrators and facilities teams.",
 };
 
 const moduleHighlights = [
   {
     title: "Survey capture",
     description:
-      "Use checklists, required fields, photos, and notes to capture consistent site data during every walkthrough.",
+      "Use checklists, required fields, photos, and notes to capture consistent security site data during every walkthrough.",
   },
   {
     title: "Floorplan editor",
     description:
-      "Import plans, set scale, draw walls and zones, and place devices where they will be installed.",
+      "Import plans, set scale, draw walls and zones, and place devices on accurate layouts.",
   },
   {
-    title: "Asset library",
+    title: "Device library (element library)",
     description:
       "Keep a standard catalog of approved devices, parts, and accessories for every team and location.",
   },
@@ -38,7 +38,7 @@ const moduleHighlights = [
   {
     title: "Assignments and handoff",
     description:
-      "Track install tasks, status, and notes so nothing is missed between survey and install.",
+      "Track tasks, status, and notes so nothing is missed between survey and install.",
   },
   {
     title: "Reporting and exports",
@@ -67,7 +67,7 @@ const workflowSteps = [
 ];
 
 const collaborationPoints = [
-  "Role-based access for surveyors, designers, and project leads.",
+  "Seat types and admin/user roles keep access aligned to responsibilities.",
   "Version history to keep revisions clear and approvals simple.",
   "Comments and notes tied to plans, devices, and photos.",
 ];
@@ -78,10 +78,10 @@ export default function ProductPage() {
       <PageHero
         eyebrow="Product"
         title="Everything your team needs to survey, design, and document security sites"
-        subtitle="OneSurvey brings floorplans, device libraries, field photos, and reports into one platform so integrators can deliver clear scope and accurate documentation."
+        subtitle="OneSurvey brings floorplans, device libraries, field photos, and reports into one platform so teams deliver clear scope and accurate documentation."
         primaryCta={{ label: "Book a demo", href: "/demo" }}
         secondaryCta={{ label: "See features", href: "/product/features" }}
-        supportingText="Built for security system integrators and low voltage teams."
+        supportingText="Built for security system integrators, project managers, and low-voltage teams."
         media={
           <MediaPlaceholder
             label="Product overview collage"

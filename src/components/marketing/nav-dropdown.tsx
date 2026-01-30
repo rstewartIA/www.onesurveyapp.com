@@ -32,7 +32,7 @@ function NavIcon({ label }: { label: string }) {
     );
   }
 
-  if (key.includes("asset")) {
+  if (key.includes("asset") || key.includes("device") || key.includes("library")) {
     return (
       <svg aria-hidden="true" viewBox="0 0 24 24" className={iconClassName} fill="none" stroke="currentColor" strokeWidth="1.6">
         <rect x="4" y="4" width="7" height="7" rx="1.2" />
@@ -116,9 +116,9 @@ function NavIcon({ label }: { label: string }) {
   if (key.includes("doc")) {
     return (
       <svg aria-hidden="true" viewBox="0 0 24 24" className={iconClassName} fill="none" stroke="currentColor" strokeWidth="1.6">
-        <path d="M7 3.5h7l4 4V20.5a1.5 1.5 0 0 1-1.5 1.5H7A1.5 1.5 0 0 1 5.5 20.5V5A1.5 1.5 0 0 1 7 3.5z" />
-        <path d="M14 3.5V8h4" />
-        <path d="M8 12h8M8 16h5" />
+        <path d="M4.5 6.5c0-1.1.9-2 2-2H11a2 2 0 0 1 2 2v12.5H6.5a2 2 0 0 0-2 2v-14z" />
+        <path d="M19.5 6.5c0-1.1-.9-2-2-2H13a2 2 0 0 0-2 2v12.5h6.5a2 2 0 0 1 2 2v-14z" />
+        <path d="M9 8.5h2.5M9 12h2.5M9 15.5h2.5" />
       </svg>
     );
   }
@@ -164,15 +164,37 @@ export function NavDropdown({ item }: NavDropdownProps) {
   const [open, setOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
   const triggerRef = useRef<HTMLButtonElement | null>(null);
+  const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const isExternal = (href: string, external?: boolean) => external || href.startsWith("http");
 
   if (!item.children || item.children.length === 0) {
     return null;
   }
 
+  const cancelClose = () => {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+  };
+
+  const scheduleClose = () => {
+    cancelClose();
+    closeTimeoutRef.current = setTimeout(() => {
+      setOpen(false);
+    }, 260);
+  };
+
   const handleMenuLeave = (event: MouseEvent<HTMLDivElement>) => {
     const next = event.relatedTarget as Node | null;
     if (next && triggerRef.current?.contains(next)) return;
-    setOpen(false);
+    scheduleClose();
+  };
+
+  const handleTriggerLeave = (event: MouseEvent<HTMLButtonElement>) => {
+    const next = event.relatedTarget as Node | null;
+    if (next && (menuRef.current?.contains(next) || triggerRef.current?.contains(next))) return;
+    scheduleClose();
   };
 
   const handleBlur = (event: FocusEvent<HTMLDivElement>) => {
@@ -194,17 +216,10 @@ export function NavDropdown({ item }: NavDropdownProps) {
     };
   }, [open]);
 
+  useEffect(() => () => cancelClose(), []);
+
   return (
-    <div
-      className="relative flex h-16 items-center"
-      onBlur={handleBlur}
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
-    >
-      <span
-        aria-hidden="true"
-        className="pointer-events-auto absolute left-0 right-0 top-full h-3"
-      />
+    <div className="relative flex h-16 items-center" onBlur={handleBlur}>
       <button
         ref={triggerRef}
         type="button"
@@ -214,7 +229,15 @@ export function NavDropdown({ item }: NavDropdownProps) {
         )}
         aria-haspopup="true"
         aria-expanded={open}
-        onFocus={() => setOpen(true)}
+        onFocus={() => {
+          cancelClose();
+          setOpen(true);
+        }}
+        onMouseEnter={() => {
+          cancelClose();
+          setOpen(true);
+        }}
+        onMouseLeave={handleTriggerLeave}
       >
         {item.label}
         <svg
@@ -233,7 +256,6 @@ export function NavDropdown({ item }: NavDropdownProps) {
 
       <div
         aria-hidden="true"
-        onMouseEnter={() => setOpen(false)}
         onClick={() => setOpen(false)}
         className={cn(
           "fixed inset-x-0 top-16 bottom-0 z-30 bg-white/20 backdrop-blur-2xl transition-opacity duration-200",
@@ -243,7 +265,10 @@ export function NavDropdown({ item }: NavDropdownProps) {
 
       <div
         ref={menuRef}
-        onMouseEnter={() => setOpen(true)}
+        onMouseEnter={() => {
+          cancelClose();
+          setOpen(true);
+        }}
         onMouseLeave={handleMenuLeave}
         className={cn(
           "fixed left-0 right-0 top-16 z-40 border-b border-neutral-200 bg-white shadow-lg transition-all duration-200",
@@ -252,40 +277,121 @@ export function NavDropdown({ item }: NavDropdownProps) {
         aria-hidden={!open}
       >
         <div className="container mx-auto px-4 py-8 md:px-6 lg:px-8">
-          <div className="grid gap-8 lg:grid-cols-[240px_minmax(0,1fr)]">
-            <div className="space-y-4">
-              <Link
-                href={item.href}
-                className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-primary"
-              >
-                {item.label}
-              </Link>
-              <div className="rounded-xl border border-neutral-200 bg-neutral-50 p-4 shadow-sm">
-                <div className="aspect-[4/3] w-full rounded-lg bg-gradient-to-br from-brand-accent/40 via-white to-brand-primary/10">
-                  <div className="flex h-full w-full items-center justify-center text-[0.65rem] font-semibold uppercase tracking-wide text-neutral-500">
-                    {item.label} preview
-                  </div>
-                </div>
-                <p className="mt-3 text-xs text-neutral-500">Placeholder image for {item.label}.</p>
-              </div>
-            </div>
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {item.children.map((child) => (
-                <Link
-                  key={child.label}
-                  href={child.href}
-                  className="group flex items-start gap-3 rounded-xl border border-neutral-200 bg-neutral-100 px-4 py-3 transition hover:border-neutral-300 hover:bg-neutral-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary"
+          <div className="grid gap-6 lg:grid-cols-[240px_minmax(0,1fr)]">
+            <div className="border-r border-neutral-200/70 pr-6">
+              {isExternal(item.href, item.external) ? (
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group flex flex-col gap-4 rounded-2xl px-4 py-4 transition-colors hover:bg-neutral-50/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary"
                 >
-                  <span className="mt-0.5 flex h-8 w-8 items-center justify-center">
-                    <NavIcon label={child.label} />
-                  </span>
-                  <div>
-                    <div className="text-sm font-semibold text-neutral-900 transition group-hover:text-brand-primary">
-                      {child.label}
+                  <div className="flex items-center justify-between text-sm font-semibold uppercase tracking-[0.2em] text-brand-secondary transition-colors group-hover:text-brand-primary">
+                    <span>{item.label}</span>
+                    <svg
+                      aria-hidden="true"
+                      viewBox="0 0 24 24"
+                      className="h-4 w-4"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M7 17l10-10" />
+                      <path d="M10 7h7v7" />
+                    </svg>
+                  </div>
+                  <div className="rounded-xl border border-neutral-200 bg-white p-4 shadow-sm transition-colors group-hover:bg-neutral-50">
+                    <div className="mx-auto aspect-[4/3] w-full max-w-[170px] rounded-lg bg-gradient-to-br from-brand-accent/40 via-white to-brand-primary/10">
+                      <div className="flex h-full w-full items-center justify-center text-[0.65rem] font-semibold uppercase tracking-wide text-neutral-500">
+                        {item.label} preview
+                      </div>
                     </div>
-                    {child.description && <p className="mt-1 text-xs text-neutral-500">{child.description}</p>}
+                    <p className="mt-4 text-xs text-neutral-500">Placeholder image for {item.label}.</p>
+                  </div>
+                </a>
+              ) : (
+                <Link
+                  href={item.href}
+                  className="group flex flex-col gap-4 rounded-2xl px-4 py-4 transition-colors hover:bg-neutral-50/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary"
+                >
+                  <div className="flex items-center justify-between text-sm font-semibold uppercase tracking-[0.2em] text-brand-secondary transition-colors group-hover:text-brand-primary">
+                    <span>{item.label}</span>
+                    <svg
+                      aria-hidden="true"
+                      viewBox="0 0 24 24"
+                      className="h-4 w-4"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M9 6l6 6-6 6" />
+                    </svg>
+                  </div>
+                  <div className="rounded-xl border border-neutral-200 bg-white p-4 shadow-sm transition-colors group-hover:bg-neutral-50">
+                    <div className="mx-auto aspect-[4/3] w-full max-w-[170px] rounded-lg bg-gradient-to-br from-brand-accent/40 via-white to-brand-primary/10">
+                      <div className="flex h-full w-full items-center justify-center text-[0.65rem] font-semibold uppercase tracking-wide text-neutral-500">
+                        {item.label} preview
+                      </div>
+                    </div>
+                    <p className="mt-4 text-xs text-neutral-500">Placeholder image for {item.label}.</p>
                   </div>
                 </Link>
+              )}
+            </div>
+            <div className="grid gap-3 pl-6 sm:grid-cols-2 lg:grid-cols-3">
+              {item.children.map((child) => (
+                isExternal(child.href, child.external) ? (
+                  <a
+                    key={child.label}
+                    href={child.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="group flex items-start gap-3 rounded-xl border border-neutral-200 bg-neutral-100 px-4 py-3 transition hover:border-neutral-300 hover:bg-neutral-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary"
+                  >
+                    <span className="mt-0.5 flex h-8 w-8 items-center justify-center">
+                      <NavIcon label={child.label} />
+                    </span>
+                    <div>
+                      <div className="flex items-center gap-2 text-sm font-semibold text-neutral-900 transition group-hover:text-brand-primary">
+                        <span>{child.label}</span>
+                        <svg
+                          aria-hidden="true"
+                          viewBox="0 0 24 24"
+                          className="h-3.5 w-3.5"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path d="M7 17l10-10" />
+                          <path d="M10 7h7v7" />
+                        </svg>
+                      </div>
+                      {child.description && <p className="mt-1 text-xs text-neutral-500">{child.description}</p>}
+                    </div>
+                  </a>
+                ) : (
+                  <Link
+                    key={child.label}
+                    href={child.href}
+                    className="group flex items-start gap-3 rounded-xl border border-neutral-200 bg-neutral-100 px-4 py-3 transition hover:border-neutral-300 hover:bg-neutral-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary"
+                  >
+                    <span className="mt-0.5 flex h-8 w-8 items-center justify-center">
+                      <NavIcon label={child.label} />
+                    </span>
+                    <div>
+                      <div className="text-sm font-semibold text-neutral-900 transition group-hover:text-brand-primary">
+                        {child.label}
+                      </div>
+                      {child.description && <p className="mt-1 text-xs text-neutral-500">{child.description}</p>}
+                    </div>
+                  </Link>
+                )
               ))}
             </div>
           </div>

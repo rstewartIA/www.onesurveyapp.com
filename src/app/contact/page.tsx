@@ -5,9 +5,9 @@ import { SectionHeading } from "@/components/marketing/section-heading";
 import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
-  title: "Contact OneSurvey",
+  title: "Contact OneSurvey - Request a Demo",
   description:
-    "Talk with OneSurvey about demos, pilots, or questions about your survey workflow.",
+    "Talk with OneSurvey about demos, pilots, or questions about your security site survey workflow.",
 };
 
 export default function ContactPage() {

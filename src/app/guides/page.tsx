@@ -7,7 +7,7 @@ import { MediaPlaceholder } from "@/components/marketing/media-placeholder";
 import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
-  title: "Security Survey and Design Guides",
+  title: "Security Site Survey and Floorplan Design Guides",
   description:
     "Step by step guides for site surveys, device placement, and proposal ready reporting.",
 };

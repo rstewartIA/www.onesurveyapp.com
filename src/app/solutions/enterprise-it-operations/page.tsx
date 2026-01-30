@@ -9,7 +9,7 @@ import { CtaBand } from "@/components/marketing/cta-band";
 export const metadata: Metadata = {
   title: "Enterprise Security Site Survey Standardization",
   description:
-    "Standardize multi site surveys and layouts with shared templates, governance, and reporting.",
+    "Standardize multi-site surveys and layouts with shared templates, governance, and reporting.",
 };
 
 const enterpriseFeatures = [

@@ -7,7 +7,7 @@ import { MediaPlaceholder } from "@/components/marketing/media-placeholder";
 import { CtaBand } from "@/components/marketing/cta-band";
 
 export const metadata: Metadata = {
-  title: "Standardized Security Site Survey Workflow",
+  title: "Security Site Survey Workflow and Templates",
   description:
     "Use templates, required fields, and clear steps to capture consistent security site data across every technician.",
 };
@@ -45,7 +45,7 @@ export default function SurveyAutomationPage() {
       <PageHero
         eyebrow="Survey workflow"
         title="Standardize site surveys without slowing the field team"
-        subtitle="Templates, required fields, and guided steps help every technician capture complete site data." 
+        subtitle="Templates, required fields, and guided steps help every technician capture complete site data."
         primaryCta={{ label: "Book a demo", href: "/demo" }}
         secondaryCta={{ label: "View product", href: "/product" }}
         media={

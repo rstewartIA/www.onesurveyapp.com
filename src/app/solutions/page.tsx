@@ -23,7 +23,7 @@ const solutions = [
   {
     title: "Facility managers",
     description:
-      "Keep floorplans and asset records current for maintenance and upgrades.",
+      "Keep floorplans and device records current for maintenance and upgrades.",
     href: "/solutions/facility-managers",
     accent: "slate" as const,
   },
@@ -42,7 +42,7 @@ export default function SolutionsPage() {
       <PageHero
         eyebrow="Solutions"
         title="Solutions for teams that plan and manage security sites"
-        subtitle="OneSurvey adapts to the workflows of integrators, facility teams, and enterprise operations groups."
+        subtitle="OneSurvey adapts to the workflows of integrators, low-voltage teams, facility managers, and enterprise operations groups."
         primaryCta={{ label: "Book a demo", href: "/demo" }}
         secondaryCta={{ label: "Talk to sales", href: "/contact" }}
         media={
