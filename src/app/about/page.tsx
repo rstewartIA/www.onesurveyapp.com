@@ -24,7 +24,6 @@ export default function AboutPage() {
         title="Built around the way integrators work"
         subtitle="From field surveys to proposal-ready reports, OneSurvey is designed around real security site workflows."
         primaryCta={{ label: "Book a demo", href: "/demo" }}
-        secondaryCta={{ label: "Careers", href: "/careers" }}
         media={
           <MediaPlaceholder
             label="Company timeline"

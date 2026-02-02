@@ -1297,7 +1297,7 @@ export default function PricingPage() {
                 <ChevronIcon className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-500" />
               </div>
             </div>
-            <div className="flex items-center rounded-full border border-neutral-200 bg-white p-1 text-xs font-semibold text-neutral-600 shadow-sm">
+            <div className="inline-flex w-fit items-center rounded-full border border-neutral-200 bg-white p-1 text-xs font-semibold text-neutral-600 shadow-sm self-start">
               <button
                 type="button"
                 onClick={() => setFeatureView("all")}

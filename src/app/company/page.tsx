@@ -35,7 +35,6 @@ export default function CompanyPage() {
         title="Built for integrators who need clarity"
         subtitle="OneSurvey focuses on the survey and design workflow that drives every security site."
         primaryCta={{ label: "About us", href: "/about" }}
-        secondaryCta={{ label: "Careers", href: "/careers" }}
         media={
           <MediaPlaceholder
             label="Team photo"
