@@ -31,7 +31,7 @@ export default function CareersPage() {
       <PageHero
         eyebrow="Careers"
         title="Build the future of site surveys"
-        subtitle="Join a team focused on helping integrators deliver better projects."
+        subtitle="Join a team focused on helping integrators deliver better sites."
         primaryCta={{ label: "View open roles", href: "#open-roles" }}
         secondaryCta={{ label: "Contact us", href: "/contact" }}
         media={

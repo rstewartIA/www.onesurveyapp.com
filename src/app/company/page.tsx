@@ -33,7 +33,7 @@ export default function CompanyPage() {
       <PageHero
         eyebrow="Company"
         title="Built for integrators who need clarity"
-        subtitle="OneSurvey focuses on the survey and design workflow that drives every security project."
+        subtitle="OneSurvey focuses on the survey and design workflow that drives every security site."
         primaryCta={{ label: "About us", href: "/about" }}
         secondaryCta={{ label: "Careers", href: "/careers" }}
         media={
@@ -49,7 +49,7 @@ export default function CompanyPage() {
           <SectionHeading
             eyebrow="Values"
             title="What guides our work"
-            subtitle="We build tools that help integrators deliver better projects."
+            subtitle="We build tools that help integrators deliver better sites."
           />
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             {values.map((value) => (

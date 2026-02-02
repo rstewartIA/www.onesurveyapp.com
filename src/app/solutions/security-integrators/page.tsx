@@ -48,7 +48,7 @@ export default function SecurityIntegratorsPage() {
       <PageHero
         eyebrow="Security integrators"
         title="Win bids with fast, accurate site surveys"
-        subtitle="Reduce rework and deliver clearer scope with scaled floorplans, device standards, and report-ready documentation for project managers, estimators, and low-voltage teams."
+        subtitle="Reduce rework and deliver clearer scope with scaled floorplans, device standards, and report-ready documentation for site managers, estimators, and low-voltage teams."
         primaryCta={{ label: "Book a demo", href: "/demo" }}
         secondaryCta={{ label: "See the workflow", href: "/product" }}
         media={
@@ -79,7 +79,7 @@ export default function SecurityIntegratorsPage() {
           <div className="grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-center">
             <MediaPlaceholder
               label="Integrator case study"
-              helper="Insert a customer story or project snapshot."
+              helper="Insert a customer story or site snapshot."
               className="min-h-[320px]"
             />
             <div className="space-y-5">
@@ -103,7 +103,7 @@ export default function SecurityIntegratorsPage() {
 
       <CtaBand
         eyebrow="Integrator ready"
-        title="See OneSurvey with your next project"
+        title="See OneSurvey with your next site"
         description="Schedule a walkthrough tailored to your typical survey and proposal flow."
         primaryCta={{ label: "Book a demo", href: "/demo" }}
         secondaryCta={{ label: "Talk to sales", href: "/contact" }}

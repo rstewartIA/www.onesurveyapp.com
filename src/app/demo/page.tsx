@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { MarketingShell } from "@/components/marketing/marketing-shell";
 import { PageHero } from "@/components/marketing/page-hero";
 import { SectionHeading } from "@/components/marketing/section-heading";
@@ -38,7 +39,7 @@ export default function DemoPage() {
                 subtitle="We will cover survey capture, floorplan design, and reporting in about 30 to 45 minutes."
               />
               <div className="rounded-xl border border-neutral-200 bg-white p-4 shadow-sm">
-                <p className="text-sm text-neutral-600">Review your typical project workflow.</p>
+                <p className="text-sm text-neutral-600">Review your typical site workflow.</p>
               </div>
               <div className="rounded-xl border border-neutral-200 bg-white p-4 shadow-sm">
                 <p className="text-sm text-neutral-600">Walk through a sample survey and layout.</p>
@@ -66,13 +67,20 @@ export default function DemoPage() {
                 />
                 <input
                   className="rounded-lg border border-neutral-200 px-4 py-3 text-sm"
-                  placeholder="Project size or number of sites"
+                  placeholder="Site size or number of locations"
                   type="text"
                 />
                 <textarea
                   className="min-h-[120px] rounded-lg border border-neutral-200 px-4 py-3 text-sm"
                   placeholder="What would you like to see in the demo?"
                 />
+                <p className="text-xs text-neutral-500">
+                  By submitting, you agree to our{" "}
+                  <Link href="/privacy" className="font-semibold text-brand-primary hover:underline">
+                    Privacy Policy
+                  </Link>
+                  .
+                </p>
                 <Button className="bg-brand-primary text-white hover:bg-brand-secondary">Request a demo</Button>
               </form>
             </div>

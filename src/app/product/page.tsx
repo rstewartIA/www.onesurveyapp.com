@@ -81,7 +81,7 @@ export default function ProductPage() {
         subtitle="OneSurvey brings floorplans, device libraries, field photos, and reports into one platform so teams deliver clear scope and accurate documentation."
         primaryCta={{ label: "Book a demo", href: "/demo" }}
         secondaryCta={{ label: "See features", href: "/product/features" }}
-        supportingText="Built for security system integrators, project managers, and low-voltage teams."
+        supportingText="Built for security system integrators, site managers, and low-voltage teams."
         media={
           <MediaPlaceholder
             label="Product overview collage"
@@ -95,7 +95,7 @@ export default function ProductPage() {
           <SectionHeading
             eyebrow="Modules"
             title="A single workspace for surveys, designs, and reports"
-            subtitle="Each module is designed to keep the field and office aligned so projects move from walkthrough to proposal without rework."
+            subtitle="Each module is designed to keep the field and office aligned so sites move from walkthrough to proposal without rework."
           />
           <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {moduleHighlights.map((feature) => (
@@ -148,7 +148,7 @@ export default function ProductPage() {
               <SectionHeading
                 eyebrow="Collaboration"
                 title="Keep surveys and designs aligned across teams"
-                subtitle="Make it easy for surveyors, designers, and project leads to stay on the same page without chasing updates."
+                subtitle="Make it easy for surveyors, designers, and site leads to stay on the same page without chasing updates."
               />
               <ul className="space-y-3 text-sm text-neutral-600">
                 {collaborationPoints.map((point) => (

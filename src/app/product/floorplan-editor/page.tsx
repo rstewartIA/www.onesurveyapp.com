@@ -41,7 +41,7 @@ const editorFeatures = [
 
 const reviewPoints = [
   "Use version history to keep revisions organized.",
-  "Share plan updates with project leads and clients.",
+  "Share plan updates with site leads and clients.",
   "Capture comments tied to specific devices or areas.",
 ];
 

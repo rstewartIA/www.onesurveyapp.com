@@ -34,8 +34,8 @@ const libraryFeatures = [
     description: "Clone devices and adjust specs without rebuilding from scratch.",
   },
   {
-    title: "Project ready",
-    description: "Apply the right devices to each project with consistent standards.",
+    title: "Site ready",
+    description: "Apply the right devices to each site with consistent standards.",
   },
 ];
 
@@ -45,7 +45,7 @@ export default function AssetLibraryPage() {
       <PageHero
         eyebrow="Device library"
         title="Standardize devices and parts across every survey"
-        subtitle="Keep a clean catalog of cameras, access control, intrusion, and more so your team uses the right equipment on every project."
+        subtitle="Keep a clean catalog of cameras, access control, intrusion, and more so your team uses the right equipment on every site."
         primaryCta={{ label: "Book a demo", href: "/demo" }}
         secondaryCta={{ label: "View features", href: "/product/features" }}
         media={
@@ -78,13 +78,13 @@ export default function AssetLibraryPage() {
               <SectionHeading
                 eyebrow="Templates"
                 title="Speed up layouts with reusable device sets"
-                subtitle="Bundle cameras, access control, and accessories into templates your team can drop into new projects."
+                subtitle="Bundle cameras, access control, and accessories into templates your team can drop into new sites."
               />
               <div className="grid gap-4">
                 <div className="rounded-xl border border-neutral-200 bg-white p-4 shadow-sm">
                   <h3 className="text-lg font-semibold text-brand-primary">Standard camera package</h3>
                   <p className="mt-2 text-sm text-neutral-600">
-                    Camera, mount, bracket, and cabling checklist that stays consistent across projects.
+                    Camera, mount, bracket, and cabling checklist that stays consistent across sites.
                   </p>
                 </div>
                 <div className="rounded-xl border border-neutral-200 bg-white p-4 shadow-sm">

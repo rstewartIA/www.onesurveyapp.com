@@ -21,7 +21,7 @@ Marketing starter for the OneSurvey platform built with the Next.js App Router, 
 | `/pricing` | Plan grid + FAQ (FAQ schema-ready) |
 | `/resources` | Content pillar planner & asset teasers |
 | `/about` | Mission, milestones, trust signals |
-| `/contact` | Demo/pilot request form stub + contact info |
+| `/contact` | Demo request form stub + contact info |
 
 All sections pull copy from `src/data/marketing.ts` so messaging updates stay centralized.
 

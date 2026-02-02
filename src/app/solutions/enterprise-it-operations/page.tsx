@@ -77,7 +77,7 @@ export default function EnterpriseOperationsPage() {
               <SectionHeading
                 eyebrow="Outcomes"
                 title="Deliver consistent documentation at scale"
-                subtitle="Make it easy to review project progress and scope across regions."
+                subtitle="Make it easy to review site progress and scope across regions."
               />
               <ul className="space-y-3 text-sm text-neutral-600">
                 {enterpriseOutcomes.map((item) => (

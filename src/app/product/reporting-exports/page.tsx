@@ -45,7 +45,7 @@ export default function ReportingExportsPage() {
       <PageHero
         eyebrow="Reporting"
         title="Turn site data into clear reports and scope packages"
-        subtitle="Generate survey summaries, inventories, and photo reports that help clients and project teams make confident decisions."
+        subtitle="Generate survey summaries, inventories, and photo reports that help clients and site teams make confident decisions."
         primaryCta={{ label: "Book a demo", href: "/demo" }}
         secondaryCta={{ label: "Explore resources", href: "/resources" }}
         media={
@@ -82,7 +82,7 @@ export default function ReportingExportsPage() {
               />
               <div className="rounded-xl border border-neutral-200 bg-white p-4 shadow-sm">
                 <p className="text-sm text-neutral-600">
-                  Add cover pages, summaries, and report titles that match the project and client.
+                  Add cover pages, summaries, and report titles that match the site and client.
                 </p>
               </div>
               <div className="rounded-xl border border-neutral-200 bg-white p-4 shadow-sm">
@@ -103,7 +103,7 @@ export default function ReportingExportsPage() {
       <CtaBand
         eyebrow="Share with confidence"
         title="Generate your next proposal package faster"
-        description="See how OneSurvey produces clean reports that help win and deliver projects."
+        description="See how OneSurvey produces clean reports that help win and deliver sites."
         primaryCta={{ label: "Book a demo", href: "/demo" }}
         secondaryCta={{ label: "Contact sales", href: "/contact" }}
       />
