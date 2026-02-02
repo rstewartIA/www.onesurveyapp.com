@@ -335,7 +335,7 @@ const seatTypes: SeatType[] = [
   {
     id: "viewer",
     name: "Viewer seat",
-    description: "Non-billable. View and comment access across sites and reports.",
+    description: "View and comment access across sites and reports.",
     color: "bg-neutral-100 text-neutral-700",
     Icon: ({ className }) => (
       <svg
@@ -356,7 +356,7 @@ const seatTypes: SeatType[] = [
   {
     id: "field",
     name: "Field seat",
-    description: "Billable. Field workflows for onsite capture and updates.",
+    description: "Field workflows for onsite capture and updates.",
     color: "bg-brand-accent/60 text-brand-dark",
     Icon: ({ className }) => (
       <svg
@@ -377,7 +377,7 @@ const seatTypes: SeatType[] = [
   {
     id: "full",
     name: "Full seat",
-    description: "Billable. Full authoring and management workflows.",
+    description: "Full authoring and management workflows.",
     color: "bg-brand-primary/15 text-brand-primary",
     Icon: ({ className }) => (
       <svg
@@ -542,6 +542,13 @@ const availabilityLimited: Record<PlanTierId, Availability> = {
   professional: true,
   organization: true,
   enterprise: true,
+};
+
+const availabilityNone: Record<PlanTierId, Availability> = {
+  starter: false,
+  professional: false,
+  organization: false,
+  enterprise: false,
 };
 
 const compareModules: CompareModule[] = [
@@ -972,15 +979,18 @@ export default function PricingPage() {
   const [featureView, setFeatureView] = useState<FeatureView>("all");
 
   const filteredModules = useMemo(() => {
-    const allowedModules = seatCompareModuleMap[seatFilter] ?? compareModuleIds;
+    const allowedModules = new Set(seatCompareModuleMap[seatFilter] ?? compareModuleIds);
     return compareModules
-      .filter((compareModule) => allowedModules.includes(compareModule.id))
       .map((compareModule) => {
+        const moduleAllowed = allowedModules.has(compareModule.id);
         const filteredFeatures =
           featureView === "key"
             ? compareModule.features.filter((feature) => feature.isKey)
             : compareModule.features;
-        return { ...compareModule, features: filteredFeatures };
+        const featuresWithSeatAccess = filteredFeatures.map((feature) =>
+          moduleAllowed ? feature : { ...feature, availability: availabilityNone }
+        );
+        return { ...compareModule, features: featuresWithSeatAccess };
       })
       .filter((compareModule) => compareModule.features.length > 0);
   }, [seatFilter, featureView]);
@@ -1084,7 +1094,7 @@ export default function PricingPage() {
                         </span>
                       )}
                     </div>
-                    <div className="min-h-[40px]">
+                    <div className="min-h-[32px] md:min-h-[40px]">
                       {plan.name === "Professional" ? (
                         <div
                           className="inline-flex w-fit items-center rounded-full border border-neutral-200 bg-white p-1 text-xs font-semibold text-neutral-600 shadow-sm"
@@ -1129,7 +1139,7 @@ export default function PricingPage() {
                     </div>
                   </div>
 
-                    <div className="min-h-[276px]">
+                  <div className="min-h-0 md:min-h-[276px]">
                     {plan.seats.length > 0 && (
                       <div className="space-y-3">
                         {plan.seats.map((seat) => (
@@ -1178,7 +1188,7 @@ export default function PricingPage() {
                     >
                       <Link href={plan.cta.href}>{plan.cta.label}</Link>
                     </Button>
-                    <div className="min-h-[20px]">
+                    <div className="min-h-0 md:min-h-[20px]">
                       {plan.auxLink ? (
                         <Link
                           href={plan.auxLink.href}
@@ -1190,7 +1200,7 @@ export default function PricingPage() {
                         <span aria-hidden="true" />
                       )}
                     </div>
-                    <div className="min-h-[252px]">
+                    <div className="min-h-0 md:min-h-[252px]">
                       <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500">Included</p>
                       <ul className="mt-3 space-y-2 text-sm text-neutral-600">
                         {plan.features.map((feature) => (
@@ -1317,8 +1327,8 @@ export default function PricingPage() {
 
           <div className="mt-8 rounded-2xl border border-neutral-200 bg-white shadow-sm">
             <div className="overflow-x-auto">
-              <div className="min-w-[920px]">
-                <div className="grid grid-cols-[minmax(240px,1fr)_repeat(4,minmax(0,130px))_minmax(0,40px)] gap-4 border-b border-neutral-200 px-6 py-3 text-xs font-semibold uppercase tracking-wide text-neutral-500">
+              <div className="min-w-[760px] sm:min-w-[920px]">
+                <div className="grid grid-cols-[minmax(240px,1fr)_repeat(4,minmax(0,130px))_minmax(0,40px)] gap-3 sm:gap-4 border-b border-neutral-200 px-4 sm:px-6 py-3 text-xs font-semibold uppercase tracking-wide text-neutral-500">
                   <div>Features</div>
                   {planTiers.map((planTier) => (
                     <div key={planTier.id} className="text-center">
@@ -1330,7 +1340,7 @@ export default function PricingPage() {
                 <div className="divide-y divide-neutral-200">
                   {filteredModules.map((compareModule) => (
                     <details key={compareModule.id} className="group">
-                      <summary className="grid cursor-pointer list-none grid-cols-[minmax(240px,1fr)_repeat(4,minmax(0,130px))_minmax(0,40px)] gap-4 px-6 py-4 text-sm font-semibold text-neutral-900 transition hover:bg-neutral-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary/30 [&::-webkit-details-marker]:hidden">
+                      <summary className="grid cursor-pointer list-none grid-cols-[minmax(240px,1fr)_repeat(4,minmax(0,130px))_minmax(0,40px)] gap-3 sm:gap-4 px-4 sm:px-6 py-4 text-sm font-semibold text-neutral-900 transition hover:bg-neutral-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary/30 [&::-webkit-details-marker]:hidden">
                         <div className="flex items-center gap-3">
                           <div className="flex flex-col">
                             <span>{compareModule.name}</span>
@@ -1338,9 +1348,7 @@ export default function PricingPage() {
                           </div>
                         </div>
                         {planTiers.map((planTier) => (
-                          <div key={planTier.id} className="flex items-center justify-center">
-                            <span className="inline-flex h-2 w-2 rounded-full bg-neutral-200" />
-                          </div>
+                          <div key={planTier.id} className="flex items-center justify-center" />
                         ))}
                         <div className="flex items-center justify-end">
                           <ChevronIcon className="h-4 w-4 text-neutral-400 transition group-open:rotate-180" />
@@ -1349,7 +1357,7 @@ export default function PricingPage() {
                       <div className="border-t border-neutral-200 bg-neutral-50/40">
                         {compareModule.features.map((feature) => (
                           <details key={`${compareModule.id}-${feature.name}`} className="group border-t border-neutral-200 bg-white">
-                            <summary className="grid cursor-pointer list-none grid-cols-[minmax(240px,1fr)_repeat(4,minmax(0,130px))_minmax(0,40px)] gap-4 px-6 py-3 text-sm text-neutral-700 transition hover:bg-neutral-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary/30 [&::-webkit-details-marker]:hidden">
+                            <summary className="grid cursor-pointer list-none grid-cols-[minmax(240px,1fr)_repeat(4,minmax(0,130px))_minmax(0,40px)] gap-3 sm:gap-4 px-4 sm:px-6 py-3 text-sm text-neutral-700 transition hover:bg-neutral-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary/30 [&::-webkit-details-marker]:hidden">
                               <div className="flex items-center gap-3 pl-6">
                                 <span className="font-medium text-neutral-800">{feature.name}</span>
                               </div>
@@ -1362,7 +1370,7 @@ export default function PricingPage() {
                                 <ChevronIcon className="h-4 w-4 text-neutral-400 transition group-open:rotate-180" />
                               </div>
                             </summary>
-                            <div className="pb-4 pr-6 pl-14 text-sm text-neutral-500">
+                            <div className="pb-4 pr-4 pl-12 sm:pr-6 sm:pl-14 text-sm text-neutral-500">
                               <p className="max-w-2xl">{feature.detail}</p>
                             </div>
                           </details>
