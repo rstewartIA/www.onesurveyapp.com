@@ -49,7 +49,7 @@ const libraryFeatures = [
   },
   {
     title: "Templates",
-    description: "Reuse standard device packages across projects.",
+    description: "Reuse standard device packages across sites.",
   },
   {
     title: "Bulk updates",
@@ -78,7 +78,7 @@ export default function FeaturesPage() {
       <PageHero
         eyebrow="Features"
         title="Features built around how integrators survey and design"
-        subtitle="OneSurvey brings survey capture, floorplan design, device libraries, and reporting together so every project starts with clean data."
+        subtitle="OneSurvey brings survey capture, floorplan design, device libraries, and reporting together so every site starts with clean data."
         primaryCta={{ label: "Book a demo", href: "/demo" }}
         secondaryCta={{ label: "View pricing", href: "/pricing" }}
         media={
@@ -155,11 +155,11 @@ export default function FeaturesPage() {
             <div className="space-y-4">
               <SectionHeading
                 eyebrow="Quality check"
-                title="Optional quality review (pilot)"
+                title="Optional quality review"
                 subtitle="Run an optional automated review on installation photos to surface issues before handoff."
               />
               <p className="text-sm text-neutral-600">
-                This capability is available as a pilot add on. Contact us if you want to include it in your workflow.
+                This capability is available as an add-on. Contact us if you want to include it in your workflow.
               </p>
             </div>
             <MediaPlaceholder

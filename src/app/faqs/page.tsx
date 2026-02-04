@@ -19,12 +19,12 @@ const faqs = [
   {
     question: "Who uses OneSurvey day to day?",
     answer:
-      "Security integrators, low voltage installers, facility managers, and project teams use it to capture site data, document devices, and coordinate reporting.",
+      "Security integrators, low voltage installers, facility managers, and site teams use it to capture site data, document devices, and coordinate reporting.",
   },
   {
     question: "Can we standardize surveys across multiple technicians?",
     answer:
-      "Yes. Teams can align on consistent survey steps, device metadata, and reporting outputs so every project follows the same quality standard.",
+      "Yes. Teams can align on consistent survey steps, device metadata, and reporting outputs so every site follows the same quality standard.",
   },
   {
     question: "How does the floorplan workflow work?",
@@ -49,7 +49,7 @@ const faqs = [
   {
     question: "Is OneSurvey built for multi site or enterprise teams?",
     answer:
-      "Yes. Organizations can manage multiple projects, roles, and teams while keeping survey standards consistent.",
+      "Yes. Organizations can manage multiple sites, roles, and teams while keeping survey standards consistent.",
   },
   {
     question: "How do we get started?",
@@ -64,7 +64,7 @@ export default function FaqsPage() {
       <PageHero
         eyebrow="FAQs"
         title="Frequently asked questions"
-        subtitle="Clear answers to the most common questions from survey and project teams."
+        subtitle="Clear answers to the most common questions from survey and site teams."
         primaryCta={{ label: "Book a demo", href: "/demo" }}
         secondaryCta={{ label: "Contact us", href: "/contact" }}
       />

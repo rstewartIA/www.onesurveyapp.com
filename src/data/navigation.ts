@@ -70,6 +70,10 @@ export const navigationHierarchy: NavigationItem[] = [
         label: "FAQs",
         href: "/faqs"
       },
+      {
+        label: "Waitlist",
+        href: "/waitlist"
+      },
     ],
   },
   {
@@ -77,7 +81,6 @@ export const navigationHierarchy: NavigationItem[] = [
     href: "/company",
     children: [
       { label: "About", href: "/about" },
-      { label: "Careers", href: "/careers" },
       { label: "Contact", href: "/contact" },
     ],
   },
@@ -108,13 +111,13 @@ export const footerColumns = [
       { label: "Blog", href: "/blog" },
       { label: "Documentation", href: "https://rstewartia.github.io/OneSurvey-Docs/", external: true },
       { label: "FAQs", href: "/faqs" },
+      { label: "Waitlist", href: "/waitlist" },
     ],
   },
   {
     title: "Company",
     links: [
       { label: "About", href: "/about" },
-      { label: "Careers", href: "/careers" },
       { label: "Contact", href: "/contact" },
     ],
   },

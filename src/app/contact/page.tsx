@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { MarketingShell } from "@/components/marketing/marketing-shell";
 import { PageHero } from "@/components/marketing/page-hero";
 import { SectionHeading } from "@/components/marketing/section-heading";
@@ -7,7 +8,7 @@ import { Button } from "@/components/ui/button";
 export const metadata: Metadata = {
   title: "Contact OneSurvey - Request a Demo",
   description:
-    "Talk with OneSurvey about demos, pilots, or questions about your security site survey workflow.",
+    "Talk with OneSurvey about demos or questions about your security site survey workflow.",
 };
 
 export default function ContactPage() {
@@ -16,7 +17,7 @@ export default function ContactPage() {
       <PageHero
         eyebrow="Contact"
         title="Talk to OneSurvey"
-        subtitle="Tell us about your projects and we will set up a demo tailored to your survey workflow."
+        subtitle="Tell us about your sites and we will set up a demo tailored to your survey workflow."
         primaryCta={{ label: "Request a demo", href: "#contact-form" }}
         secondaryCta={{ label: "Email sales", href: "mailto:sales@onesurvey.com" }}
         supportingText="We respond within one business day."
@@ -28,7 +29,7 @@ export default function ContactPage() {
             <div className="space-y-6">
               <SectionHeading
                 eyebrow="Demo request"
-                title="Tell us about your project"
+                title="Tell us about your site"
                 subtitle="Fill out the form and our team will follow up with next steps."
               />
               <form className="grid gap-4">
@@ -61,8 +62,15 @@ export default function ContactPage() {
                 />
                 <textarea
                   className="min-h-[120px] rounded-lg border border-neutral-200 px-4 py-3 text-sm"
-                  placeholder="Tell us about your survey workflow and project size"
+                  placeholder="Tell us about your survey workflow and site size"
                 />
+                <p className="text-xs text-neutral-500">
+                  By submitting, you agree to our{" "}
+                  <Link href="/privacy" className="font-semibold text-brand-primary hover:underline">
+                    Privacy Policy
+                  </Link>
+                  .
+                </p>
                 <Button className="bg-brand-primary text-white hover:bg-brand-secondary">Submit request</Button>
               </form>
             </div>

@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     "security integrator platform",
     "device mapping",
     "floorplan editor",
-    "project walkthrough software",
+    "site walkthrough software",
     "survey workflow tool",
     "site assessment platform",
     "physical security planning",

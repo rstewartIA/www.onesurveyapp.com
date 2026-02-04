@@ -39,7 +39,7 @@ export const personas = [
     name: "Jacob / Program Manager",
     goal: "Keep multi site rollouts on schedule with trusted survey inputs.",
     needs: [
-      "Consistent project documentation",
+      "Consistent site documentation",
       "Stakeholder ready reporting",
       "Visibility into risk items",
     ],
@@ -83,7 +83,7 @@ export const lifecyclePhases = [
   {
     title: "Install and service",
     details: "Device registry, punch list tracking, and service history.",
-    keyword: "security project lifecycle management",
+    keyword: "security site lifecycle management",
   },
 ];
 

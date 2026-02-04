@@ -17,7 +17,7 @@ const resources = [
   {
     title: "Blog",
     type: "Insights",
-    description: "Field tips, best practices, and stories from survey, design, and project teams.",
+    description: "Field tips, best practices, and stories from survey, design, and site teams.",
     href: "/blog",
     cta: "Visit the blog",
   },

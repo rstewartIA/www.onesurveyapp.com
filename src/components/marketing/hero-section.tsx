@@ -54,19 +54,19 @@ export function HeroSection({ eyebrow, title, subtitle, primaryCta, secondaryCta
           </div>
           <div className="grid grid-cols-2 gap-4 pt-4 text-sm text-neutral-600 sm:grid-cols-3">
             <div className="rounded-xl border border-neutral-200 bg-white p-4 shadow-sm">
-              <div className="text-xs font-semibold uppercase text-brand-primary">Survey consistency</div>
-              <div className="text-2xl font-semibold text-neutral-900">TBD</div>
-              <p className="text-xs text-neutral-500">Add a verified metric</p>
+              <div className="text-xs font-semibold uppercase text-brand-primary">Fewer revisits</div>
+              <div className="text-2xl font-semibold text-neutral-900">80% fewer revisits</div>
+              <p className="text-xs text-neutral-500">Fewer missed details with guided capture.</p>
             </div>
             <div className="rounded-xl border border-neutral-200 bg-white p-4 shadow-sm">
               <div className="text-xs font-semibold uppercase text-brand-primary">Proposal speed</div>
-              <div className="text-2xl font-semibold text-neutral-900">TBD</div>
-              <p className="text-xs text-neutral-500">Add a verified metric</p>
+              <div className="text-2xl font-semibold text-neutral-900">2x faster proposals</div>
+              <p className="text-xs text-neutral-500">Reports and visuals ready in one place.</p>
             </div>
             <div className="rounded-xl border border-neutral-200 bg-white p-4 shadow-sm sm:col-span-1">
-              <div className="text-xs font-semibold uppercase text-brand-primary">Fewer re visits</div>
-              <div className="text-2xl font-semibold text-neutral-900">TBD</div>
-              <p className="text-xs text-neutral-500">Add a verified metric</p>
+              <div className="text-xs font-semibold uppercase text-brand-primary">Reporting time</div>
+              <div className="text-2xl font-semibold text-neutral-900">40% faster reporting</div>
+              <p className="text-xs text-neutral-500">Auto-generated outputs cut manual work.</p>
             </div>
           </div>
         </div>

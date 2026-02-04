@@ -22,9 +22,8 @@ export default function AboutPage() {
       <PageHero
         eyebrow="About"
         title="Built around the way integrators work"
-        subtitle="From field surveys to proposal-ready reports, OneSurvey is designed around real security project workflows."
+        subtitle="From field surveys to proposal-ready reports, OneSurvey is designed around real security site workflows."
         primaryCta={{ label: "Book a demo", href: "/demo" }}
-        secondaryCta={{ label: "Careers", href: "/careers" }}
         media={
           <MediaPlaceholder
             label="Company timeline"
@@ -38,7 +37,7 @@ export default function AboutPage() {
           <SectionHeading
             eyebrow="Mission"
             title="Make site surveys faster and more reliable"
-            subtitle="We help integrators collect clean data and deliver clear documentation for every project."
+            subtitle="We help integrators collect clean data and deliver clear documentation for every site."
           />
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             {milestones.map((milestone) => (

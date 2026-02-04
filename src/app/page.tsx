@@ -35,6 +35,48 @@ const featureBlocks = [
   },
 ];
 
+const differentiators = [
+  {
+    title: "Floorplan-first security design",
+    description:
+      "Scale plans, place devices, and use coverage views to confirm intent before proposals go out.",
+  },
+  {
+    title: "Element-level photo documentation",
+    description:
+      "Photos, notes, and context stay attached to each device so details never get lost.",
+  },
+  {
+    title: "Proposal-ready reporting",
+    description:
+      "Export floorplan visuals, device inventories, and photo reports without manual cleanup.",
+  },
+  {
+    title: "Device standards built in",
+    description:
+      "Use the shared device library and templates so every survey uses approved specs.",
+  },
+];
+
+const howItWorksSteps = [
+  {
+    title: "Set up the site",
+    description: "Create a site, add stakeholders, and define survey scope.",
+  },
+  {
+    title: "Capture the survey",
+    description: "Import floorplans, set scale, and walk the site with guided checklists.",
+  },
+  {
+    title: "Map devices and photos",
+    description: "Place devices on the plan and attach photos, notes, and assignments.",
+  },
+  {
+    title: "Deliver reports",
+    description: "Generate proposal-ready reports, inventories, and handoff packages.",
+  },
+];
+
 const solutionTiles = [
   {
     title: "Security integrators",
@@ -84,9 +126,11 @@ export default function Home() {
             <div className="flex flex-col items-center gap-8 text-center">
               <div className="space-y-3">
                 <p className="text-xs font-semibold uppercase tracking-[0.25em] text-brand-secondary">
-                  Trusted by integrators and teams like yours
+                  Trusted by security teams
                 </p>
-                <h2 className="text-2xl font-semibold text-brand-primary">Trusted by integrators and teams like yours</h2>
+                <h2 className="text-2xl font-semibold text-brand-primary">
+                  Integrators, facilities, and enterprise ops rely on OneSurvey
+                </h2>
               </div>
               <div className="grid w-full grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
                 {trustLogos.map((name) => (
@@ -161,15 +205,86 @@ export default function Home() {
           </div>
         </section>
 
+        <section id="how-it-works" className="bg-[#F7F9FC] py-18 md:py-24">
+          <div className="container mx-auto px-4 md:px-6 lg:px-8">
+            <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between md:gap-8">
+              <div className="space-y-3 max-w-2xl">
+                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-brand-secondary">How it works</p>
+                <h2 className="text-3xl font-semibold text-brand-primary sm:text-4xl">
+                  From site walk to proposal-ready documentation
+                </h2>
+                <p className="text-neutral-600">
+                  Four steps keep field teams and office teams aligned from walkthrough to handoff.
+                </p>
+              </div>
+              <div className="flex gap-3">
+                <Button asChild className="bg-brand-primary text-white hover:bg-brand-secondary">
+                  <Link href="/product">See the workflow</Link>
+                </Button>
+                <Button asChild variant="outline" className="border-neutral-200 text-brand-primary hover:border-brand-primary">
+                  <Link href="/demo">Book a Demo</Link>
+                </Button>
+              </div>
+            </div>
+
+            <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+              {howItWorksSteps.map((step, index) => (
+                <div key={step.title} className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm">
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-secondary">
+                    Step {index + 1}
+                  </p>
+                  <h3 className="mt-3 text-lg font-semibold text-brand-primary">{step.title}</h3>
+                  <p className="mt-2 text-sm text-neutral-600">{step.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="differentiators" className="bg-white py-18 md:py-24">
+          <div className="container mx-auto px-4 md:px-6 lg:px-8">
+            <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between md:gap-8">
+              <div className="space-y-3 max-w-2xl">
+                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-brand-secondary">Differentiators</p>
+                <h2 className="text-3xl font-semibold text-brand-primary sm:text-4xl">
+                  Built for security survey workflows
+                </h2>
+                <p className="text-neutral-600">
+                  OneSurvey is purpose-built for floorplan-based security planning, not generic work tracking.
+                </p>
+              </div>
+              <div className="flex gap-3">
+                <Button asChild className="bg-brand-primary text-white hover:bg-brand-secondary">
+                  <Link href="/product">Explore the product</Link>
+                </Button>
+                <Button asChild variant="outline" className="border-neutral-200 text-brand-primary hover:border-brand-primary">
+                  <Link href="/product/features">View features</Link>
+                </Button>
+              </div>
+            </div>
+
+            <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+              {differentiators.map((item) => (
+                <div key={item.title} className="rounded-2xl border border-neutral-200 bg-[#F7F9FC] p-6 shadow-sm">
+                  <h3 className="text-lg font-semibold text-brand-primary">{item.title}</h3>
+                  <p className="mt-2 text-sm text-neutral-600">{item.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         <section id="cta" className="relative overflow-hidden bg-gradient-to-r from-brand-primary via-brand-secondary to-brand-primary py-20 text-white">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.15),transparent_35%)]" />
           <div className="container relative mx-auto px-4 md:px-6 lg:px-8">
             <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] items-center">
               <div className="space-y-4">
                 <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/70">
-                  Take control of your site surveys
+                  Ready to standardize
                 </p>
-                <h2 className="text-3xl font-semibold text-white sm:text-4xl">Take control of your site surveys</h2>
+                <h2 className="text-3xl font-semibold text-white sm:text-4xl">
+                  Take control of your site surveys
+                </h2>
                 <p className="text-lg text-white/80">
                   Whether you are standardizing surveys across technicians or organizing site information for long-term
                   planning, OneSurvey gives you a single place to capture, review, and share accurate data.
