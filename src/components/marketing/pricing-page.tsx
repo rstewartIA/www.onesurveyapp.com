@@ -211,7 +211,7 @@ const moduleMap = modules.reduce<Record<string, Module>>((acc, moduleItem) => {
 
 const dragDropModule: Module = {
   id: "drag-drop",
-  label: "Drag + drop layout",
+  label: "Drag & drop + survey design",
   color: "bg-cyan-100 text-cyan-700 ring-cyan-200",
   Icon: ({ className }) => (
     <svg
@@ -232,7 +232,7 @@ const dragDropModule: Module = {
 
 const photoDocsModule: Module = {
   id: "photo-docs",
-  label: "Photo capture + documentation",
+  label: "Photo capture + notes",
   color: "bg-lime-100 text-lime-700 ring-lime-200",
   Icon: ({ className }) => (
     <svg
@@ -254,7 +254,7 @@ const photoDocsModule: Module = {
 
 const readCommentModule: Module = {
   id: "read-comment",
-  label: "Read + comment only",
+  label: "Read-only access",
   color: "bg-slate-100 text-slate-700 ring-slate-200",
   Icon: ({ className }) => (
     <svg
@@ -298,6 +298,8 @@ const seatAccess: Record<string, string[]> = {
     "surveys",
     "assignments",
     "tickets",
+    "gallery",
+    "attachments",
     "onesnap",
   ],
   viewer: [
@@ -335,7 +337,7 @@ const seatTypes: SeatType[] = [
   {
     id: "viewer",
     name: "Viewer seat",
-    description: "View and comment access across sites and reports.",
+    description: "Read-only access to sites, surveys, data tables, reports, and photos.",
     color: "bg-neutral-100 text-neutral-700",
     Icon: ({ className }) => (
       <svg
@@ -356,7 +358,7 @@ const seatTypes: SeatType[] = [
   {
     id: "field",
     name: "Field seat",
-    description: "Field workflows for onsite capture and updates.",
+    description: "Capture photos, add comments, and complete assignments onsite.",
     color: "bg-brand-accent/60 text-brand-dark",
     Icon: ({ className }) => (
       <svg
@@ -377,7 +379,7 @@ const seatTypes: SeatType[] = [
   {
     id: "full",
     name: "Full seat",
-    description: "Full authoring and management workflows.",
+    description: "Create sites and surveys, edit layouts, and generate reports.",
     color: "bg-brand-primary/15 text-brand-primary",
     Icon: ({ className }) => (
       <svg
@@ -417,44 +419,65 @@ type Plan = {
   highlight?: boolean;
 };
 
-const plans: Plan[] = [
-  {
-    name: "Starter",
-    description: "Best for small teams validating a new survey workflow. Includes one personal Full seat.",
-    price: "Free",
-    priceUnit: "Starter plan",
-    cta: { label: "Select plan", href: "/contact" },
-    seats: [],
-    features: [
-      "Sites and Surveys workspace",
-      "Site Data tabs: Survey Information, Installation Information, Element Information, Bill of Materials",
-      "Reports: Floor Plans, Bill of Materials, Element/Survey/Installation Information",
-      "Gallery and Attachments",
-    ],
-  },
-  {
-    name: "Professional",
-    description: "For growing integrators who need consistent surveys and reporting.",
+const professionalPricingByCycle: Record<
+  BillingCycle,
+  { price: string; priceUnit: string; seats: Seat[] }
+> = {
+  annual: {
     price: "$18",
-    priceUnit: "per seat / month",
-    badge: "Most popular",
-    highlight: true,
-    cta: { label: "Select plan", href: "/contact" },
+    priceUnit: "per seat / month, billed annually",
     seats: [
       { name: "Viewer seat", price: "$6", cadence: "/mo", modules: professionalSeatModules.viewer },
       { name: "Field seat", price: "$12", cadence: "/mo", modules: professionalSeatModules.field },
       { name: "Full seat", price: "$18", cadence: "/mo", modules: professionalSeatModules.full },
     ],
+  },
+  monthly: {
+    price: "$24",
+    priceUnit: "per seat / month, billed monthly",
+    seats: [
+      { name: "Viewer seat", price: "$8", cadence: "/mo", modules: professionalSeatModules.viewer },
+      { name: "Field seat", price: "$16", cadence: "/mo", modules: professionalSeatModules.field },
+      { name: "Full seat", price: "$24", cadence: "/mo", modules: professionalSeatModules.full },
+    ],
+  },
+};
+
+const plans: Plan[] = [
+  {
+    name: "Starter",
+    description: "Best for small teams validating a new site survey workflow. Includes one personal Full seat.",
+    price: "Free",
+    priceUnit: "Starter plan",
+    cta: { label: "Select plan", href: "/contact" },
+    seats: [],
+    features: [
+      "Sites + Surveys workspace",
+      "Site Data tabs: Survey, Installation, Element, Bill of Materials",
+      "Core reports: Floorplan, BOM, and data tables",
+      "Site gallery + attachments",
+    ],
+  },
+  {
+    name: "Professional",
+    description: "For growing teams that need consistent site surveys, assignments, and reporting.",
+    price: professionalPricingByCycle.annual.price,
+    priceUnit: professionalPricingByCycle.annual.priceUnit,
+    badge: "Most popular",
+    highlight: true,
+    cta: { label: "Select plan", href: "/contact" },
+    seats: professionalPricingByCycle.annual.seats,
     features: [
       "Assignments + My Assignments",
-      "Reports: Floor Plans, Bill of Materials, Survey/Installation/Element Information",
+      "Field photo capture + comments",
+      "Reports: floorplans, BOM, and data exports",
       "Photo Report + report history",
-      "OneSnap: Gallery, Albums, and Map",
+      "OneSnap sessions + photo capture",
     ],
   },
   {
     name: "Organization",
-    description: "For multi-team standardization across sites and regions.",
+    description: "For multi-team standardization across sites and regions with governance controls.",
     price: "$28",
     priceUnit: "per seat / month",
     cta: { label: "Select plan", href: "/contact" },
@@ -466,9 +489,9 @@ const plans: Plan[] = [
     ],
     features: [
       "Tickets for site issue tracking",
-      "Element customization (fields, variations, accessories)",
-      "WiseEyes AI (credits limited to 'x' tokens)",
-      "Portfolio reporting across sites",
+      "Element library customization (fields, variations, accessories)",
+      "WiseEyes AI quality checks (usage-based credits)",
+      "Organization audit logs + admin settings",
     ],
   },
   {
@@ -485,9 +508,9 @@ const plans: Plan[] = [
     ],
     features: [
       "All Organization features and modules",
-      "WiseEyes AI with expanded token credits",
-      "Advanced reporting packages + multi-site rollout planning",
-      "Custom seat mix and volume pricing + dedicated onboarding",
+      "WiseEyes AI with expanded usage credits",
+      "Advanced reporting packages + rollout planning",
+      "Custom seat mix, volume pricing, and onboarding",
     ],
   },
 ];
@@ -507,6 +530,7 @@ type CompareFeature = {
   detail: string;
   availability: Record<PlanTierId, Availability>;
   isKey?: boolean;
+  seatMin?: SeatFilter;
 };
 
 type CompareModule = {
@@ -544,176 +568,219 @@ const availabilityLimited: Record<PlanTierId, Availability> = {
   enterprise: true,
 };
 
-const availabilityNone: Record<PlanTierId, Availability> = {
-  starter: false,
-  professional: false,
-  organization: false,
-  enterprise: false,
+const seatLevel: Record<SeatFilter, number> = {
+  viewer: 1,
+  field: 2,
+  full: 3,
+};
+
+const seatRequirementLabel: Record<SeatFilter, string> = {
+  viewer: "Viewer seat",
+  field: "Field seat",
+  full: "Full seat",
 };
 
 const compareModules: CompareModule[] = [
   {
     id: "projects",
     name: "Sites",
-    description: "Organize sites and open the full site workspace.",
+    description: "Create, organize, and manage security sites and stakeholder access.",
     features: [
       {
-        name: "Sites list + search",
-        detail: "View sites, search by name, and jump into site detail pages.",
+        name: "Site list + search",
+        detail: "Browse all sites, filter by status, and jump into a site workspace.",
         availability: availabilityAll,
         isKey: true,
       },
       {
-        name: "Site detail workspace",
-        detail: "Access Surveys, Site Data, Attachments, Reports, Gallery, Tickets, and Assignments tabs.",
+        name: "Site workspace tabs",
+        detail: "Surveys, Site Data, Gallery, Attachments, Reports, Tickets, and Assignments in one workspace.",
         availability: availabilityAll,
         isKey: true,
       },
       {
-        name: "Site team access",
-        detail: "Set Edit, Restricted Edit, or View access per site member.",
+        name: "View site team + contacts",
+        detail: "See assigned members, client contacts, and access roles for each site.",
         availability: availabilityAll,
       },
       {
-        name: "Stage and archive tracking",
-        detail: "Track active vs archived sites and current stage status.",
+        name: "Create or edit sites",
+        detail: "Create sites and update core details (Full seat; Manager role can edit any site).",
+        availability: availabilityAll,
+        seatMin: "full",
+      },
+      {
+        name: "Stage tracking + archive",
+        detail: "Update stage/status; archive or restore sites (Manager role required).",
         availability: availabilityPro,
+        seatMin: "full",
       },
     ],
   },
   {
     id: "surveys",
     name: "Surveys",
-    description: "Floor plan workflows for capturing and mapping site surveys.",
+    description: "Floorplan-based survey editor for device placement and coverage planning.",
     features: [
       {
-        name: "Floor plan upload",
-        detail: "Create surveys by uploading or importing floor plans.",
+        name: "View surveys + floorplans",
+        detail: "Open plans, review layouts, and inspect element context across a site.",
         availability: availabilityAll,
         isKey: true,
       },
       {
-        name: "Scale setting",
-        detail: "Set real-world scale for accurate measurements.",
+        name: "Create surveys + upload floorplans",
+        detail: "Start new surveys and upload floorplans for each site.",
         availability: availabilityAll,
         isKey: true,
+        seatMin: "full",
       },
       {
-        name: "Element placement",
-        detail: "Place elements directly on the floor plan layout.",
+        name: "Scale + measurement tools",
+        detail: "Set real-world scale for accurate distances and coverage.",
+        availability: availabilityAll,
+        seatMin: "full",
+      },
+      {
+        name: "Drag-and-drop element placement",
+        detail: "Place, move, and label elements directly on the floorplan.",
         availability: availabilityAll,
         isKey: true,
+        seatMin: "full",
       },
       {
-        name: "Element detail sidebar",
-        detail: "Element Info, Element Photos, Element Assignments, Element Tickets, and Element Path tabs.",
+        name: "Field photos + comments",
+        detail: "Capture element photos and add onsite notes or comments.",
         availability: availabilityAll,
+        isKey: true,
+        seatMin: "field",
       },
       {
         name: "Field of View (FoV) overlays",
-        detail: "Visualize element coverage and orientation on the plan.",
+        detail: "Visualize camera coverage and orientation on the plan.",
         availability: availabilityPro,
+        seatMin: "full",
       },
       {
-        name: "Element visibility filters",
-        detail: "Filter elements by category, search, and visibility rules.",
+        name: "Draw mode (walls + markups)",
+        detail: "Draw walls, zones, labels, and markup annotations on the plan.",
+        availability: availabilityPro,
+        seatMin: "full",
+      },
+      {
+        name: "Paths between elements",
+        detail: "Draw paths between elements for cabling and connectivity context.",
         availability: availabilityAll,
+        seatMin: "full",
       },
       {
-        name: "Swap elements",
-        detail: "Swap an element for another while preserving placement and data.",
+        name: "Swap elements + visibility filters",
+        detail: "Swap devices and filter by category or visibility rules.",
         availability: availabilityPro,
+        seatMin: "full",
       },
     ],
   },
   {
     id: "site-data",
     name: "Site Data",
-    description: "Structured data tabs for reporting and field review.",
+    description: "Structured data tables that roll up survey and installation details.",
     features: [
       {
-        name: "Survey Information",
-        detail: "Survey-level details and operational status views.",
+        name: "Survey Information table",
+        detail: "Survey-level status, notes, and operational tracking fields.",
         availability: availabilityAll,
         isKey: true,
       },
       {
-        name: "Installation Information",
-        detail: "Installation tracking fields and status reporting.",
+        name: "Installation Information table",
+        detail: "Installation status fields and progress tracking across elements.",
         availability: availabilityAll,
         isKey: true,
       },
       {
-        name: "Element Information",
-        detail: "Element-level data, labels, and field values.",
+        name: "Element Information table",
+        detail: "Element labels, categories, and field values in a sortable grid.",
         availability: availabilityAll,
         isKey: true,
       },
       {
-        name: "Bill of Materials",
+        name: "Bill of Materials rollups",
         detail: "Material summaries grouped by element category and library.",
         availability: availabilityAll,
+      },
+      {
+        name: "Custom element fields + accessories",
+        detail: "Configure element fields, variations, and accessories (Manager role required).",
+        availability: availabilityOrg,
+        seatMin: "full",
+      },
+      {
+        name: "Export tables to spreadsheets",
+        detail: "Generate XLSX exports for Survey, Installation, and Element data.",
+        availability: availabilityAll,
+        seatMin: "full",
       },
     ],
   },
   {
     id: "assignments",
     name: "Assignments",
-    description: "Task workflows connected to sites and elements.",
+    description: "Task workflows tied to sites and elements.",
     features: [
       {
-        name: "Assignments list",
-        detail: "Create and manage assignments by site or element.",
+        name: "Assignments list + My Assignments",
+        detail: "Track open tasks by site and see personal task queues.",
         availability: availabilityPro,
         isKey: true,
+        seatMin: "field",
       },
       {
-        name: "Status + priority",
-        detail: "Track assignment status and priority levels.",
+        name: "Create assignments linked to elements",
+        detail: "Create tasks tied to elements or site areas.",
         availability: availabilityPro,
-        isKey: true,
+        seatMin: "field",
       },
       {
-        name: "Due dates",
-        detail: "Set deadlines and keep field teams on schedule.",
+        name: "Status, priority, and due dates",
+        detail: "Track progress, priority, and deadlines.",
         availability: availabilityPro,
+        seatMin: "field",
       },
       {
-        name: "Assignment comments",
-        detail: "Collaborate with comments on each assignment.",
+        name: "Comments + attachments",
+        detail: "Collaborate with notes and files on each task.",
         availability: availabilityPro,
+        seatMin: "field",
       },
       {
-        name: "Assignment attachments",
-        detail: "Attach files and reference material to tasks.",
+        name: "Assign or reassign teammates",
+        detail: "Assign owners and reassign tasks (Full seat required).",
         availability: availabilityPro,
+        seatMin: "full",
       },
       {
-        name: "My Assignments view",
-        detail: "Personalized assignment list for each user.",
+        name: "Complete assignments in the field",
+        detail: "Mark tasks complete from web or mobile workflows.",
         availability: availabilityPro,
-      },
-      {
-        name: "Element-linked assignments",
-        detail: "Tie assignments directly to elements on the floor plan.",
-        availability: availabilityPro,
+        seatMin: "field",
       },
     ],
   },
   {
     id: "tickets",
     name: "Tickets",
-    description: "Ticketing workflows for service and issue tracking.",
+    description: "Issue and service tracking for ongoing site work (module entitlement required).",
     features: [
       {
-        name: "Tickets list",
-        detail: "Create and manage tickets across sites.",
+        name: "Create + view tickets",
+        detail: "Log issues per site and track ticket lists and detail views.",
         availability: availabilityOrg,
         isKey: true,
       },
       {
-        name: "Ticket status workflow",
-        detail: "Track ticket status updates and progress.",
+        name: "Status workflow + priorities",
+        detail: "Update ticket status, category, and priority.",
         availability: availabilityOrg,
       },
       {
@@ -722,148 +789,165 @@ const compareModules: CompareModule[] = [
         availability: availabilityOrg,
       },
       {
-        name: "Element-linked tickets",
-        detail: "Connect tickets to specific elements or locations.",
+        name: "Followers + notifications",
+        detail: "Follow tickets and manage notification updates.",
         availability: availabilityOrg,
-        isKey: true,
+        seatMin: "field",
       },
       {
-        name: "My Tickets + Following",
-        detail: "Quick views for assigned or followed tickets.",
+        name: "Attach files to tickets",
+        detail: "Upload attachments and reference files on tickets.",
         availability: availabilityOrg,
+        seatMin: "field",
+      },
+      {
+        name: "Assign or reassign tickets",
+        detail: "Assign ticket owners (Full seat required).",
+        availability: availabilityOrg,
+        seatMin: "full",
       },
     ],
   },
   {
     id: "reports",
     name: "Reports",
-    description: "Generate site reports and exportable deliverables.",
+    description: "Generate deliverables for proposals, installs, and handoff documentation.",
     features: [
       {
-        name: "Floor Plans report",
-        detail: "Generate PDF floor plan reports from surveys.",
+        name: "View and download reports",
+        detail: "Access report history and download generated files.",
         availability: availabilityAll,
         isKey: true,
       },
       {
-        name: "Bill of Materials report",
-        detail: "Create Bill of Materials reports for estimating.",
+        name: "Floorplan PDF reports",
+        detail: "Export floorplan layouts for proposals and reviews.",
         availability: availabilityAll,
         isKey: true,
+        seatMin: "full",
       },
       {
-        name: "Element Information report",
-        detail: "Element-level data reports for proposals and documentation.",
+        name: "Bill of Materials reports",
+        detail: "Generate BOM exports for estimating and procurement.",
         availability: availabilityAll,
+        seatMin: "full",
       },
       {
-        name: "Installation Information report",
-        detail: "Installation tracking reports with status fields.",
+        name: "Survey + Installation data reports",
+        detail: "Export Survey, Installation, and Element information.",
         availability: availabilityAll,
+        seatMin: "full",
       },
       {
-        name: "Survey Information report",
-        detail: "Survey data reports with operational and installation fields.",
-        availability: availabilityAll,
-      },
-      {
-        name: "Photo Report",
-        detail: "Photo-based documentation reports for approvals.",
+        name: "Photo Reports",
+        detail: "Create photo-based documentation reports.",
         availability: availabilityPro,
+        seatMin: "full",
       },
       {
         name: "Spreadsheet exports (XLSX)",
-        detail: "Export Element, Installation, and Survey Information spreadsheets.",
+        detail: "Export data tables for downstream workflows.",
         availability: availabilityAll,
-      },
-      {
-        name: "Report history + downloads",
-        detail: "Track report status and download generated files.",
-        availability: availabilityAll,
+        seatMin: "full",
       },
     ],
   },
   {
     id: "gallery",
     name: "Gallery",
-    description: "Centralized site photo management.",
+    description: "Photo library for site documentation.",
     features: [
       {
-        name: "Site Gallery",
-        detail: "View all site photos in one gallery.",
+        name: "Site gallery + albums",
+        detail: "Browse all photos across a site or by album.",
         availability: availabilityAll,
         isKey: true,
       },
       {
-        name: "Albums",
-        detail: "Organize photos into site albums.",
+        name: "Upload photos",
+        detail: "Add photos to site galleries and element records.",
         availability: availabilityAll,
+        seatMin: "field",
       },
       {
-        name: "All Photos view",
-        detail: "Access full photo lists across the site.",
+        name: "Create and organize albums",
+        detail: "Group photos into albums for handoff and review.",
         availability: availabilityAll,
+        seatMin: "full",
+      },
+      {
+        name: "Delete or replace photos",
+        detail: "Remove outdated photos (Full seat required).",
+        availability: availabilityAll,
+        seatMin: "full",
       },
     ],
   },
   {
     id: "attachments",
     name: "Attachments",
-    description: "Site file uploads and document storage.",
+    description: "Files, drawings, and documents stored per site.",
     features: [
       {
-        name: "Site attachments",
-        detail: "Upload and store site files and documents.",
+        name: "View and download attachments",
+        detail: "Access files, drawings, and supporting documents per site.",
         availability: availabilityAll,
         isKey: true,
       },
       {
-        name: "Downloads + sharing",
-        detail: "Download attachments for proposals and handoffs.",
+        name: "Upload attachments",
+        detail: "Upload files and reference documents to a site.",
         availability: availabilityAll,
+        seatMin: "field",
+      },
+      {
+        name: "Delete attachments",
+        detail: "Remove outdated files from a site.",
+        availability: availabilityAll,
+        seatMin: "field",
       },
     ],
   },
   {
     id: "onesnap",
     name: "OneSnap",
-    description: "Photo capture and documentation workflows.",
+    description: "Fast photo capture for quick site walks (module entitlement required).",
     features: [
       {
-        name: "OneSnap Gallery",
-        detail: "Capture and organize OneSnap photo sets.",
+        name: "View OneSnap sessions + albums",
+        detail: "Access session lists, albums, and photo sets.",
         availability: availabilityLimited,
         isKey: true,
       },
       {
-        name: "Albums",
-        detail: "Create albums for organizing OneSnap photos.",
+        name: "Create sessions + capture photos",
+        detail: "Start sessions and capture photos onsite.",
         availability: availabilityLimited,
+        seatMin: "field",
       },
       {
-        name: "Map",
-        detail: "Map-based OneSnap photo views.",
+        name: "Edit labels + organize photos",
+        detail: "Rename photos and adjust album organization.",
         availability: availabilityLimited,
+        seatMin: "field",
       },
       {
-        name: "Reports",
-        detail: "Generate OneSnap reports for documentation.",
+        name: "Create albums + archive sessions",
+        detail: "Organize sessions with albums and archive when complete.",
         availability: availabilityLimited,
+        seatMin: "full",
       },
       {
-        name: "Archive",
-        detail: "Archive completed OneSnap collections.",
+        name: "Delete photos or sessions",
+        detail: "Delete photos or sessions (Full seat; Manager role required for session deletion).",
         availability: availabilityLimited,
+        seatMin: "full",
       },
       {
-        name: "Floor Plan Builder",
-        detail: "Create simple floor plans for OneSnap collections.",
+        name: "Public album links + OneSnap reports",
+        detail: "Share album links and generate OneSnap reports.",
         availability: availabilityLimited,
-      },
-      {
-        name: "Public album links",
-        detail: "Share OneSnap albums with public links when needed.",
-        availability: availabilityLimited,
+        seatMin: "full",
       },
     ],
   },
@@ -981,19 +1065,50 @@ export default function PricingPage() {
   const filteredModules = useMemo(() => {
     const allowedModules = new Set(seatCompareModuleMap[seatFilter] ?? compareModuleIds);
     return compareModules
+      .filter((compareModule) => allowedModules.has(compareModule.id))
       .map((compareModule) => {
-        const moduleAllowed = allowedModules.has(compareModule.id);
         const filteredFeatures =
           featureView === "key"
             ? compareModule.features.filter((feature) => feature.isKey)
             : compareModule.features;
-        const featuresWithSeatAccess = filteredFeatures.map((feature) =>
-          moduleAllowed ? feature : { ...feature, availability: availabilityNone }
-        );
+        const featuresWithSeatAccess = filteredFeatures.map((feature) => {
+          const seatMin = feature.seatMin ?? "viewer";
+          const meetsSeat = seatLevel[seatFilter] >= seatLevel[seatMin];
+          const availabilityByPlan = planTiers.reduce<Record<PlanTierId, Availability>>(
+            (acc, planTier) => {
+              const baseValue = feature.availability[planTier.id];
+              if (meetsSeat) {
+                acc[planTier.id] = baseValue;
+              } else if (baseValue === false) {
+                acc[planTier.id] = false;
+              } else {
+                acc[planTier.id] = seatRequirementLabel[seatMin];
+              }
+              return acc;
+            },
+            { ...feature.availability }
+          );
+          return { ...feature, availability: availabilityByPlan };
+        });
         return { ...compareModule, features: featuresWithSeatAccess };
       })
       .filter((compareModule) => compareModule.features.length > 0);
   }, [seatFilter, featureView]);
+
+  const displayPlans = useMemo(
+    () =>
+      plans.map((plan) => {
+        if (plan.name !== "Professional") return plan;
+        const pricing = professionalPricingByCycle[billingCycle];
+        return {
+          ...plan,
+          price: pricing.price,
+          priceUnit: pricing.priceUnit,
+          seats: pricing.seats,
+        };
+      }),
+    [billingCycle]
+  );
 
   return (
     <MarketingShell>
@@ -1077,7 +1192,7 @@ export default function PricingPage() {
 
           <div className="mt-10 overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm">
             <div className="grid divide-y divide-neutral-200 md:grid-cols-2 md:divide-y-0 md:divide-x xl:grid-cols-4">
-              {plans.map((plan, index) => (
+              {displayPlans.map((plan, index) => (
                 <div
                   key={plan.name}
                   className={`flex h-full flex-col gap-6 p-6 motion-safe:animate-[pricing-fade-up_700ms_ease-out_both] ${
@@ -1131,11 +1246,28 @@ export default function PricingPage() {
                       ) : null}
                     </div>
                     <div>
-                      <div className="flex items-baseline gap-2">
-                        <p className="text-2xl font-semibold text-brand-primary">{plan.price}</p>
-                        {plan.priceUnit && <p className="text-xs text-neutral-500">{plan.priceUnit}</p>}
-                      </div>
-                      <p className="mt-2 text-sm text-neutral-600">{plan.description}</p>
+                      {plan.seats.length > 0 ? (
+                        <div className="space-y-1">
+                          <p className="text-sm font-semibold text-brand-primary">
+                            {plan.name === "Enterprise"
+                              ? "Custom pricing · contact sales"
+                              : "Per-seat pricing shown below"}
+                          </p>
+                          {plan.name === "Enterprise" && (
+                            <p className="text-xs text-neutral-500">
+                              Tailored seat mix, modules, and rollout support.
+                            </p>
+                          )}
+                        </div>
+                      ) : (
+                        <div className="flex items-baseline gap-2">
+                          <p className="text-2xl font-semibold text-brand-primary">{plan.price}</p>
+                          {plan.priceUnit && <p className="text-xs text-neutral-500">{plan.priceUnit}</p>}
+                        </div>
+                      )}
+                      <p className={`text-sm text-neutral-600 ${plan.seats.length > 0 ? "mt-3" : "mt-2"}`}>
+                        {plan.description}
+                      </p>
                     </div>
                   </div>
 
