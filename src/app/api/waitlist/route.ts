@@ -12,7 +12,7 @@ type WaitlistPayload = {
   useCase?: string;
   updatesOptIn?: boolean;
   website?: string;
-
+};
 
 export async function POST(request: Request) {
   let payload: WaitlistPayload;
